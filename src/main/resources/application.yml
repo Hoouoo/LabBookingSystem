@@ -1,5 +1,14 @@
-spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/
-      suffix: .jsp
+ spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/lab_booking_system"
+    username: lab_booking_system
+    password: 1234
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

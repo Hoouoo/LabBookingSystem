@@ -28,6 +28,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'javax.servlet:jstl'
     compileOnly "org.apache.tomcat.embed:tomcat-embed-jasper"
+
 }
 
 tasks.named('test') {
