@@ -1,5 +1,5 @@
 package deu.team.jsp.account.domain;
 
 public enum Role {
-    STUDENT,ADMIN
+    STUDENT,ADMIN,PROFESSOR
 }
