@@ -41,7 +41,6 @@ public class AccountService {
         }else{
             role=Role.PROFESSOR;
         }
-        System.out.println(roleType);
 
         Optional<OneTimeKey> key = oneTimeKeyRepository.findByRole(role);
 
@@ -76,6 +75,7 @@ public class AccountService {
         }else{
             HttpSession session=request.getSession();
             session.setAttribute("account", findByStudentId);
+            System.out.println(session);
         }
         return findByStudentId.getRole();
 

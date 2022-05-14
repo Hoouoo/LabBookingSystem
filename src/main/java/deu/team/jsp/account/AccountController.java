@@ -2,6 +2,7 @@ package deu.team.jsp.account;
 
 import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.interceptor.CheckSession;
+import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -45,6 +47,15 @@ public class AccountController {
         }
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        System.out.println(session);
+        session.invalidate();
+        System.out.println(session);
+        return "redirect:/";
+    }
+
     @PostMapping("/signUp")
     public String SignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
         accountService.SignUp(request,response);
@@ -57,6 +68,7 @@ public class AccountController {
         return "WEB-INF/manager/adminModifyAccount.jsp";
     }
 
+    @CheckSession
     @PostMapping("/accountSearch")
     public String AccountSearch(HttpServletRequest request,HttpServletResponse response,
                                 Model model) throws IOException {
@@ -64,6 +76,7 @@ public class AccountController {
         return "/adminAccountModifyPage";
     }
 
+    @CheckSession
     @PostMapping("/adminAccountModify")
     public String AdminModify(HttpServletRequest request){
         accountService.modify(request);
@@ -76,6 +89,7 @@ public class AccountController {
         return "WEB-INF/student/studentModifyAccount.jsp";
     }
 
+    @CheckSession
     @PostMapping("/studentAccountModify")
     public String StudentModify(HttpServletRequest request){
         accountService.modify(request);
