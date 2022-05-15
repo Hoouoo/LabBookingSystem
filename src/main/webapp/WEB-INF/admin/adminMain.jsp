@@ -12,13 +12,12 @@
     <title>관리자 페이지 입니다.</title>
 </head>
 <body>
-    <form action="/administrator" method="post">
 
+    <form action="/administrator" method="post">
         <button type="submit" name="keyRole" value="STUDENT">일반 사용자 암호 생성</button>
         <c:if test="${null ne sessionScope.keyStudent}">
             <c:out value="${sessionScope.keyStudent}"/>
         </c:if>
-        <br/>
         <button type="submit" name="keyRole" value="PROFESSOR">교수 사용자 암호 생성</button>
         <c:if test="${null ne sessionScope.keyProfessor}">
             <c:out value="${sessionScope.keyProfessor}"/>
@@ -28,9 +27,12 @@
                 alert("${sessionScope.keyMsg}");
             </script>
         </c:if>
-
-        <br/>
     </form>
+
+    <
+    <br/>
+
+
 <%--    <%--%>
 <%--        String oneTimeKey = (String) request.getSession().getAttribute("key");--%>
 <%--        out.println(oneTimeKey);--%>
