@@ -22,13 +22,13 @@
             시작 시간 : <input type="time" name="scheduleStartTime"/>
             월&nbsp;&nbsp;화&nbsp;&nbsp;수&nbsp;&nbsp;목&nbsp;&nbsp;금&nbsp;&nbsp;토&nbsp;&nbsp;일<br/>
             종료 시간 : <input type="time" name="scheduleEndTime"/>
-            <input type="radio" name="scheduleDay" value="scheduleMon"/>
-            <input type="radio" name="scheduleDay" value="scheduleTue"/>
-            <input type="radio" name="scheduleDay" value="scheduleWed"/>
-            <input type="radio" name="scheduleDay" value="scheduleThu"/>
-            <input type="radio" name="scheduleDay" value="scheduleFri"/>
-            <input type="radio" name="scheduleDay" value="scheduleSat"/>
-            <input type="radio" name="scheduleDay" value="scheduleSun"/>
+            <input type="radio" name="scheduleDay" value="Mon"/>
+            <input type="radio" name="scheduleDay" value="Tue"/>
+            <input type="radio" name="scheduleDay" value="Wed"/>
+            <input type="radio" name="scheduleDay" value="Thu"/>
+            <input type="radio" name="scheduleDay" value="Fri"/>
+            <input type="radio" name="scheduleDay" value="Sat"/>
+            <input type="radio" name="scheduleDay" value="Sun"/>
             <br/>
         </label>
         <label>
@@ -37,10 +37,16 @@
         <button type="submit" name="scheduleCreateBtn">입력</button>
     </form>
     <hr/>
-    TEST : <%= request.getAttribute("scheduleCnt") %>
     <c:if test="${0 < scheduleCnt }">
-        <c:forEach var="scheduleListView" items="${scheduleList }" varStatus="status">
-            <p>${status.count} 과목명 : <c:out value="${scheduleListView}"/></p>
+        등록된 시간표 개수 : <%= request.getAttribute("scheduleCnt") %>개
+        <hr/>
+        <c:forEach var="schedule" items="${scheduleList}" varStatus="status">
+            <p>[${status.count}]번째 시간표</p>
+            <p>과목명 : <c:out value="${schedule.subject}"/></p>
+            <p>교수님 성함  : <c:out value="${schedule.professor}"/></p>
+            <p>수업 요일 : <c:out value="${schedule.day}"/></p>
+            <p> 수업 시작 시간 : <c:out value="${schedule.startTime}"/></p>
+            <p>수업 종료 시간 : <c:out value="${schedule.endTime}"/></p>
             <br/>
             <hr/>
         </c:forEach>
