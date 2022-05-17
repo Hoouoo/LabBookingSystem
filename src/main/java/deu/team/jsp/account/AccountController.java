@@ -1,18 +1,20 @@
 package deu.team.jsp.account;
 
+import deu.team.jsp.account.domain.Role;
+import deu.team.jsp.interceptor.CheckSession;
+import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Objects;
 
 @Controller
 public class AccountController {
@@ -22,44 +24,75 @@ public class AccountController {
 
     @GetMapping("/")
     public String LoginPage(){
-        return "/WEB-INF/Account/login.jsp";
+        return "/WEB-INF/account/login.jsp";
     }
 
     @GetMapping("/signUpPage")
     public String SignUpPage(){
-        return "/WEB-INF/Account/signUp.jsp";
+        return "/WEB-INF/account/signUp.jsp";
     }
 
     @PostMapping("/login")
     public String MainPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        accountService.Login(request,response);
+        Role role= accountService.Login(request, response);
 
-        Date now=new Date();
-        SimpleDateFormat df=new SimpleDateFormat("HH:mm");
-        String date=df.format(now);
-
-        int cutLineTime=17;
-        int currentTime=Integer.valueOf(date.substring(0,2));
-
-        HttpSession session=request.getSession();
-        Object account = session.getAttribute("account");
-        if(Objects.isNull(account)){
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out=response.getWriter();
-            out.println("<script>alert('세션이 만료되었습니다. 메인 페이지로 이동합니다.'); location.href='/';</script>");
-            out.flush();
+        if (role.equals(Role.STUDENT)){
+            return "WEB-INF/student/studentMain.jsp";
         }
-
-        if(cutLineTime >currentTime){
-            return "/WEB-INF/book/before17.jsp";
+        else if(role.equals(Role.ADMIN)){
+            return "WEB-INF/manager/adminMain.jsp";
         }
+        else{
+            return "WEB-INF/manager/professor.jsp";
+        }
+    }
 
-        return "/WEB-INF/book/after17.jsp";
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        System.out.println(session);
+        session.invalidate();
+        System.out.println(session);
+        return "redirect:/";
     }
 
     @PostMapping("/signUp")
     public String SignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
         accountService.SignUp(request,response);
+        return "redirect:/";
+    }
+
+    @CheckSession
+    @RequestMapping(value = "/adminAccountModifyPage",method = {RequestMethod.POST,RequestMethod.GET})
+    public String AdminAccountModifyPage(){
+        return "WEB-INF/manager/adminModifyAccount.jsp";
+    }
+
+    @CheckSession
+    @PostMapping("/accountSearch")
+    public String AccountSearch(HttpServletRequest request,HttpServletResponse response,
+                                Model model) throws IOException {
+        model.addAttribute("findAccount",accountService.AccountSearch(request,response,model));
+        return "/adminAccountModifyPage";
+    }
+
+    @CheckSession
+    @PostMapping("/adminAccountModify")
+    public String AdminModify(HttpServletRequest request){
+        accountService.modify(request);
+        return "redirect:/";
+    }
+
+    @CheckSession
+    @RequestMapping(value = "/studentAccountModifyPage",method = {RequestMethod.POST,RequestMethod.GET})
+    public String StudentAccountModifyPage(){
+        return "WEB-INF/student/studentModifyAccount.jsp";
+    }
+
+    @CheckSession
+    @PostMapping("/studentAccountModify")
+    public String StudentModify(HttpServletRequest request){
+        accountService.modify(request);
         return "redirect:/";
     }
 
