@@ -2,10 +2,13 @@ package deu.team.jsp.admin;
 
 import deu.team.jsp.OneTimeKey.OneTimeKeyService;
 import deu.team.jsp.account.domain.Role;
+import deu.team.jsp.interceptor.CheckSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -24,12 +27,14 @@ public class AdminMainController {
 
     private final OneTimeKeyService oneTimeKeyService;
 
-    @GetMapping("/admin")
+    @CheckSession
+    @GetMapping("/manager")
+//    @RequestMapping(value = "/manager",method = {RequestMethod.POST,RequestMethod.GET})
     public String mainPage() {
-        return "/WEB-INF/admin/adminMain.jsp";
+        return "/WEB-INF/manager/adminMain.jsp";
     }
 
-    @PostMapping("/admin")
+    @PostMapping("/manager")
     public void generateKey(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Role targetRole;
         System.out.println("~~~> : " + request.getParameter("keyRole"));
@@ -55,6 +60,6 @@ public class AdminMainController {
         request.getSession().setAttribute("keyMsg", "일회용 토큰 값이 성공적으로 생성되었습니다.");
 
 
-        response.sendRedirect("/administrator");
+        response.sendRedirect("/manager");
     }
 }

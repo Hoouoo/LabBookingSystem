@@ -37,6 +37,26 @@
         <button type="submit" name="scheduleCreateBtn">입력</button>
     </form>
     <hr/>
+    <table border="3">
+        <tr>
+            <th align="center">시간</th>
+            <th align="center">월</th>
+            <th align="center">화</th>
+            <th align="center">수</th>
+            <th align="center">목</th>
+            <th align="center">금</th>
+        </tr>
+        <% for(int j=9; j<=16; j++){%>
+        <tr>
+            <td align="center"><%= (j)%></td>
+            <% for(int i=0; i<5; i++){%>
+            <td align="center"> </td>
+            <% }%>
+        </tr>
+        <%} %>
+    </table>
+
+    <hr/>
     <c:if test="${0 < scheduleCnt }">
         등록된 시간표 개수 : <%= request.getAttribute("scheduleCnt") %>개
         <hr/>

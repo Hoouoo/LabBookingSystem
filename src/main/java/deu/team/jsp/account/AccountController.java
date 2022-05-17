@@ -40,7 +40,7 @@ public class AccountController {
             return "WEB-INF/student/studentMain.jsp";
         }
         else if(role.equals(Role.ADMIN)){
-            return "WEB-INF/manager/adminMain.jsp";
+            return "redirect:/manager";
         }
         else{
             return "WEB-INF/manager/professor.jsp";

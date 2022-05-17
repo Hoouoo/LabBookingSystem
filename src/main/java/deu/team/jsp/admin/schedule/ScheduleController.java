@@ -28,7 +28,7 @@ public class ScheduleController {
             model.addAttribute("scheduleCnt", scheduleService.getScheduleCnt());
             model.addAttribute("scheduleList", scheduleService.getScheduleList());
         }
-        return "/WEB-INF/admin/schedule/scheduleCreate.jsp";
+        return "/WEB-INF/manager/schedule/scheduleCreate.jsp";
     }
     @PostMapping("/admin/schedule")
     public void scheduleCreate(HttpServletRequest request, HttpServletResponse response, RedirectAttributes model) throws IOException {
