@@ -20,8 +20,9 @@ public class ScheduleCreateRequestDto {
     private LocalTime endTime;
     private String subject;
     private String professor;
+    private String labNo;
 
     public Schedule toEntity(){
-        return Schedule.builder().day(day).startTime(startTime).endTime(endTime).subject(subject).professor(professor).build();
+        return Schedule.builder().day(day).startTime(startTime).endTime(endTime).subject(subject).professor(professor).labNo(labNo).build();
     }
 }

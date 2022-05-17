@@ -27,13 +27,15 @@ public class Schedule {
     private LocalTime endTime;
     private String subject;
     private String professor;
+    private String labNo;
 
     @Builder
-    public Schedule(String day, LocalTime startTime, LocalTime endTime, String subject, String professor) {
+    public Schedule(String day, LocalTime startTime, LocalTime endTime, String subject, String professor, String labNo) {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
         this.subject = subject;
         this.professor = professor;
+        this.labNo = labNo;
     }
 }
