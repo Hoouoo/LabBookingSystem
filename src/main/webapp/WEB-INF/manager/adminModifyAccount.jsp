@@ -4,6 +4,10 @@
 <head>
     <title>회원정보 수정</title>
 </head>
+
+
+<jsp:include page="../fragment/adminHeader.jsp"/>
+
 <body>
 <h3>회원정보 수정</h3> <br/>
 
@@ -41,4 +45,6 @@
 
 </form>
 </body>
+
+<jsp:include page="../fragment/footer.jsp"/>
 </html>

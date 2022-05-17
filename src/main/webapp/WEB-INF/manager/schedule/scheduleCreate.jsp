@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <title>관리자 페이지 입니다.</title>
 </head>
+
+<jsp:include page="../../fragment/adminHeader.jsp"/>
 <body>
 
 <div align="center">
@@ -73,4 +75,6 @@
     </c:if>
 </div>
 </body>
+
+<jsp:include page="../../fragment/footer.jsp"/>
 </html>

@@ -2,14 +2,34 @@
 <html>
 <head>
     <title>로그인</title>
+    <link href="../../css/account.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-    <h3>로그인</h3> <br/>
+
+<body class="text-center">
+
+<%--<jsp:include page="../fragment/adminHeader.jsp"/>--%>
+
+
+<div class="account-box">
+    <div class="account-title">
+        <h1>로그인</h1></div>
+    <br/>
     <form action="/login" method="post">
-        학번 : <input type="text" name="studentId" required/><br/>
-        비밀번호 : <input type="password" name="userPassword" required><br/>
-        <input type="submit" value="로그인"><br/>
-        <button type="button"  onClick="location.href='signUpPage'"> 회원가입</button><br/>
+        <div class="mb-3">
+            <input class="account-input-box" type="text" name="studentId" placeholder="  학번" required/>
+        </div>
+        <div class="mb-3">
+            <input class="account-input-box" type="password" name="userPassword" placeholder="  비밀번호" required><br/>
+        </div>
+
+        <div class="form-group mb-3">
+            <input type="submit" class="btn btn-secondary btn-block account-button" value="로그인">
+        </div>
+        <button type="button" class="btn btn-dark btn-block account-button" onClick="location.href='signUpPage'"> 회원가입
+        </button>
     </form>
+</div>
+
 </body>
+<jsp:include page="../fragment/footer.jsp"/>
 </html>

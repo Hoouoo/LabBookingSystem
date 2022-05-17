@@ -14,6 +14,9 @@
 <head>
     <title>Title</title>
 </head>
+
+
+<jsp:include page="../fragment/adminHeader.jsp"/>
 <body>
     <table border="1">
         <thead>
@@ -35,4 +38,6 @@
         <%}%>
     </table>
 </body>
+
+<jsp:include page="../fragment/footer.jsp"/>
 </html>

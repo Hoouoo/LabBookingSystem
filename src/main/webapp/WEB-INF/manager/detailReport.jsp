@@ -12,10 +12,14 @@
 <head>
     <title>Title</title>
 </head>
+
+<jsp:include page="../fragment/adminHeader.jsp"/>
 <body>
     <h3>제목 : <%=report.getReportTitle()%></h3>
     <h3>작성자 : <%=report.getAccount().getUserName()%></h3>
     <h3>작성 시간 : <%=report.getReportTime().toString().substring(0, 19)%></h3>
     <textarea cols="20" rows="2" readonly><%=report.getReportContent()%></textarea>
 </body>
+
+<jsp:include page="../fragment/footer.jsp"/>
 </html>
