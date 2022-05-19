@@ -25,7 +25,6 @@ public class AnnounceController {
     @PostMapping("/postAnnounce")
     public String postAnnounce(HttpServletRequest request, Model model){
         announceService.post(request);
-
         return "WEB-INF/manager/adminMain.jsp";
     }
 
