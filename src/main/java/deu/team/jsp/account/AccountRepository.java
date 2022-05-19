@@ -17,7 +17,8 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     //좌석 예약 시 예약 상태 업데이트
     @Transactional
     @Modifying
-    @Query("update Account a set a.bookStatus=1 where a.studentId=:studentId")
-    void updateBookStatus(@Param("studentId")String studentId);
+    @Query("update Account a set a.bookStatus=:bookStatus where a.studentId=:studentId")
+    void updateBookStatus(@Param("studentId")String studentId,
+                          @Param("bookStatus")int bookStatus);
 
 }
