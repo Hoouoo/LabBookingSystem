@@ -6,6 +6,7 @@
 <head>
     <title>실습실 관리 페이지</title>
 </head>
+<jsp:include page="../fragment/adminHeader.jsp"/>
 <body>
 
 <p align="center">예약 관리</p>
@@ -111,4 +112,5 @@
     </c:forEach>
 </table>
 </body>
+<jsp:include page="../fragment/footer.jsp"/>
 </html>

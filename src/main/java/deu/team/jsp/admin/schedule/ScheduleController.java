@@ -1,5 +1,7 @@
 package deu.team.jsp.admin.schedule;
 
+import deu.team.jsp.OneTimeKey.OneTimeKeyService;
+import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.admin.schedule.dto.ScheduleCreateRequestDto;
 import deu.team.jsp.schedule.ScheduleService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 public class ScheduleController {
 
     private final ScheduleService scheduleService;
+    private final OneTimeKeyService oneTimeKeyService;
 
     @GetMapping("/admin/schedule")
     public String schedulePage(Model model){
@@ -29,6 +32,9 @@ public class ScheduleController {
             model.addAttribute("scheduleCnt", scheduleService.getScheduleCnt());
             model.addAttribute("scheduleList", scheduleService.getScheduleList());
             model.addAttribute("scheduleTimeList", scheduleService.getSubjectTime());
+            model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
+            model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
+
         }
         return "/WEB-INF/manager/schedule/scheduleCreate.jsp";
     }

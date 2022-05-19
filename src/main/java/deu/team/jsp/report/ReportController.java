@@ -1,5 +1,7 @@
 package deu.team.jsp.report;
 
+import deu.team.jsp.OneTimeKey.OneTimeKeyService;
+import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.interceptor.CheckSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,9 @@ public class ReportController {
     @Autowired
     ReportService reportService;
 
+    @Autowired
+    OneTimeKeyService oneTimeKeyService;
+
     @GetMapping("/reportPage")
     public String reportPage(){
         return "/WEB-INF/student/reportPage.jsp";
@@ -25,6 +30,8 @@ public class ReportController {
     @GetMapping("/confirmReportPage")
     public String confirmReportPage(Model model){
         model.addAttribute("reportList",reportService.getReportList());
+        model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
+        model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
         return "/WEB-INF/manager/confirmReport.jsp";
     }
 

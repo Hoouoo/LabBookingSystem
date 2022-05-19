@@ -1,5 +1,7 @@
 package deu.team.jsp.announce;
 
+import deu.team.jsp.OneTimeKey.OneTimeKeyService;
+import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.interceptor.CheckSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +17,16 @@ public class AnnounceController {
     @Autowired
     AnnounceService announceService;
 
+    @Autowired
+    OneTimeKeyService oneTimeKeyService;
+
     @GetMapping("/announcePage")
     @CheckSession
     public String announcePage(Model model){
         model.addAttribute("context",announceService.findContent());
+        model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
+        model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
+
         return "/WEB-INF/announce/announce.jsp";
     }
 

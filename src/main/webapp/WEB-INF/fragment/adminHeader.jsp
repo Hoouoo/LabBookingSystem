@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 
 <head>
@@ -37,16 +38,15 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="/adminAccountModifyPage">회원정보 수정</a>
                 <a class="nav-item nav-link" href="/admin/schedule">시간표 추가</a>
-                <a class="nav-item nav-link" href="/manager/schedule">실습실 관리</a>
+                <a class="nav-item nav-link" href="/admin/managelab">실습실 관리</a>
                 <a class="nav-item nav-link" href="/announcePage">공지사항 등록</a>
                 <a class="nav-item nav-link" href="/confirmReportPage">신고 및 문의</a>
-                <a class="nav-item nav-link" href="logout">로그아웃</a>
+                <a class="nav-item nav-link" href="/logout">로그아웃</a>
             </div>
         </div>
     </nav>
 </header>
-
-<form action="/manager" method="post">
+<form action="/onetimekey" method="post">
     <nav class="py-2 bg-light border-bottom d-flex shadow-sm">
         <div class="container">
 
@@ -54,15 +54,15 @@
 
                 <button class="header-nav-button" type="submit" name="keyRole" value="STUDENT">일반 사용자 암호 생성
                 </button>
-                <c:if test="${null ne sessionScope.keyStudent}">
+                <c:if test="${null ne keyStudent}">
                     <div class="header-nav-p me-4">
-                        <c:out value="${sessionScope.keyStudent}"/>
+                        <c:out value="${keyStudent}"/>
                     </div>
                 </c:if>
                 <button class="header-nav-button" type="submit" name="keyRole" value="PROFESSOR">교수 사용자 암호 생성</button>
-                <c:if test="${null ne sessionScope.keyProfessor}">
+                <c:if test="${null ne keyProfessor}">
                     <div class="header-nav-p">
-                        <c:out value="${sessionScope.keyProfessor}"/>
+                        <c:out value="${keyProfessor}"/>
                     </div>
                 </c:if>
             </ul>
