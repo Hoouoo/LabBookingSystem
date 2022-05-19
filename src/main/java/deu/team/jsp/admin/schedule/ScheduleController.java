@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ public class ScheduleController {
         if (scheduleService.getScheduleCnt() > 0){
             model.addAttribute("scheduleCnt", scheduleService.getScheduleCnt());
             model.addAttribute("scheduleList", scheduleService.getScheduleList());
+            model.addAttribute("scheduleTimeList", scheduleService.getSubjectTime());
         }
         return "/WEB-INF/manager/schedule/scheduleCreate.jsp";
     }
@@ -34,6 +36,7 @@ public class ScheduleController {
     public void scheduleCreate(HttpServletRequest request, HttpServletResponse response, RedirectAttributes model) throws IOException {
         String subject = request.getParameter("subject");
         String professor = request.getParameter("professor");
+        String labNo = request.getParameter("labNo");
         String day = request.getParameter("scheduleDay");
         String strStartTime = request.getParameter("scheduleStartTime").toString();
         String strEndTime = request.getParameter("scheduleEndTime").toString();
@@ -43,8 +46,9 @@ public class ScheduleController {
 
         System.out.println("subject : " + subject + " professor : " + professor + " day : "  + day + " startTime : " + startTime + " endTime : " + endTime);
 
-        ScheduleCreateRequestDto requestDto = ScheduleCreateRequestDto.builder().day(day).subject(subject).professor(professor)
+        ScheduleCreateRequestDto requestDto = ScheduleCreateRequestDto.builder().day(day).labNo(labNo).subject(subject).professor(professor)
                 .startTime(startTime).endTime(endTime).build();
+        // dto 저장
         scheduleService.generateSchedule(requestDto);
         response.sendRedirect("/admin/schedule");
 
