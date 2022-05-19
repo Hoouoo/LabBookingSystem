@@ -3,42 +3,99 @@
 <html>
 <head>
     <title>회원정보 수정</title>
+    <link href="../../css/account.css" rel="stylesheet" type="text/css">
 </head>
+
+
+<jsp:include page="../fragment/adminHeader.jsp"/>
+
 <body>
-<h3>회원정보 수정</h3> <br/>
+<div class="account-box">
+    <div class="account-long-title">
+        <h3>회원정보 수정</h3></div>
+    <br/>
 
-<form action="/accountSearch" method="post">
-    <c:choose>
-        <c:when test="${empty findAccount}">
-            학번 : <input type="text" name="studentId" required/>
-        </c:when>
-        <c:otherwise>
-            학번 : <input type="text" name="studentId" value="${findAccount.studentId}" />
-        </c:otherwise>
-    </c:choose>
-    검색 : <input type="submit" value="검색"/> <br/><br/>
-</form>
+    <form action="/accountSearch" method="post">
+        <c:choose>
+            <c:when test="${empty findAccount}">
 
-<form action="/adminAccountModify" method="post">
+                <div class="mb-3">
+                    <input class="account-input-box" type="text" name="studentId" placeholder="  학번" required/>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="mb-3">
+                    <input class="account-input-box" type="text" name="studentId" placeholder="  학번"
+                           value="${findAccount.studentId}" required/>
+                </div>
+            </c:otherwise>
+        </c:choose>
 
-    <c:choose>
-        <c:when test="${empty findAccount}">
-            이름 : <input type="text" name="userName" required/> <br/>
-            전화번호 : <input type="text" name="phoneNo" required/> <br/>
-            이메일 : <input type="email" name="email" required/> <br/>
-            비밀번호 : <input type="text" name="userPassword" value=" " required/> <br/>
-        </c:when>
-        <c:otherwise>
-            이름 : <input type="text" name="userName" value="${findAccount.userName}"/> <br/>
-            전화번호 : <input type="text" name="phoneNo" value="${findAccount.phoneNo}"/> <br/>
-            이메일 : <input type="email" name="email" value="${findAccount.email}"/> <br/>
-            비밀번호 : <input type="text" name="userPassword" value="${findAccount.userPassword}"/><br/>
-        </c:otherwise>
-    </c:choose>
-    <input type="hidden" name="studentId" value="${findAccount.studentId}">
-    <input type="submit" name="modify" value="수정">
-    <input type="submit" name="remove" value="삭제">
+        <div class="form-group mb-3">
+            <input type="submit" class="btn btn-primary btn-block account-button" value="검색">
+        </div>
+        <hr/>
 
-</form>
+    </form>
+
+    <form action="/adminAccountModify" method="post">
+
+        <c:choose>
+            <c:when test="${empty findAccount}">
+                <div class="mb-3">
+                    <input class="account-input-box" type="text" name="userName" placeholder="  이름" required/>
+                </div>
+
+                <div class="mb-3">
+                    <input class="account-input-box" type="text" name="phoneNo" placeholder="  전화번호" required/>
+                </div>
+
+
+                <div class="mb-3">
+                    <input class="account-input-box" type="email" name="email" placeholder="  이메일" required/>
+                </div>
+
+                <div class="mb-3">
+                    <input class="account-input-box" type="text" name="userPassword" value=" " placeholder="  비밀번호"
+                           required/>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="mb-3">
+                    <input class="account-input-box" type="text" name="userName" value="${findAccount.userName}"
+                           required/>
+                </div>
+
+                <div class="mb-3">
+                    <input class="account-input-box" type="text" name="phoneNo" value="${findAccount.phoneNo}"
+                           required/>
+                </div>
+
+
+                <div class="mb-3">
+                    <input class="account-input-box" type="email" name="email" value="${findAccount.email}" required/>
+                </div>
+
+                <div class="mb-3">
+                    <input class="account-input-box" type="text" name="userPassword" value="${findAccount.userPassword}"
+                           required/>
+                </div>
+
+            </c:otherwise>
+        </c:choose>
+        <input type="hidden" name="studentId" value="${findAccount.studentId}">
+
+        <div class="form-group mb-3">
+            <input type="submit" class="btn btn-secondary btn-block account-button" name="modify" value="수정">
+        </div>
+
+        <div class="form-group mb-3">
+            <input type="submit" class="btn btn-dark btn-block account-button" name="remove" value="삭제">
+        </div>
+
+    </form>
+</div>
 </body>
+
+<jsp:include page="../fragment/footer.jsp"/>
 </html>

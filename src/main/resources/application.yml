@@ -4,9 +4,7 @@
     url: "jdbc:mysql://localhost:3306/lab_booking_system"
     username: lab_booking_system
     password: 1234
-#  sql:
-#    init:
-#      mode: always
+
 
   jpa:
     hibernate:

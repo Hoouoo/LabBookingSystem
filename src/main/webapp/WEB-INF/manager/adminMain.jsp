@@ -3,6 +3,8 @@
 <head>
     <title>관리자</title>
 </head>
+
+<jsp:include page="../fragment/adminHeader.jsp"/>
 <body>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <button type="button" onClick="location.href='adminAccountModifyPage'">회원정보 수정</button> <br/>
@@ -28,4 +30,6 @@
 <%--        </c:if>--%>
     </form>
 </body>
+
+<jsp:include page="../fragment/footer.jsp"/>
 </html>

@@ -4,6 +4,9 @@
 <head>
     <title>공지사항 등록</title>
 </head>
+
+<jsp:include page="../fragment/adminHeader.jsp"/>
+
 <body>
     <h3>공지사항을 등록하세요</h3>
     <form action="/postAnnounce" method="post">
@@ -18,4 +21,6 @@
         <input type="submit" value="등록">
     </form>
 </body>
+
+<jsp:include page="../fragment/footer.jsp"/>
 </html>

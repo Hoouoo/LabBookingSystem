@@ -24,15 +24,6 @@
         <span class="fs-4">Lab Booking System</span>
     </a>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="collapse navbar-collapse">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="/studentAccountModifyPage">회원정보</a>
-                <a class="nav-item nav-link" href="/bookPage">실습실 정보</a>
-                <a class="nav-item nav-link" href="/reportPage">신고 및 문의</a>
-            </div>
-        </div>
-    </nav>
-    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="/adminAccountModifyPage">회원정보 수정</a>
@@ -44,21 +35,6 @@
         </div>
     </nav>
 </header>
-
-<c:if test="${pageContext.request.servletPath eq '/logout.jsp'}">
-    <nav class="py-2 bg-light border-bottom d-flex shadow-sm">
-        <div class="container">
-            <ul class="nav justify-content-center" style="height: 40px;">
-                <li class="nav-item" style="height: 20px;"><a href="/bookPage" class="nav-link link-dark active"
-                                                              aria-current="page">실습실 예약</a></li>
-                <li class="nav-item border-end align-self-center" style="height: 20px;"/>
-                <li class="nav-item" style="height: 20px;"><a href="#" class="nav-link link-dark ">실습실 연장</a></li>
-                <li class="nav-item border-end align-self-center" style="height: 20px;"/>
-                <li class="nav-item" style="height: 20px;"><a href="#" class="nav-link link-dark ">예약 정보 확인</a></li>
-            </ul>
-        </div>
-    </nav>
-</c:if>
 
 
 </body>
