@@ -7,7 +7,8 @@
     <button type="button" onClick="location.href='/studentAccountModifyPage'">회원정보 수정</button> <br/>
     <button type="button" onClick="location.href='/bookPage'">실습실 예약</button> <br/>
     <button type="button" onClick="location.href=''">실습실 연장</button> <br/>
-    <button type="button" onClick="location.href=''">예약 정보 확인</button> <br/>
+    <button type="button" onClick="location.href='/myBookStatusPage'">예약 정보 확인</button> <br/>
     <button type="button" onClick="location.href='/reportPage'">신고 및 문의</button> <br/>
+    <button type="button" onClick="location.href='/logout'">로그아웃</button> <br/>
 </body>
 </html>

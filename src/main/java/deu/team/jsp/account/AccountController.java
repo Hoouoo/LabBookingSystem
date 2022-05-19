@@ -32,18 +32,28 @@ public class AccountController {
         return "/WEB-INF/account/signUp.jsp";
     }
 
+    @GetMapping("/studentPage")
+    public String studentPage(){
+        return "WEB-INF/student/studentMain.jsp";
+    }
+
+    @GetMapping("/professor")
+    public String professorPage(){
+        return "WEB-INF/manager/professor.jsp";
+    }
+
     @PostMapping("/login")
     public String MainPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Role role= accountService.Login(request, response);
 
         if (role.equals(Role.STUDENT)){
-            return "WEB-INF/student/studentMain.jsp";
+            return "redirect:/studentPage";
         }
         else if(role.equals(Role.ADMIN)){
             return "redirect:/manager";
         }
         else{
-            return "WEB-INF/manager/professor.jsp";
+            return "redirect:/professor";
         }
     }
 
