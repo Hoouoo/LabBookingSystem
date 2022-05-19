@@ -3,10 +3,9 @@ package deu.team.jsp.book.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,7 +14,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Book {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
     private String studentId;
     private LocalDateTime startTime;
@@ -24,12 +24,16 @@ public class Book {
     private int seatY;
     private int seatX;
 
-    public Book(String studentId, LocalDateTime startTime, LocalDateTime endTime, String labNo, int seatX, int seatY) {
+    @Enumerated(EnumType.STRING)
+    private ApproveStatus approveStatus;
+
+    public Book(String studentId, LocalDateTime startTime, LocalDateTime endTime, String labNo, int seatY, int seatX, ApproveStatus approveStatus) {
         this.studentId = studentId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.labNo = labNo;
-        this.seatX = seatX;
         this.seatY = seatY;
+        this.seatX = seatX;
+        this.approveStatus = approveStatus;
     }
 }

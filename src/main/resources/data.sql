@@ -1,0 +1,1 @@
+-- insert into account(account_id,student_id, user_name,user_password, email, phone_no, book_status,role) values(1000,'ADMIN','관리자','ADMIN','ADMIN@NAVER.COM','010-1234-5678',1,'ADMIN');

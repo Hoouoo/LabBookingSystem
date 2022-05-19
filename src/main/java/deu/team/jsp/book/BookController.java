@@ -57,7 +57,7 @@ public class BookController {
         else{ //삭제
             Integer removeId = Integer.valueOf(request.getParameter("remove"));
             Long bookId=removeId.longValue();
-            bookService.removeBook(bookId); //예약 취소 및 삭제
+            bookService.removeBook(bookId); //삭제
         }
 
         return "/WEB-INF/student/studentMain.jsp";
