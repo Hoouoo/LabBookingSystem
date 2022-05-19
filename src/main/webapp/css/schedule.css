@@ -1,0 +1,295 @@
+@CHARSET "UTF-8";
+
+.schedule-box {
+    display: flex;
+
+    padding-top: 50px;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    /*border-width: 1px;*/
+    /*border-style: solid;*/
+    /*border-color: rgb(245, 245, 245);*/
+}
+
+.schedule-box-2 {
+    display: flex;
+
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 150px;
+    padding-right: 150px;
+
+    margin-right: 50px;
+
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+
+
+    border-color: rgba(199, 206, 212, 50%);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px rgb(199, 206, 212);
+}
+
+.schedule-box-2-sub-text{
+    float: left;
+    margin-left: -200px;
+    font-size: 18px;
+}
+
+.schedule-title {
+    font-size: 30px;
+    text-align: center;
+    line-height: 48px;
+    letter-spacing: -0.5px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(245, 245, 245);
+}
+
+.schedule-input-box {
+    height: 31px;
+    width: 350px;
+    /*padding-top: 10px;*/
+    padding-left: 10px;
+    padding-right: 16px;
+    /*color: rgb(34, 34, 34);*/
+    font-size: 14px;
+    line-height: 24px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-color: rgb(199, 206, 212);
+    border-radius: 4px;
+}
+
+.schedule-select {
+    width: 100%;
+    height: 31px;
+}
+
+
+.schedule-in-box {
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    outline-color: initial;
+    outline-style: none;
+    outline-width: initial;
+    touch-action: manipulation;
+    padding-top: 20px;
+}
+
+.schedule-in-box-2 {
+    display: inline-flex;
+    flex-direction: column;
+    outline-color: initial;
+    outline-style: none;
+    outline-width: initial;
+    touch-action: manipulation;
+    padding-top: 20px;
+}
+
+.schedule-in-box-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.schedule-in-box-sub-grid {
+    width: 100%;
+    height: 100%;
+    margin-right: 20px;
+    margin-left: 20px;
+    /*border-radius: 10px;*/
+    /*border: 3px solid rgb(199, 206, 212);*/
+}
+
+.schedule-sub-title {
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.schedule-sub-title-2 {
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.schedule-mt-m2 {
+    margin-top: -40px;
+}
+
+.schedule-table-box {
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 3px solid rgb(199, 206, 212);
+    width: 600px;
+    height: 500px;
+    box-shadow: 1px 1px 3px rgb(199, 206, 212);
+}
+
+.schedule-table-border {
+    overflow: hidden;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.schedule-table-size {
+    width: 25px;
+    height: 55px;
+}
+
+.schedule-table-size-2 {
+    width: 300px;
+    height: 55px;
+    font-size: 15px;
+}
+
+.schedule-bg-gray-0 {
+    background-color: rgb(220, 220, 220);
+}
+
+.schedule-bg-gray-1 {
+    background-color: rgb(211, 211, 211);
+}
+
+.schedule-bg-gray-2 {
+    background-color: rgb(192, 192, 192);
+}
+
+.schedule-bg-gray-3 {
+    background-color: rgb(245, 245, 245);
+}
+
+.schedule-bg-gray-4 {
+    background-color: rgb(169, 169, 169);
+}
+
+.schedule-btn-w{
+    width: 200px;
+}
+
+
+@media ( max-width: 1112px ) {
+    .schedule-input-box {
+        width: 200px;
+    }
+
+    .schedule-box {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media ( max-width: 516px ) {
+    .schedule-input-box {
+        width: 200px;
+    }
+
+    .schedule-box {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+/*input[type=radio].toggle {*/
+/*    display: none;*/
+/*}*/
+/*input[type=radio].toggle + label {*/
+/*    cursor: pointer;*/
+/*    min-width: 20%;*/
+/*    border-color: rgb(93,100,100);*/
+/*}*/
+/*input[type=radio].toggle + label:hover {*/
+/*    background: none;*/
+/*    color: rgb(93,95,100);*/
+/*}*/
+/*input[type=radio].toggle + label:after {*/
+/*    background: rgb(93,95,100);*/
+/*    content: "";*/
+/*    height: 100%;*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);*/
+/*    width: 80%;*/
+/*    z-index: -1;*/
+/*}*/
+/*input[type=radio].toggle.toggle-lef1 + label {*/
+/*    border-right: 0;*/
+/*}*/
+/*input[type=radio].toggle.toggle-left1 + label:after {*/
+/*    left: 20%;*/
+/*}*/
+/*input[type=radio].toggle.toggle-right2 + label {*/
+/*    margin-left: 0px;*/
+/*}*/
+/*input[type=radio].toggle.toggle-right2 + label:after {*/
+/*    left: 40%;*/
+/*}*/
+
+/*input[type=radio].toggle.toggle-left3 + label {*/
+/*    border-right: 0;*/
+/*}*/
+/*input[type=radio].toggle.toggle-left3 + label:after {*/
+/*    left: 60%;*/
+/*}*/
+
+/*input[type=radio].toggle.toggle-right4 + label {*/
+/*    margin-left: -5px;*/
+/*}*/
+/*input[type=radio].toggle.toggle-right4 + label:after {*/
+/*    left: 80%;*/
+/*}*/
+
+/*input[type=radio].toggle.toggle-left5 + label {*/
+/*    border-right: 0;*/
+/*}*/
+/*input[type=radio].toggle.toggle-left5 + label:after {*/
+/*    left: 100%;*/
+/*}*/
+
+/*input[type=radio].toggle:checked + label {*/
+/*    cursor: default;*/
+/*    color: #fff;*/
+/*    transition: color 200ms;*/
+/*}*/
+/*input[type=radio].toggle:checked + label:after {*/
+/*    left: 0;*/
+/*}*/
+
+/*.account-radio-btn{*/
+/*    width: 20%;*/
+/*    border: 3px solid #1a1a1a;*/
+/*    display: inline-block;*/
+/*    padding: 10px;*/
+/*    position: relative;*/
+/*    text-align: center;*/
+/*    transition: background 600ms ease, color 600ms ease;*/
+/*}*/
