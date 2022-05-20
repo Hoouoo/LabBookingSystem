@@ -6,10 +6,10 @@
 </head>
 <body>
 
-<div class="account-box">
+<div class="account-second-box">
     <div class="account-long-title">
-        <h1> 회원가입</h1></div>
-    <br/>
+        회원가입
+    </div>
     <form action="/signUp" method="post">
         <%--        <select name="roleType">--%>
         <%--            <option value="student">학생</option>--%>

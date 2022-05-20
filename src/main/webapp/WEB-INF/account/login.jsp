@@ -12,7 +12,8 @@
 
 <div class="account-box">
     <div class="account-title">
-        <h1>로그인</h1></div>
+        로그인
+    </div>
     <br/>
     <form action="/login" method="post">
         <div class="mb-3">
