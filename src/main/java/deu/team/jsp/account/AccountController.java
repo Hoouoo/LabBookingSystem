@@ -1,5 +1,6 @@
 package deu.team.jsp.account;
 
+import deu.team.jsp.OneTimeKey.OneTimeKeyService;
 import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.interceptor.CheckSession;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
@@ -21,6 +22,9 @@ public class AccountController {
 
     @Autowired
     AccountService accountService;
+
+    @Autowired
+    OneTimeKeyService oneTimeKeyService;
 
     @GetMapping("/")
     public String LoginPage(){
@@ -50,7 +54,7 @@ public class AccountController {
             return "redirect:/studentPage";
         }
         else if(role.equals(Role.ADMIN)){
-            return "redirect:/manager";
+            return "redirect:/admin/managelab";
         }
         else{
             return "redirect:/professor";
@@ -72,9 +76,21 @@ public class AccountController {
         return "redirect:/";
     }
 
+
+//    @RequestMapping(value = "/adminAccountModifyPage",method = {RequestMethod.POST,RequestMethod.GET})
+//    public String AdminAccountModifyPage(){
+//        return "WEB-INF/manager/adminModifyAccount.jsp";
+//    }
     @CheckSession
-    @RequestMapping(value = "/adminAccountModifyPage",method = {RequestMethod.POST,RequestMethod.GET})
-    public String AdminAccountModifyPage(){
+    @GetMapping("/adminAccountModifyPage")
+    public String AdminAccountModifyPageGet(Model model){
+        model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
+        model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
+        return "WEB-INF/manager/adminModifyAccount.jsp";
+    }
+    @CheckSession
+    @PostMapping("/adminAccountModifyPage")
+    public String AdminAccountModifyPagePost(){
         return "WEB-INF/manager/adminModifyAccount.jsp";
     }
 
