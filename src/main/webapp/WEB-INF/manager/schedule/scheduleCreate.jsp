@@ -70,7 +70,7 @@
 
             </label>
 
-            <button type="submit" class="btn btn-secondary btn-block account-button mt-4" name="scheduleCreateBtn"> 입력
+            <button type="submit" class="btn btn-secondary btn-block mt-4" name="scheduleCreateBtn"> 입력
             </button>
         </div>
         <hr/>
@@ -159,7 +159,7 @@
                         </div>
                         <br/>
                         <form action="/admin/schedule" method="post">
-                            <button type="submit" class="btn btn-secondary btn-block account-button schedule-btn-w" name="delete" value="${schedule.id}"> 삭제
+                            <button type="submit" class="btn btn-secondary btn-block schedule-btn-w" name="delete" value="${schedule.id}"> 삭제
                             </button>
                       </form>
                     </div>

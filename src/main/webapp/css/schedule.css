@@ -10,10 +10,10 @@
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: center;
-    justify-content: center;
+    /*justify-content: center;*/
     margin-left: 200px;
     margin-right: 200px;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     margin-bottom: 50px;
 
     /*border-width: 1px;*/
@@ -30,6 +30,9 @@
     padding-right: 150px;
 
     margin-right: 50px;
+
+    min-width: 500px;
+    min-height: 500px;
 
     flex-direction: column;
     -webkit-box-flex: 1;
@@ -54,7 +57,8 @@
 }
 
 .schedule-title {
-    font-size: 30px;
+    font-size: 25px;
+    font-weight: bold;
     text-align: center;
     line-height: 48px;
     letter-spacing: -0.5px;

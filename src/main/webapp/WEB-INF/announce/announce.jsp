@@ -3,23 +3,29 @@
 <html>
 <head>
     <title>공지사항 등록</title>
+    <link href="../../css/announce.css" rel="stylesheet" type="text/css">
 </head>
 
 <jsp:include page="../fragment/adminHeader.jsp"/>
 
 <body>
-    <h3>공지사항을 등록하세요</h3>
+<div class="announce-box">
+    <div class="announce-title">공지사항을 등록하세요</div>
     <form action="/postAnnounce" method="post">
         <c:choose>
             <c:when test="${empty context}">
-                <textarea name="announceContent"  rows="10" clos="10"></textarea>
+                <textarea name="announceContent" class="announce-textarea"></textarea>
             </c:when>
             <c:otherwise>
-                <textarea name="announceContent" rows="10" clos="10">${context}</textarea>
+                <textarea name="announceContent" class="announce-textarea">${context}</textarea>
             </c:otherwise>
         </c:choose>
-        <input type="submit" value="등록">
+        <br/>
+        <div class="form-group mb-3">
+            <input type="submit" class="btn btn-secondary btn-block announce-button" value="등록">
+        </div>
     </form>
+</div>
 </body>
 
 <jsp:include page="../fragment/footer.jsp"/>
