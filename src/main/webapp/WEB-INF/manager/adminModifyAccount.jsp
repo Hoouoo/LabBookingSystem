@@ -10,10 +10,11 @@
 <jsp:include page="../fragment/adminHeader.jsp"/>
 
 <body>
-<div class="account-box">
+<div class="account-second-box">
     <div class="account-long-title">
-        <h3>회원정보 수정</h3></div>
+        회원정보 수정</div>
     <br/>
+    <div class="account-mb-2"></div>
 
     <form action="/accountSearch" method="post">
         <c:choose>
@@ -43,40 +44,48 @@
         <c:choose>
             <c:when test="${empty findAccount}">
                 <div class="mb-3">
+                    <div class="account-sub-title mb-1">이름</div>
                     <input class="account-input-box" type="text" name="userName" placeholder="  이름" required/>
                 </div>
 
                 <div class="mb-3">
+                    <div class="account-sub-title mb-1">전화번호</div>
                     <input class="account-input-box" type="text" name="phoneNo" placeholder="  전화번호" required/>
                 </div>
 
 
                 <div class="mb-3">
+                    <div class="account-sub-title mb-1">이메일</div>
                     <input class="account-input-box" type="email" name="email" placeholder="  이메일" required/>
                 </div>
 
                 <div class="mb-3">
+                    <div class="account-sub-title mb-1">비밀번호</div>
                     <input class="account-input-box" type="text" name="userPassword" value=" " placeholder="  비밀번호"
                            required/>
                 </div>
             </c:when>
             <c:otherwise>
                 <div class="mb-3">
+                    <div class="account-sub-title mb-1">이름</div>
                     <input class="account-input-box" type="text" name="userName" value="${findAccount.userName}"
                            required/>
                 </div>
 
                 <div class="mb-3">
+                    <div class="account-sub-title mb-1">전화번호</div>
                     <input class="account-input-box" type="text" name="phoneNo" value="${findAccount.phoneNo}"
                            required/>
                 </div>
 
 
                 <div class="mb-3">
+                    <div class="account-sub-title mb-1">이메일</div>
                     <input class="account-input-box" type="email" name="email" value="${findAccount.email}" required/>
                 </div>
 
                 <div class="mb-3">
+                    <div class="account-sub-title mb-1">비밀번호</div>
                     <input class="account-input-box" type="text" name="userPassword" value="${findAccount.userPassword}"
                            required/>
                 </div>

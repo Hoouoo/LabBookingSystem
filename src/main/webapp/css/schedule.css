@@ -88,10 +88,32 @@
     border-radius: 4px;
 }
 
+.schedule-input-box-2 {
+    height: 31px;
+    width: 100%;
+    /*padding-top: 10px;*/
+    padding-left: 10px;
+    padding-right: 16px;
+    /*color: rgb(34, 34, 34);*/
+    font-size: 14px;
+    line-height: 24px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-color: rgb(199, 206, 212);
+    border-radius: 4px;
+}
+
 .schedule-select {
     width: 100%;
     height: 31px;
 }
+
 
 
 .schedule-in-box {
@@ -114,6 +136,18 @@
     touch-action: manipulation;
     padding-top: 20px;
 }
+
+/*.schedule-in-box-3 {*/
+/*    width: 100%;*/
+/*    display: inline-flex;*/
+/*    flex-direction: column;*/
+/*    outline-color: initial;*/
+/*    outline-style: none;*/
+/*    outline-width: initial;*/
+/*    touch-action: manipulation;*/
+/*    padding-top: 20px;*/
+/*}*/
+
 
 .schedule-in-box-grid {
     display: grid;
@@ -196,6 +230,10 @@
 
 .schedule-btn-w{
     width: 200px;
+}
+
+.schedule-btn-fw {
+    width: 100%;
 }
 
 
