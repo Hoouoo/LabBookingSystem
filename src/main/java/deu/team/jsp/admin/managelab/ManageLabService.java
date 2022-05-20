@@ -30,6 +30,8 @@ public class ManageLabService {
     public void approveBook(Long id){
         Optional<Book> target = bookRepository.findById(id);
         if (target.isPresent()) {
+            String targetStudentId = target.get().getStudentId();
+            accountRepository.updateBookStatus(targetStudentId, 1);
             target.get().setApproveStatus(ApproveStatus.APPROVE);
             bookRepository.save(target.get());
         }

@@ -158,7 +158,10 @@
                             <p><b>수업 종료 시간 :</b> <c:out value="${schedule.endTime}"/></p>
                         </div>
                         <br/>
-                        <button type="button" class="btn btn-secondary btn-block account-button schedule-btn-w"> 삭제</button>
+                        <form action="/admin/schedule" method="post">
+                            <button type="submit" class="btn btn-secondary btn-block account-button schedule-btn-w" name="delete" value="${schedule.id}"> 삭제
+                            </button>
+                      </form>
                     </div>
                 </div>
             </c:forEach>
