@@ -1,6 +1,7 @@
 package deu.team.jsp.report;
 
 import deu.team.jsp.account.domain.Account;
+import deu.team.jsp.alert.AlertService;
 import deu.team.jsp.report.domain.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ public class ReportService {
     @Autowired
     ReportRepository reportRepository;
 
+    @Autowired
+    AlertService alertService;
+
     public void reportPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         HttpSession httpSession=request.getSession();
@@ -33,10 +37,7 @@ public class ReportService {
 
         reportRepository.save(report);
 
-        response.setContentType("text/html; charset=UTF-8");
-        PrintWriter out=response.getWriter();
-        out.println("<script>alert('문의사항/신고 가 등록 되었습니다.');</script>");
-        out.flush();
+        alertService.alertMessage("문의사항/신고 가 등록 되었습니다.","",response);
     }
 
     public List<Report> getReportList(){
