@@ -51,21 +51,21 @@
         </div>
         <b>칠판</b><br/>
         &nbsp;&nbsp;&nbsp;
-        <% for (int a = 1; a <= labSizeY; a++) {%>
-        <small><%=a%>
+        <% for (int x = 1; x <= labSizeY; x++) {%>
+        <small><%=x%>
         </small> &nbsp;
         <%}%>
         <br/>
 
-        <% for (int i = 1; i <= labSizeX; i++) {%>
-        <%=i%>
+        <% for (int y = 1; y <= labSizeX; y++) {%>
+        <%=y%>
         <%
-            for (int a = 1; a <= labSizeY; a++) {
-                if (seatList[i - 1][a - 1] == 1) {
+            for (int x = 1; x <= labSizeY; x++) {
+                if (seatList[y - 1][x - 1] == 1) {
         %>
-        <input type="radio" name="seat" value="<%=a %>-<%=i %>" disabled>
+        <input type="radio" name="seat" value="<%=x %>-<%=y %>" disabled>
         <%} else {%>
-        <input type="radio" name="seat" value="<%=a %>-<%=i %>">
+        <input type="radio" name="seat" value="<%=x %>-<%=y %>">
         <%}%>
         <%}%>
         <br/>

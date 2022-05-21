@@ -88,16 +88,21 @@ public class BookService {
         LocalDateTime now = LocalDateTime.now();
         //해당 아이디에 예약한거 정렬해서 가져와서 끝나는 시간이 현재보다 작으면 예약상태 0으로 변경
         List<Book> lastBookList = bookRepository.getLastBookList(account.getStudentId());
-        if (lastBookList.size() > 0) {
+        System.out.println(findSeat);
 
+        if (lastBookList.size() > 0) {
             Book lastBook = lastBookList.get(lastBookList.size() - 1);
             if (lastBook.getEndTime().isBefore(now)) {
                 accountRepository.updateBookStatus(account.getStudentId(), 0);
             }
         }
-        if (Objects.isNull(findSeat) && account.getBookStatus() == 0) { //공지사항 등록 했을 때
-            accountRepository.updateBookStatus(account.getStudentId(), 1);
+
+        //예약 상태 검색 쿼리
+        int bookStatus = accountRepository.findByStudentId(account.getStudentId()).getBookStatus();
+
+        if (Objects.isNull(findSeat) && bookStatus == 0) { //공지사항 등록 했을 때
             bookRepository.save(book);
+            accountRepository.updateBookStatus(account.getStudentId(), 1);
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
             String str = "<script>alert('" + announceContent + "');</script>";

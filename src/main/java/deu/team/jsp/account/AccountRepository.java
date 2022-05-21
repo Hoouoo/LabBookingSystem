@@ -20,5 +20,4 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Query("update Account a set a.bookStatus=:bookStatus where a.studentId=:studentId")
     void updateBookStatus(@Param("studentId")String studentId,
                           @Param("bookStatus")int bookStatus);
-
 }

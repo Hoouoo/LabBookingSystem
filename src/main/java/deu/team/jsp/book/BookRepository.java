@@ -35,4 +35,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("select b from Book as b where b.approveStatus=:approveStatus order by b.id")
     List<Book> getStatusList(@Param("approveStatus") ApproveStatus approveStatus);
+
 }

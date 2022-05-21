@@ -27,13 +27,13 @@ public class Book {
     @Enumerated(EnumType.STRING)
     private ApproveStatus approveStatus;
 
-    public Book(String studentId, LocalDateTime startTime, LocalDateTime endTime, String labNo, int seatY, int seatX, ApproveStatus approveStatus) {
+    public Book(String studentId, LocalDateTime startTime, LocalDateTime endTime, String labNo, int seatX, int seatY,ApproveStatus approveStatus) {
         this.studentId = studentId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.labNo = labNo;
-        this.seatY = seatY;
         this.seatX = seatX;
+        this.seatY = seatY;
         this.approveStatus = approveStatus;
     }
 }
