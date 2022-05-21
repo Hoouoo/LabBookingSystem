@@ -2,6 +2,7 @@ package deu.team.jsp.book;
 
 import deu.team.jsp.account.AccountRepository;
 import deu.team.jsp.account.domain.Account;
+import deu.team.jsp.alert.AlertService;
 import deu.team.jsp.announce.AnnounceRepository;
 import deu.team.jsp.announce.domain.Announcement;
 import deu.team.jsp.book.domain.ApproveStatus;
@@ -39,6 +40,9 @@ public class BookService {
 
     @Autowired
     ScheduleRepository scheduleRepository;
+
+    @Autowired
+    AlertService alertService;
 
     public void book(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -103,16 +107,17 @@ public class BookService {
         if (Objects.isNull(findSeat) && bookStatus == 0) { //공지사항 등록 했을 때
             bookRepository.save(book);
             accountRepository.updateBookStatus(account.getStudentId(), 1);
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            String str = "<script>alert('" + announceContent + "');</script>";
-            out.println(str);
-            out.flush();
+
+            alertService.alertMessage(announceContent,"",response);
+
+//            response.setContentType("text/html; charset=UTF-8");
+//            PrintWriter out = response.getWriter();
+//            String str = "<script>alert('" + announceContent + "');</script>";
+//            out.println(str);
+//            out.flush();
+
         } else {
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('이미 예약된 좌석 이거나 중복 예약이 불가능 합니다.'); location.href='/studentPage';</script>");
-            out.flush();
+            alertService.alertMessage("이미 예약된 좌석 이거나 중복 예약이 불가능 합니다.","/studentPage",response);
         }
 
     }
@@ -155,10 +160,7 @@ public class BookService {
         Integer dayOfWeekNumber = Integer.valueOf(request.getParameter("todayDayOfWeek"));
         if ((dayOfWeekNumber == 6 && targetDayOfWeek == 6) || (dayOfWeekNumber == 6 && targetDayOfWeek == 7)
                 || (dayOfWeekNumber == 7 && targetDayOfWeek == 7)) {
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('주말에는 주말 좌석 예약 불가능 합니다'); location.href='/studentPage';</script>");
-            out.flush();
+            alertService.alertMessage("주말에는 주말 좌석 예약 불가능 합니다.","/studentPage",response);
         }
 
         DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("H[H]:mm");
@@ -167,6 +169,10 @@ public class BookService {
 
         LocalDateTime start = LocalDateTime.of(year, month, day, bookStartTime.getHour(), bookStartTime.getMinute());
         LocalDateTime end = LocalDateTime.of(year, month, day, bookEndTime.getHour(), bookEndTime.getMinute());
+
+        if(start.isAfter(end)){
+            alertService.alertMessage("종료 시간이 시작 시간보다 빠를수 없습니다.","/bookPage",response);
+        }
 
         if (Objects.isNull(labNo)) {
             labNo = "915";
@@ -197,7 +203,7 @@ public class BookService {
         }
 
         List<Schedule> schedules = scheduleRepository.scheduleList(dayOfWeekKorean, labNo, bookStartTime, bookEndTime);
-        System.out.println(schedules.size());
+
         if (schedules.size() == 0) { //강의실이 비어있다면
 
             List<Book> books = bookRepository.bookList(labNo, start, end);

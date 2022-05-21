@@ -64,9 +64,7 @@ public class AccountController {
     @GetMapping("/logout")
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession();
-        System.out.println(session);
         session.invalidate();
-        System.out.println(session);
         return "redirect:/";
     }
 
@@ -76,11 +74,6 @@ public class AccountController {
         return "redirect:/";
     }
 
-
-//    @RequestMapping(value = "/adminAccountModifyPage",method = {RequestMethod.POST,RequestMethod.GET})
-//    public String AdminAccountModifyPage(){
-//        return "WEB-INF/manager/adminModifyAccount.jsp";
-//    }
     @CheckSession
     @GetMapping("/adminAccountModifyPage")
     public String AdminAccountModifyPageGet(Model model){

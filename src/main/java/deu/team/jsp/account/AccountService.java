@@ -4,6 +4,7 @@ import deu.team.jsp.OneTimeKey.OneTimeKey;
 import deu.team.jsp.OneTimeKey.OneTimeKeyRepository;
 import deu.team.jsp.account.domain.Account;
 import deu.team.jsp.account.domain.Role;
+import deu.team.jsp.alert.AlertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -24,6 +25,9 @@ public class AccountService {
 
     @Autowired
     OneTimeKeyRepository oneTimeKeyRepository;
+
+    @Autowired
+    AlertService alertService;
 
     public void SignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -52,11 +56,7 @@ public class AccountService {
                 accountRepository.save(account);
         }
         else{
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out=response.getWriter();
-            out.println("<script>alert('이미 존재하는 학번 이거나 인증키가 일치하지 않습니다." +
-                    " 메인 페이지로 이동합니다.'); location.href='/';</script>");
-            out.flush();
+            alertService.alertMessage("이미 존재하는 학번 이거나 인증키가 일치하지 않습니다. \n 메인 페이지로 이동합니다.","/",response);
         }
     }
 
@@ -68,10 +68,7 @@ public class AccountService {
         Account findByStudentId = accountRepository.findByStudentId(studentId);
 
         if(Objects.isNull(findByStudentId) || !userPassword.equals(findByStudentId.getUserPassword())){
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out=response.getWriter();
-            out.println("<script>alert('회원 정보가 일치하지 않습니다.'); location.href='/';</script>");
-            out.flush();
+            alertService.alertMessage("회원 정보가 일치하지 않습니다.","/",response);
         }else{
             HttpSession session=request.getSession();
             session.setAttribute("account", findByStudentId);
@@ -87,10 +84,7 @@ public class AccountService {
         Account findByStudentId = accountRepository.findByStudentId(studentId);
 
         if(Objects.isNull(findByStudentId)){
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out=response.getWriter();
-            out.println("<script>alert('해당 학번이 존재하지 않습니다.'); location.href='adminAccountModifyPage';</script>");
-            out.flush();
+            alertService.alertMessage("해당 학번이 존재하지 않습니다.","/adminAccountModifyPage",response);
             return null;
         }
         else{
