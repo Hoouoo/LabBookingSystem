@@ -9,6 +9,7 @@ import deu.team.jsp.book.domain.ApproveStatus;
 import deu.team.jsp.book.domain.Book;
 import deu.team.jsp.schedule.Schedule;
 import deu.team.jsp.schedule.ScheduleRepository;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,20 +51,22 @@ public class BookService {
         HttpSession httpSession = request.getSession();
         Account account = (Account) httpSession.getAttribute("account");
 
-        String date = request.getParameter("date");
         String startTime = request.getParameter("startTime");
         String endTime = request.getParameter("endTime");
         String seat = request.getParameter("seat");
         String labNo = request.getParameter("labNo");
 
-        int year = Integer.valueOf(date.substring(0, 4));
-        int month = Integer.valueOf(date.substring(5, 7));
-        int day = Integer.valueOf(date.substring(8, 10));
 
-        int startHour = Integer.valueOf(startTime.substring(0, 2));
-        int startMinute = Integer.valueOf(startTime.substring(3, 5));
-        int endHour = Integer.valueOf(endTime.substring(0, 2));
-        int endMinute = Integer.valueOf(endTime.substring(3, 5));
+        int year = Integer.valueOf(startTime.substring(0, 4));
+        int month = Integer.valueOf(startTime.substring(5, 7));
+
+        int startDay=Integer.valueOf(startTime.substring(8, 10));
+        int endDay = Integer.valueOf(endTime.substring(8, 10));
+
+        int startHour = Integer.valueOf(startTime.substring(11, 13));
+        int startMinute = Integer.valueOf(startTime.substring(14, 16));
+        int endHour = Integer.valueOf(endTime.substring(11, 13));
+        int endMinute = Integer.valueOf(endTime.substring(14, 16));
 
         if (Objects.isNull(seat)) {
             response.setContentType("text/html; charset=UTF-8");
@@ -74,8 +78,8 @@ public class BookService {
         int seatX = Integer.valueOf(seat.substring(0, 1));
         int seatY = Integer.valueOf(seat.substring(2, 3));
 
-        LocalDateTime start = LocalDateTime.of(year, month, day, startHour, startMinute);
-        LocalDateTime end = LocalDateTime.of(year, month, day, endHour, endMinute);
+        LocalDateTime start = LocalDateTime.of(year, month, startDay, startHour, startMinute);
+        LocalDateTime end = LocalDateTime.of(year, month, endDay, endHour, endMinute);
 
         Book book = new Book(account.getStudentId(), start, end, labNo, seatX, seatY, ApproveStatus.READY);
 
@@ -110,12 +114,6 @@ public class BookService {
 
             alertService.alertMessage(announceContent,"",response);
 
-//            response.setContentType("text/html; charset=UTF-8");
-//            PrintWriter out = response.getWriter();
-//            String str = "<script>alert('" + announceContent + "');</script>";
-//            out.println(str);
-//            out.flush();
-
         } else {
             alertService.alertMessage("이미 예약된 좌석 이거나 중복 예약이 불가능 합니다.","/studentPage",response);
         }
@@ -124,20 +122,27 @@ public class BookService {
 
     public int[][] checkSeat(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 
-        String date = request.getParameter("date");
         String startTime = request.getParameter("startTime");
         String endTime = request.getParameter("endTime");
         String labNo = request.getParameter("labNo");
+        System.out.println("startTime = " + startTime);
 
-        int year = Integer.valueOf(date.substring(0, 4));
-        int month = Integer.valueOf(date.substring(5, 7));
-        int day = Integer.valueOf(date.substring(8, 10));
 
-        int startHour = Integer.valueOf(startTime.substring(0, 2));
-        int endHour = Integer.valueOf(endTime.substring(0, 2));
+        int year = Integer.valueOf(startTime.substring(0, 4));
+        int month = Integer.valueOf(startTime.substring(5, 7));
+
+        int startDay=Integer.valueOf(startTime.substring(8, 10));
+        int endDay=Integer.valueOf(endTime.substring(8, 10));
+
+        int startHour = Integer.valueOf(startTime.substring(11, 13));
+        int startMinute = Integer.valueOf(startTime.substring(14, 16));
+
+
+        int endHour = Integer.valueOf(endTime.substring(11, 13));
+        int endMinute = Integer.valueOf(endTime.substring(14, 16));
 
         //예약 날자 요일 구하기
-        LocalDate targetDate = LocalDate.of(year, month, day);
+        LocalDate targetDate = LocalDate.of(year, month, startDay);
         DayOfWeek dayOfWeek = targetDate.getDayOfWeek();
         int targetDayOfWeek = dayOfWeek.getValue();
         String dayOfWeekKorean = "";
@@ -163,12 +168,18 @@ public class BookService {
             alertService.alertMessage("주말에는 주말 좌석 예약 불가능 합니다.","/studentPage",response);
         }
 
-        DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("H[H]:mm");
-        LocalTime bookStartTime = LocalTime.parse(startTime, formatterTime); //예약 시작 시간
-        LocalTime bookEndTime = LocalTime.parse(endTime, formatterTime); //예약 종료 시간
+        //새로운 시간 정의 포멧 맞추기
+        LocalDateTime start= LocalDateTime.of(year, month, startDay,startHour,startMinute);
+        LocalDateTime end= LocalDateTime.of(year, month, endDay,endHour,endMinute);
 
-        LocalDateTime start = LocalDateTime.of(year, month, day, bookStartTime.getHour(), bookStartTime.getMinute());
-        LocalDateTime end = LocalDateTime.of(year, month, day, bookEndTime.getHour(), bookEndTime.getMinute());
+        LocalTime bookStartTime=LocalTime.of(startHour, startMinute);
+        LocalTime bookEndTime=LocalTime.of(endHour, endMinute);
+
+        //다음날 넘어가는지 테스트
+        System.out.println("start = " + start);
+        System.out.println("end = " + end);
+
+
 
         if(start.isAfter(end)){
             alertService.alertMessage("종료 시간이 시작 시간보다 빠를수 없습니다.","/bookPage",response);
