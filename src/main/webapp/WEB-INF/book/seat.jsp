@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-    String date = request.getParameter("date");
     String startTime = request.getParameter("startTime");
     String endTime = request.getParameter("endTime");
     String labNo = request.getParameter("labNo");
@@ -72,7 +71,6 @@
         <%}%>
         <br/>
 
-        <input type="hidden" name="date" value="<%=date%>">
         <input type="hidden" name="startTime" value="<%=startTime%>">
         <input type="hidden" name="endTime" value="<%=endTime%>">
         <input type="hidden" name="labNo" value="<%=labNo%>">
