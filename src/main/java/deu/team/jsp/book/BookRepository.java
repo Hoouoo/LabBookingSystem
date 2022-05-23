@@ -3,10 +3,12 @@ package deu.team.jsp.book;
 import deu.team.jsp.book.domain.ApproveStatus;
 import deu.team.jsp.book.domain.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,5 +37,19 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("select b from Book as b where b.approveStatus=:approveStatus order by b.id")
     List<Book> getStatusList(@Param("approveStatus") ApproveStatus approveStatus);
+
+//    x,y, 강의실로 예약 가져오기
+    @Query("select b from Book as b where b.seatY=:seatY and b.seatX=:seatX and b.startTime>= :startTime and b.labNo=:labNo order by b.startTime")
+    List<Book> getBookByX_Y_labNo(@Param("seatX")int seatX,
+                            @Param("seatY")int seatY,
+                            @Param("labNo")String labNo,
+                                  @Param("startTime")LocalDateTime startTime);
+
+    //연장 : 종료 시간 업데이트
+    @Transactional
+    @Modifying
+    @Query("update Book b set b.endTime=:endTime where b.studentId=:studentId")
+    void extendEndTime(@Param("endTime")LocalDateTime endTime,
+                       @Param("studentId")String studentId);
 
 }
