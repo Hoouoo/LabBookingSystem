@@ -38,7 +38,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link href="../../../css/schedule.css" rel="stylesheet" type="text/css">
+    <link href="../../css/schedule.css" rel="stylesheet" type="text/css">
 </head>
 
 <jsp:include page="../fragment/studentHeader.jsp"/>
@@ -49,35 +49,40 @@
 
         <div class="schedule-title"><%=labNo%>
         </div>
-        <b>칠판</b><br/>
+        <div class="schedule-sub-title-3">칠판</div>
+        <br/>
         &nbsp;&nbsp;&nbsp;
         <% for (int a = 1; a <= labSizeY; a++) {%>
-        <small><%=a%>
+        <small>
+            <%--            <%=a%>--%>
         </small> &nbsp;
         <%}%>
         <br/>
 
         <% for (int i = 1; i <= labSizeX; i++) {%>
-        <%=i%>
+        <%--        <%=i%>--%>
         <%
             for (int a = 1; a <= labSizeY; a++) {
                 if (seatList[i - 1][a - 1] == 1) {
         %>
-        <input type="radio" name="seat" value="<%=a %>-<%=i %>" disabled>
+        <input type="radio" name="seat" value="<%=a %>-<%=i %>" disabled><label
+            class="insert-full-seat"></label></input>
         <%} else {%>
-        <input type="radio" name="seat" value="<%=a %>-<%=i %>">
+        <input type="radio" name="seat" value="<%=a %>-<%=i %>"><label class="insert-seat"></label></input>
         <%}%>
         <%}%>
         <br/>
         <%}%>
         <br/>
-
+        <%--        --%>
+        <%--            --%>
         <input type="hidden" name="date" value="<%=date%>">
         <input type="hidden" name="startTime" value="<%=startTime%>">
         <input type="hidden" name="endTime" value="<%=endTime%>">
         <input type="hidden" name="labNo" value="<%=labNo%>">
 
         <input type="submit" class="btn btn-secondary btn-block schedule-btn-fw" value="예약"/>
+
     </form>
 </div>
 </body>
