@@ -37,7 +37,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="/studentAccountModifyPage">회원정보 수정</a>
                 <a class="nav-item nav-link" href="bookPage">실습실 예약</a>
-                <a class="nav-item nav-link" href="">실습실 연장</a>
+                <a class="nav-item nav-link" href="bookExtendPage">실습실 연장</a>
                 <a class="nav-item nav-link" href="myBookStatusPage">예약 정보 확인</a>
                 <a class="nav-item nav-link" href="reportPage">신고 및 문의</a>
                 <a class="nav-item nav-link" href="logout">로그아웃</a>
