@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
+    String date = request.getParameter("date");
     String startTime = request.getParameter("startTime");
     String endTime = request.getParameter("endTime");
     String labNo = request.getParameter("labNo");
@@ -37,7 +38,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link href="../../../css/schedule.css" rel="stylesheet" type="text/css">
+    <link href="../../css/schedule.css" rel="stylesheet" type="text/css">
 </head>
 
 <jsp:include page="../fragment/studentHeader.jsp"/>
@@ -46,25 +47,33 @@
 <div class="schedule-box">
     <form action="/book" method="post">
 
+
         <div class="schedule-title"><%=labNo%>
         </div>
-        <b>칠판</b><br/>
-        &nbsp;&nbsp;&nbsp;
+        <div class="schedule-sub-title-3">칠판</div>
+        <br/>
         <% for (int x = 1; x <= labSizeY; x++) {%>
-        <small><%=x%>
-        </small> &nbsp;
+        <small>
+            <%--            <%=x%>--%>
+        </small>
         <%}%>
         <br/>
 
         <% for (int y = 1; y <= labSizeX; y++) {%>
-        <%=y%>
+        <%--        <%=y%>--%>
         <%
             for (int x = 1; x <= labSizeY; x++) {
                 if (seatList[y - 1][x - 1] == 1) {
         %>
-        <input type="radio" name="seat" value="<%=x %>-<%=y %>" disabled>
+        <%--        <input type="radio" name="seat" value="<%=x %>-<%=y %>" disabled>--%>
+
+        <input type="radio" name="seat" value="<%=x %>-<%=y %>" disabled><label
+            class="insert-full-seat"></label></input>
+
         <%} else {%>
-        <input type="radio" name="seat" value="<%=x %>-<%=y %>">
+
+        <input type="radio" name="seat" value="<%=x %>-<%=y %>"><label class="insert-seat"></label></input>
+        <%--        <input type="radio" name="seat" value="<%=x %>-<%=y %>">--%>
         <%}%>
         <%}%>
         <br/>
