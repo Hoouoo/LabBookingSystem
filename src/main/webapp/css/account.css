@@ -53,7 +53,7 @@
 
 .account-long-title {
     padding-top: 50px;
-    margin-left: -330px;
+    margin-left: -360px;
     /*padding-bottom: 24px;*/
 
     font-size: 25px;
@@ -100,7 +100,9 @@
 .account-button {
     width: 100%;
 }
-
+.account-center{
+    text-align: center;
+}
 .account-radio-btn{
     border: 3px solid #1a1a1a;
     display: inline-block;
@@ -120,7 +122,7 @@ input[type=radio].toggle {
 }
 input[type=radio].toggle + label {
     cursor: pointer;
-    min-width: 50%;
+    min-width: 49.9%;
     border-color: rgb(93,100,100);
 }
 input[type=radio].toggle + label:hover {

@@ -3,7 +3,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/lab_booking_system"
     username: root
-    password: 1234
+    password: admin
 
 
   jpa:

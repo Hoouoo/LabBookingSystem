@@ -45,7 +45,15 @@
         </div>
     </nav>
 </header>
-
+<c:if test="${null ne AlertMsg}">
+    <nav class="py-2 bg-light border-bottom d-flex shadow-sm">
+        <div class="container">
+            <ul class="nav justify-content-center header-nav-height-2">
+                <c:out value="${AlertMsg}"/>
+            </ul>
+        </div>
+    </nav>
+</c:if>
 
 </body>
 </html>

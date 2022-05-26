@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
@@ -52,4 +53,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     void extendEndTime(@Param("endTime")LocalDateTime endTime,
                        @Param("studentId")String studentId);
 
+
+    @Query("select b from Book as b where b.labNo = :labNo order by b.endTime desc ")
+    List<Book> test(@Param("labNo") String labNo);
 }

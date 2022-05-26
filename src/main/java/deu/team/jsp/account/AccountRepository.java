@@ -8,9 +8,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account,Long> {
+
+    Optional<Account> findByUserName(String StudentId);
 
     Account findByStudentId(String StudentId);
 
@@ -20,4 +24,5 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Query("update Account a set a.bookStatus=:bookStatus where a.studentId=:studentId")
     void updateBookStatus(@Param("studentId")String studentId,
                           @Param("bookStatus")int bookStatus);
+
 }

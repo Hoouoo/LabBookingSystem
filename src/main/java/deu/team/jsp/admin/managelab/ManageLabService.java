@@ -1,14 +1,18 @@
 package deu.team.jsp.admin.managelab;
 
 import deu.team.jsp.account.AccountRepository;
+import deu.team.jsp.account.domain.Account;
 import deu.team.jsp.book.BookRepository;
 import deu.team.jsp.book.domain.ApproveStatus;
 import deu.team.jsp.book.domain.Book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
-import java.util.List;
-import java.util.Optional;
+import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -45,8 +49,20 @@ public class ManageLabService {
             target.get().setApproveStatus(ApproveStatus.REJECT);
             bookRepository.save(target.get());
         }
-
     }
 
+    public String notifyLastStudent(){
 
+        List<Book> bookList = bookRepository.findAll();
+
+        Book lastBook = bookList.stream()
+                .filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now()))
+                .max(Comparator.comparing(Book::getEndTime)).orElse(null);
+
+        if (Objects.isNull(lastBook)) {
+            return null;
+        }
+
+        return lastBook.getStudentId();
+    }
 }

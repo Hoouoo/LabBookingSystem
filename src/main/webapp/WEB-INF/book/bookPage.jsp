@@ -39,9 +39,10 @@
 <jsp:include page="../fragment/studentHeader.jsp"/>
 <body>
 <div class="schedule-box">
+
     <div class="schedule-title">실습실 예약</div>
     <br/>
-    <div class="schedule-sub-title">자정 넘어 실습실 사용하실 분은 종료 시간을 11시59분으로 예약 하고 그 이후 연장해주세요</div>
+<%--    <div class="schedule-sub-title">자정 넘어 실습실 사용하실 분은 종료 시간을 11시59분으로 예약 하고 그 이후 연장해주세요</div>--%>
     <form action="/seat" method="post">
         <%if (now.before(cutLine)) {%>
         <div class="schedule-in-box">

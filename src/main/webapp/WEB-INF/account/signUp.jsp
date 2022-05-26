@@ -7,7 +7,7 @@
 <body>
 
 <div class="account-second-box">
-    <div class="account-long-title">
+    <div class="account-long-title mb-4">
         회원가입
     </div>
     <form action="/signUp" method="post">
@@ -15,11 +15,12 @@
         <%--            <option value="student">학생</option>--%>
         <%--            <option value="professor">교수</option>--%>
         <%--        </select>--%>
-
-        <input id="toggle-on" class="toggle toggle-left" name="roleType" value="student" type="radio" checked>
-        <label for="toggle-on" class="account-radio-btn">학생</label>
-        <input id="toggle-off" class="toggle toggle-right" name="roleType" value="professor" type="radio">
-        <label for="toggle-off" class="account-radio-btn">교수</label>
+        <div class="account-center">
+            <input id="toggle-on" class="toggle toggle-left" name="roleType" value="student" type="radio" checked>
+            <label for="toggle-on" class="account-radio-btn">학생</label>
+            <input id="toggle-off" class="toggle toggle-right" name="roleType" value="professor" type="radio">
+            <label for="toggle-off" class="account-radio-btn">교수</label>
+        </div>
 
         <div class="mb-3 mt-3">
             <input class="account-input-box" type="text" name="studentId" placeholder="  학번" required/>
