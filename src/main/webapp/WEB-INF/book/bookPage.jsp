@@ -34,7 +34,7 @@
 <html>
 <head>
     <title>실습실 예약</title>
-    <link href="../../../css/schedule.css" rel="stylesheet" type="text/css">
+    <link href="../../css/schedule.css" rel="stylesheet" type="text/css">
 </head>
 <jsp:include page="../fragment/studentHeader.jsp"/>
 <body>

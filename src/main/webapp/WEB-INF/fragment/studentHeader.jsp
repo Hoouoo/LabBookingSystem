@@ -10,7 +10,7 @@
 
 <%
     String[] url = request.getRequestURI().split("/");
-    String headerIndex = url[url.length -1];       // list.jsp 반환
+    String headerIndex = url[url.length - 1];       // list.jsp 반환
 %>
 
 <html>
@@ -36,17 +36,26 @@
 
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <%--        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>--%>
-        <span class="fs-4">Lab Booking System</span>
+        <span class="fs-4 header-title">Lab Booking System</span>
     </a>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link <%if (headerIndex.equals("studentModifyAccount.jsp")) {%> active <%}%>" href="/studentAccountModifyPage">회원정보 수정</a>
-                <a class="nav-item nav-link <%if (headerIndex.equals("bookPage.jsp")||headerIndex.equals("seat.jsp")) {%> active <%}%>" href="/bookPage">실습실 예약</a>
-                <a class="nav-item nav-link <%if (headerIndex.equals("bookExtendPage.jsp")) {%> active <%}%>" href="/bookExtendPage">실습실 연장</a>
-                <a class="nav-item nav-link <%if (headerIndex.equals("myBookStatus.jsp")) {%> active <%}%>" href="/myBookStatusPage">예약 정보 확인</a>
-                <a class="nav-item nav-link <%if (headerIndex.equals("reportPage.jsp")) {%> active <%}%>" href="/reportPage">신고 및 문의</a>
-                <a class="nav-item nav-link" href="logout">로그아웃</a>
+                <a class="nav-item header-nav-link <%if (headerIndex.equals("bookPage.jsp")||headerIndex.equals("seat.jsp")||headerIndex.equals("bookExtendPage.jsp")) {%> header-nav-active <%}%>"
+                   href="/bookPage">실습실 이용</a>
+                <a class="nav-item header-nav-link <%if (headerIndex.equals("myBookStatus.jsp")) {%> header-nav-active <%}%>"
+                   href="/myBookStatusPage">예약 확인</a>
+                <a class="nav-item header-nav-link <%if (headerIndex.equals("studentModifyAccount.jsp")) {%> header-nav-active <%}%>"
+                   href="/studentAccountModifyPage">회원정보 관리</a>
+                <a class="nav-item header-nav-link <%if (headerIndex.equals("reportPage.jsp")) {%> header-nav-active <%}%>"
+                   href="/reportPage">신고 및 문의</a>
+
+                <%--                <a class="nav-item header-nav-link <%if (headerIndex.equals("bookPage.jsp")||headerIndex.equals("seat.jsp")) {%> header-nav-active <%}%>" href="/bookPage">실습실 예약</a>--%>
+                <%--                <a class="nav-item header-nav-link <%if (headerIndex.equals("bookExtendPage.jsp")) {%> header-nav-active <%}%>" href="/bookExtendPage">실습실 연장</a>--%>
+                <%--                <a class="nav-item header-nav-link <%if (headerIndex.equals("myBookStatus.jsp")) {%> header-nav-active <%}%>" href="/myBookStatusPage">예약 정보 확인</a>--%>
+                <%--                <a class="nav-item header-nav-link <%if (headerIndex.equals("reportPage.jsp")) {%> header-nav-active <%}%>" href="/reportPage">신고 및 문의</a>--%>
+                <%--                <a class="nav-item header-nav-link <%if (headerIndex.equals("studentModifyAccount.jsp")) {%> header-nav-active <%}%>" href="/studentAccountModifyPage">회원정보 관리</a>--%>
+                <a class="nav-item header-nav-link" href="logout">로그아웃</a>
             </div>
         </div>
     </nav>
@@ -60,6 +69,27 @@
         </div>
     </nav>
 </c:if>
+
+
+<%if (headerIndex.equals("bookPage.jsp") || headerIndex.equals("seat.jsp") || headerIndex.equals("bookExtendPage.jsp")) {%>
+<nav class="py-2 bg-light border-bottom d-flex shadow-sm">
+    <div class="container">
+        <ul class="nav justify-content-center header-nav-height-4 ">
+            <li class="nav-item header-nav-height-2"><a href="/bookPage" class="nav-link link-dark active"
+                                                        aria-current="page">실습실 잔여석 조회</a></li>
+            <li class="nav-item border-end align-self-center header-nav-height-2"/>
+            <li class="nav-item header-nav-height-2"><a href="/bookPage"
+                                                        class="nav-link <%if (headerIndex.equals("bookPage.jsp")||headerIndex.equals("seat.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>">실습실
+                예약</a></li>
+            <li class="nav-item border-end align-self-center header-nav-height-2"/>
+            <li class="nav-item header-nav-height-2"><a href="/bookExtendPage"
+                                                        class="nav-link <%if (headerIndex.equals("bookExtendPage.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>">실습실
+                연장</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<%}%>
 
 </body>
 </html>

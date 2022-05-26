@@ -35,7 +35,7 @@
 
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <%--        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>--%>
-        <span class="fs-4">Lab Booking System</span>
+        <span class="fs-4 header-title">Lab Booking System</span>
     </a>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="collapse navbar-collapse">
