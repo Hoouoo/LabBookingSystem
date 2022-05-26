@@ -55,5 +55,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
 
     @Query("select b from Book as b where b.labNo = :labNo order by b.endTime desc ")
-    List<Book> test(@Param("labNo") String labNo);
+    List<Book> getLastBookListByLabNo(@Param("labNo") String labNo);
 }
