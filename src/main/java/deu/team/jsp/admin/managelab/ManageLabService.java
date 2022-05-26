@@ -2,6 +2,7 @@ package deu.team.jsp.admin.managelab;
 
 import deu.team.jsp.account.AccountRepository;
 import deu.team.jsp.account.domain.Account;
+import deu.team.jsp.alert.AlertLastUserDto;
 import deu.team.jsp.book.BookRepository;
 import deu.team.jsp.book.domain.ApproveStatus;
 import deu.team.jsp.book.domain.Book;
@@ -21,17 +22,19 @@ public class ManageLabService {
     private final BookRepository bookRepository;
     private final AccountRepository accountRepository;
 
-    public List<Book>getAllBookList(){
+    public List<Book> getAllBookList() {
         return bookRepository.findAll();
     }
-    public List<Book>getAllApproveList(){
+
+    public List<Book> getAllApproveList() {
         return bookRepository.getStatusList(ApproveStatus.APPROVE);
     }
-    public List<Book>getAllRejectList(){
+
+    public List<Book> getAllRejectList() {
         return bookRepository.getStatusList(ApproveStatus.REJECT);
     }
 
-    public void approveBook(Long id){
+    public void approveBook(Long id) {
         Optional<Book> target = bookRepository.findById(id);
         if (target.isPresent()) {
             String targetStudentId = target.get().getStudentId();
@@ -41,7 +44,7 @@ public class ManageLabService {
         }
     }
 
-    public void cancelBook(Long id){
+    public void cancelBook(Long id) {
         Optional<Book> target = bookRepository.findById(id);
         if (target.isPresent()) {
             String targetStudentId = target.get().getStudentId();
@@ -51,18 +54,53 @@ public class ManageLabService {
         }
     }
 
-    public String notifyLastStudent(){
+    public List<AlertLastUserDto> notifyLastStudent() {
 
-        List<Book> bookList = bookRepository.findAll();
+        List<AlertLastUserDto> targetLastStudentList = new ArrayList<>();
 
-        Book lastBook = bookList.stream()
-                .filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now()))
-                .max(Comparator.comparing(Book::getEndTime)).orElse(null);
+        String[] labNoList = {"911", "915", "916", "918"};
+        for (String targetLabNo : labNoList) {
+            List<Book> bookList = bookRepository.getLastBookListByLabNo(targetLabNo);
+            if (! bookList.isEmpty()) {
+                String targetStudentId = bookList.stream().filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now()))
+                        .max(Comparator.comparing(Book::getEndTime)).get().getStudentId();
+                targetLastStudentList.add(AlertLastUserDto.builder().labNo(targetLabNo).studentId(targetStudentId).build());
+            }
+        }
 
-        if (Objects.isNull(lastBook)) {
+//        Book lastBook = bookList.stream()
+//                .filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now()))
+//                .max(Comparator.comparing(Book::getEndTime)).orElse(null);
+
+
+        if(targetLastStudentList.isEmpty()){
             return null;
         }
 
-        return lastBook.getStudentId();
+        return targetLastStudentList;
+    }
+
+    public void alertUser(HttpSession session, Model model){
+        List<AlertLastUserDto> studentIdListByLabNo = notifyLastStudent();
+        Account account = (Account) session.getAttribute("account");
+
+        //TODO 강의실 별로 알려줘야 함
+        if (!studentIdListByLabNo.isEmpty()) {
+            for (AlertLastUserDto alertLastUserDto : studentIdListByLabNo) {
+                System.out.println("alertLastUserDto.getLabNo() = " + alertLastUserDto.getLabNo());
+                System.out.println("alertLastUserDto.getStudentId() = " + alertLastUserDto.getStudentId());
+            }
+            for (AlertLastUserDto targetAlertUser : studentIdListByLabNo) {
+                accountRepository.getAccountByStudentId(targetAlertUser.getStudentId()).ifPresent(target ->{
+                    String StudentName = target.getUserName();
+                    if (targetAlertUser.getStudentId().equals(account.getStudentId())) {
+                        model.addAttribute("AlertMsg" + targetAlertUser.getLabNo(), "[" +targetAlertUser.getLabNo()+" 강의실] '" + StudentName + "'학생은 현재 마지막 사용자입니다\n 실습실 마지막 사용에 대한 뒷정리 책임이 부여됩니다.");
+                    } else {
+                        model.addAttribute("AlertMsg" + targetAlertUser.getLabNo(), "[" +targetAlertUser.getLabNo()+" 강의실] 현재 마지막 사용자는 [" + StudentName + "]학생 입니다.");
+                    }
+                });
+
+            }
+        }
     }
 }
