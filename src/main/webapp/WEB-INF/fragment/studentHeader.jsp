@@ -51,11 +51,40 @@
         </div>
     </nav>
 </header>
-<c:if test="${null ne AlertMsg}">
+<c:if test="${null ne AlertMsg911}">
     <nav class="py-2 bg-light border-bottom d-flex shadow-sm">
         <div class="container">
             <ul class="nav justify-content-center header-nav-height-2">
-                <c:out value="${AlertMsg}"/>
+                <c:out value="${AlertMsg911}"/>
+            </ul>
+        </div>
+    </nav>
+</c:if>
+<c:if test="${null ne AlertMsg915}">
+    <nav class="py-2 bg-light border-bottom d-flex shadow-sm">
+        <div class="container">
+            <ul class="nav justify-content-center header-nav-height-2">
+                <c:out value="${AlertMsg915}"/>
+            </ul>
+        </div>
+    </nav>
+</c:if>
+
+<c:if test="${null ne AlertMsg916}">
+    <nav class="py-2 bg-light border-bottom d-flex shadow-sm">
+        <div class="container">
+            <ul class="nav justify-content-center header-nav-height-2">
+                <c:out value="${AlertMsg916}"/>
+            </ul>
+        </div>
+    </nav>
+</c:if>
+
+<c:if test="${null ne AlertMsg918}">
+    <nav class="py-2 bg-light border-bottom d-flex shadow-sm">
+        <div class="container">
+            <ul class="nav justify-content-center header-nav-height-2">
+                <c:out value="${AlertMsg918}"/>
             </ul>
         </div>
     </nav>
