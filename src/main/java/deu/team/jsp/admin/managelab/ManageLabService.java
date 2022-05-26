@@ -61,7 +61,7 @@ public class ManageLabService {
         String[] labNoList = {"911", "915", "916", "918"};
         for (String targetLabNo : labNoList) {
             List<Book> bookList = bookRepository.getLastBookListByLabNo(targetLabNo);
-            if (! bookList.isEmpty()) {
+            if (!bookList.isEmpty()) {
                 String targetStudentId = bookList.stream().filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now()))
                         .max(Comparator.comparing(Book::getEndTime)).get().getStudentId();
                 targetLastStudentList.add(AlertLastUserDto.builder().labNo(targetLabNo).studentId(targetStudentId).build());
@@ -82,10 +82,11 @@ public class ManageLabService {
 
     public void alertUser(HttpSession session, Model model){
         List<AlertLastUserDto> studentIdListByLabNo = notifyLastStudent();
+        System.out.println("studentIdListByLabNo = " + studentIdListByLabNo);
         Account account = (Account) session.getAttribute("account");
 
         //TODO 강의실 별로 알려줘야 함
-        if (!studentIdListByLabNo.isEmpty()) {
+        if (Objects.nonNull(studentIdListByLabNo)) {
             for (AlertLastUserDto alertLastUserDto : studentIdListByLabNo) {
                 System.out.println("alertLastUserDto.getLabNo() = " + alertLastUserDto.getLabNo());
                 System.out.println("alertLastUserDto.getStudentId() = " + alertLastUserDto.getStudentId());
