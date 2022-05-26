@@ -8,6 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%
+    String[] url = request.getRequestURI().split("/");
+    String headerIndex = url[url.length -1];       // list.jsp 반환
+%>
 <html>
 
 <head>
@@ -36,11 +40,11 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="collapse navbar-collapse">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="/adminAccountModifyPage">회원정보 수정</a>
-                <a class="nav-item nav-link" href="/admin/schedule">시간표 추가</a>
-                <a class="nav-item nav-link" href="/admin/managelab">실습실 관리</a>
-                <a class="nav-item nav-link" href="/announcePage">공지사항 등록</a>
-                <a class="nav-item nav-link" href="/confirmReportPage">신고 및 문의</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("adminModifyAccount.jsp")) {%> active <%}%>" href="/adminAccountModifyPage">회원정보 수정</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("scheduleCreate.jsp")) {%> active <%}%>" href="/admin/schedule">시간표 추가</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> active <%}%>" href="/admin/managelab">실습실 관리</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("announce.jsp")) {%> active <%}%>" href="/announcePage">공지사항 등록</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("confirmReport.jsp")) {%> active <%}%>" href="/confirmReportPage">신고 및 문의</a>
                 <a class="nav-item nav-link" href="/logout">로그아웃</a>
             </div>
         </div>

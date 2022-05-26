@@ -5,6 +5,8 @@
     <link href="../../css/account.css" rel="stylesheet" type="text/css">
 </head>
 
+<jsp:include page="../fragment/header.jsp"/>
+
 <body class="text-center">
 
 <%--<jsp:include page="../fragment/adminHeader.jsp"/>--%>

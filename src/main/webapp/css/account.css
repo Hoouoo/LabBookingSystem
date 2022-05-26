@@ -18,6 +18,28 @@
     min-height: 100vh;
 }
 
+.account-title {
+    margin-top: -200px;
+    margin-left: -380px;
+    /*padding-bottom: 24px;*/
+
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 48px;
+    letter-spacing: -0.5px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(245, 245, 245);
+}
+
+.account-real-title {
+    margin-top: -200px;
+    margin-bottom: 280px;
+    /*margin-left: 680px;*/
+    font-size: 40px;
+    font-weight: 600;
+}
+
 .account-second-box {
     display: flex;
     /*announce == lab*/

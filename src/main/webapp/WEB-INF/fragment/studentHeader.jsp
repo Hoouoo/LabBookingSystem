@@ -7,6 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+    String[] url = request.getRequestURI().split("/");
+    String headerIndex = url[url.length -1];       // list.jsp 반환
+%>
+
 <html>
 
 <head>
@@ -35,11 +41,11 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="/studentAccountModifyPage">회원정보 수정</a>
-                <a class="nav-item nav-link" href="bookPage">실습실 예약</a>
-                <a class="nav-item nav-link" href="bookExtendPage">실습실 연장</a>
-                <a class="nav-item nav-link" href="myBookStatusPage">예약 정보 확인</a>
-                <a class="nav-item nav-link" href="reportPage">신고 및 문의</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("studentModifyAccount.jsp")) {%> active <%}%>" href="/studentAccountModifyPage">회원정보 수정</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("bookPage.jsp")||headerIndex.equals("seat.jsp")) {%> active <%}%>" href="/bookPage">실습실 예약</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("bookExtendPage.jsp")) {%> active <%}%>" href="/bookExtendPage">실습실 연장</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("myBookStatus.jsp")) {%> active <%}%>" href="/myBookStatusPage">예약 정보 확인</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("reportPage.jsp")) {%> active <%}%>" href="/reportPage">신고 및 문의</a>
                 <a class="nav-item nav-link" href="logout">로그아웃</a>
             </div>
         </div>

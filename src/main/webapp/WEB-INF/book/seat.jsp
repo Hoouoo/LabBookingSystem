@@ -50,7 +50,7 @@
 
         <div class="schedule-title"><%=labNo%>
         </div>
-        <div class="schedule-sub-title-3">칠판</div>
+        <div class="schedule-sub-title-3">SCREEN</div>
         <br/>
         <% for (int x = 1; x <= labSizeY; x++) {%>
         <small>
