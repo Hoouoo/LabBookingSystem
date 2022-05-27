@@ -82,15 +82,10 @@ public class ManageLabService {
 
     public void alertUser(HttpSession session, Model model){
         List<AlertLastUserDto> studentIdListByLabNo = notifyLastStudent();
-        System.out.println("studentIdListByLabNo = " + studentIdListByLabNo);
         Account account = (Account) session.getAttribute("account");
 
         //TODO 강의실 별로 알려줘야 함
         if (Objects.nonNull(studentIdListByLabNo)) {
-            for (AlertLastUserDto alertLastUserDto : studentIdListByLabNo) {
-                System.out.println("alertLastUserDto.getLabNo() = " + alertLastUserDto.getLabNo());
-                System.out.println("alertLastUserDto.getStudentId() = " + alertLastUserDto.getStudentId());
-            }
             for (AlertLastUserDto targetAlertUser : studentIdListByLabNo) {
                 accountRepository.getAccountByStudentId(targetAlertUser.getStudentId()).ifPresent(target ->{
                     String StudentName = target.getUserName();
