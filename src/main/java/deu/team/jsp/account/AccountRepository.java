@@ -1,6 +1,7 @@
 package deu.team.jsp.account;
 
 import deu.team.jsp.account.domain.Account;
+import deu.team.jsp.account.domain.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -8,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 
@@ -24,5 +26,7 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Query("update Account a set a.bookStatus=:bookStatus where a.studentId=:studentId")
     void updateBookStatus(@Param("studentId")String studentId,
                           @Param("bookStatus")int bookStatus);
+
+    List<Account> findAllByRole(Role role);
 
 }
