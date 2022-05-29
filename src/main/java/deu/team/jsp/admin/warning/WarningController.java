@@ -1,4 +1,4 @@
-package deu.team.jsp.admin.waring;
+package deu.team.jsp.admin.warning;
 
 import deu.team.jsp.account.domain.Account;
 import deu.team.jsp.interceptor.CheckSession;
@@ -16,34 +16,33 @@ import java.util.Objects;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-public class WaringController {
+public class WarningController {
 
-    private final WaringService waringService;
+    private final WarningService warningService;
 
     @CheckSession
-    @GetMapping("/admin/waring")
-    public String adminWaringPageGet(Model model){
-        List<Account> allStudentList = waringService.getAllStudentList();
+    @GetMapping("/admin/warning")
+    public String adminWarningGetPage(Model model){
+        List<Account> allStudentList = warningService.getAllStudentList();
         if(!allStudentList.isEmpty()){
             model.addAttribute("studentList", allStudentList);
         }
 
-        return "/WEB-INF/manager/adminWaring.jsp";
+        return "/WEB-INF/manager/adminWarning.jsp";
     }
 
     @CheckSession
-    @PostMapping("/admin/waring")
-    public String adminWaringPagePost(HttpServletRequest request){
-        String requestWaringStatus = request.getParameter("waring");
+    @PostMapping("/admin/warning")
+    public String adminWarningPostPage(HttpServletRequest request){
+        String requestWarningStatus = request.getParameter("warning");
         String requestResetStatus = request.getParameter("reset");
-        if (Objects.nonNull(requestWaringStatus)){
-            log.info(requestWaringStatus);
-            waringService.giveWaring(requestWaringStatus);
+        if (Objects.nonNull(requestWarningStatus)){
+            log.info(requestWarningStatus);
+            warningService.giveWarning(requestWarningStatus);
         }else if(Objects.nonNull(requestResetStatus)){
-            log.info(requestWaringStatus);
-            waringService.resetWaringCnt(requestResetStatus);
+            warningService.resetWarning(requestResetStatus);
         }
 
-        return "redirect:/admin/waring";
+        return "redirect:/admin/warning";
     }
 }

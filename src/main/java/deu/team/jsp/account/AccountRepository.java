@@ -2,6 +2,7 @@ package deu.team.jsp.account;
 
 import deu.team.jsp.account.domain.Account;
 import deu.team.jsp.account.domain.Role;
+import deu.team.jsp.admin.warning.Warning;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -28,5 +29,8 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
                           @Param("bookStatus")int bookStatus);
 
     List<Account> findAllByRole(Role role);
+
+    @Query("select a from Account as a where a.warning.id = :warningId")
+    Optional<Account> findByWarning_Id(@Param("warningId") Long warningId);
 
 }
