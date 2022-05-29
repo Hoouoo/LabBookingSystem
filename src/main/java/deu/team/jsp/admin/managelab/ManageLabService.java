@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -62,10 +64,15 @@ public class ManageLabService {
         for (String targetLabNo : labNoList) {
             List<Book> bookList = bookRepository.getLastBookListByLabNo(targetLabNo);
             if (!bookList.isEmpty()) {
-                String targetStudentId = bookList.stream().filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now()))
-                        .max(Comparator.comparing(Book::getEndTime)).get().getStudentId();
-                targetLastStudentList.add(AlertLastUserDto.builder().labNo(targetLabNo).studentId(targetStudentId).build());
+                Stream<Book> todayBookList = bookList.stream().filter(target -> target.getStartTime().toLocalDate().equals(LocalDate.now()));
+                if (todayBookList.findFirst().isPresent()) {
+                    String targetStudentId = todayBookList.max(Comparator.comparing(Book::getEndTime)).get().getStudentId();
+                    targetLastStudentList.add(AlertLastUserDto.builder().labNo(targetLabNo).studentId(targetStudentId).build());
+                }
             }
+//                String targetStudentId = bookList.stream().filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now()))
+//                        .max(Comparator.comparing(Book::getEndTime)).get().getStudentId();
+
         }
 
 //        Book lastBook = bookList.stream()
@@ -73,26 +80,25 @@ public class ManageLabService {
 //                .max(Comparator.comparing(Book::getEndTime)).orElse(null);
 
 
-        if(targetLastStudentList.isEmpty()){
+        if (targetLastStudentList.isEmpty()) {
             return null;
         }
 
         return targetLastStudentList;
     }
 
-    public void alertUser(HttpSession session, Model model){
+    public void alertUser(HttpSession session, Model model) {
         List<AlertLastUserDto> studentIdListByLabNo = notifyLastStudent();
         Account account = (Account) session.getAttribute("account");
 
-        //TODO 강의실 별로 알려줘야 함
         if (Objects.nonNull(studentIdListByLabNo)) {
             for (AlertLastUserDto targetAlertUser : studentIdListByLabNo) {
-                accountRepository.getAccountByStudentId(targetAlertUser.getStudentId()).ifPresent(target ->{
+                accountRepository.getAccountByStudentId(targetAlertUser.getStudentId()).ifPresent(target -> {
                     String StudentName = target.getUserName();
                     if (targetAlertUser.getStudentId().equals(account.getStudentId())) {
-                        model.addAttribute("AlertMsg" + targetAlertUser.getLabNo(), "[" +targetAlertUser.getLabNo()+" 강의실] '" + StudentName + "'학생은 현재 마지막 사용자입니다\n 실습실 마지막 사용에 대한 뒷정리 책임이 부여됩니다.");
+                        model.addAttribute("AlertMsg" + targetAlertUser.getLabNo(), "[" + targetAlertUser.getLabNo() + " 강의실] '" + StudentName + "'학생은 현재 마지막 사용자입니다\n 실습실 마지막 사용에 대한 뒷정리 책임이 부여됩니다.");
                     } else {
-                        model.addAttribute("AlertMsg" + targetAlertUser.getLabNo(), "[" +targetAlertUser.getLabNo()+" 강의실] 현재 마지막 사용자는 [" + StudentName + "]학생 입니다.");
+                        model.addAttribute("AlertMsg" + targetAlertUser.getLabNo(), "[" + targetAlertUser.getLabNo() + " 강의실] 현재 마지막 사용자는 [" + StudentName + "]학생 입니다.");
                     }
                 });
 

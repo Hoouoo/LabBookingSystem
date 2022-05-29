@@ -41,6 +41,7 @@
         <div class="collapse navbar-collapse">
             <div class="navbar-nav">
                 <a class="nav-item nav-link <%if (headerIndex.equals("adminModifyAccount.jsp")) {%> active <%}%>" href="/adminAccountModifyPage">회원정보 수정</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("adminModifyAccount.jsp")) {%> active <%}%>" href="/admin/waring">회원 관리</a>
                 <a class="nav-item nav-link <%if (headerIndex.equals("scheduleCreate.jsp")) {%> active <%}%>" href="/admin/schedule">시간표 추가</a>
                 <a class="nav-item nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> active <%}%>" href="/admin/managelab">실습실 관리</a>
                 <a class="nav-item nav-link <%if (headerIndex.equals("announce.jsp")) {%> active <%}%>" href="/announcePage">공지사항 등록</a>

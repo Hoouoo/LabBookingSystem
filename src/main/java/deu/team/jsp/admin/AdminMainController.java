@@ -39,7 +39,6 @@ public class AdminMainController {
     @PostMapping("/onetimekey")
     public String generateKey(RedirectAttributes model, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Role targetRole;
-        System.out.println("~~~> : " + request.getParameter("keyRole"));
         if (request.getParameter("keyRole").equals("STUDENT")) {
             targetRole = Role.STUDENT;
         } else {
