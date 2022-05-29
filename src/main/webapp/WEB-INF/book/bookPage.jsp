@@ -48,7 +48,6 @@
 <body>
 <div class="schedule-box">
     <div class="schedule-title">실습실 예약</div>
-    <h3>자정 넘어 실습실 사용하실 분은 종료 시간을 11시59분으로 예약 하고 그 이후 연장해주세요</h3>
     <form action="/seat" method="post">
         <%if (now.before(cutLine)) {%>
         <div class="schedule-in-box">
@@ -79,11 +78,6 @@
             <input class="schedule-input-box" type="datetime-local" name="endTime" max="24:00" required>
         </div>
         <br/>
-<%--        <div class="schedule-in-box-2 mb-4">--%>
-
-<%--            <div class="schedule-sub-title"> 종료 시간</div>--%>
-<%--            <input class="schedule-input-box" type="datetime-local" name="endTime" max="24:00" required>--%>
-<%--        </div>--%>
         <br/>
         <input type="hidden" name="todayDayOfWeek" value="<%=todayDayOfWeek%>">
 

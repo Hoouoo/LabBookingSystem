@@ -40,7 +40,7 @@
     <link href="../../../css/schedule.css" rel="stylesheet" type="text/css">
 </head>
 
-<jsp:include page="../fragment/studentHeader.jsp"/>
+<link href="../../../css/schedule.css" rel="stylesheet" type="text/css">
 <body>
 
 <div class="schedule-box">

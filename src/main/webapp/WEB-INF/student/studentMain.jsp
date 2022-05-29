@@ -5,6 +5,7 @@
 </head>
 <jsp:include page="../fragment/studentHeader.jsp"/>
 <body>
+    <button type="button" onClick="location.href='/nowLabStatusPage'">실습실 사용 현황</button> <br/>
     <button type="button" onClick="location.href='/studentAccountModifyPage'">회원정보 수정</button> <br/>
     <button type="button" onClick="location.href='/bookPage'">실습실 예약</button> <br/>
     <button type="button" onClick="location.href='/bookExtendPage'">실습실 연장</button> <br/>
