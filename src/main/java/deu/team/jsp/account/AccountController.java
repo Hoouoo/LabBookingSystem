@@ -48,6 +48,11 @@ public class AccountController {
         return "WEB-INF/manager/professor.jsp";
     }
 
+    @GetMapping("/adminPage")
+    public String adminPage(){
+        return "WEB-INF/manager/adminMain.jsp";
+    }
+
     @PostMapping("/login")
     public String MainPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Role role= accountService.Login(request, response);
@@ -56,7 +61,7 @@ public class AccountController {
             return "redirect:/studentPage";
         }
         else if(role.equals(Role.ADMIN)){
-            return "redirect:/admin/managelab";
+            return "redirect:/adminPage";
         }
         else{
             return "redirect:/professor";
