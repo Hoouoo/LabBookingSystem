@@ -31,9 +31,11 @@ public class WarningService {
             if (totalWarningCnt < 3) {
                 target.get().changeWarningCnt(totalWarningCnt);
                 warningRepository.save(target.get());
-            }else if (totalWarningCnt == 4){
+            }else if (totalWarningCnt == 3){
                 log.info("totalWarningCnt : " + totalWarningCnt);
                 // TODO 예약 하지 못하도록 수정해야함
+                target.get().changeWarningCnt(totalWarningCnt);
+                warningRepository.save(target.get());
                 accountRepository.findByWarning_Id(target.get().getId()).ifPresent(
                         targetWarningObj -> {
                             targetWarningObj.setBookStatus(2);
