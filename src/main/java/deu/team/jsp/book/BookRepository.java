@@ -28,8 +28,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
                   @Param("endTime") LocalDateTime endTime);
 
     //자리 예약 시 해당 강의실, 시작 시간, 끝나는 시간 조회하는 쿼리
+    @Transactional
     @Query("select b from Book as b where b.labNo=:labNo and ((:start between b.startTime and b.endTime) or (:end between b.startTime and b.endTime)" +
-            "or (:start <= b.startTime) and (:end >=b.endTime) )")
+            "or (:start <= b.startTime) and (:end >=b.endTime)) and b.approveStatus <> 'REJECT'")
     List<Book> bookList(@Param("labNo") String labNo,
                         @Param("start") LocalDateTime start,
                         @Param("end") LocalDateTime end);
