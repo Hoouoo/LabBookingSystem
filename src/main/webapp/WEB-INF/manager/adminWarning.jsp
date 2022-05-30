@@ -18,7 +18,7 @@
 
 <jsp:include page="../fragment/adminHeader.jsp"/>
 <body>
-<div class="announce-box">
+<div class="announce-box announce-pt-10">
     <div class="announce-title">사용자 관리</div>
     <div class="announce-top-m"></div>
     <table id="confirm" class="display">
@@ -40,8 +40,8 @@
             <td><c:out value="${targetStudent.warning.warningCnt}"/> </td>
             <form action="/admin/warning" method="post">
             <td>
-                <button type="submit" name="warning" onclick="alert('${targetStudent.userName}학생에게 경고가 부여되었습니다.')" value="${targetStudent.studentId}">경고 주기</button>
-                <button type="submit" name="reset" onclick="alert(('${targetStudent.userName}학생의 경고가 초기화되었습니다.'))" value="${targetStudent.studentId}">경고 초기화</button>
+                <button type="submit" class="btn btn-primary  btn-sm  btn-block" name="warning" onclick="alert('${targetStudent.userName}학생에게 경고가 부여되었습니다.')" value="${targetStudent.studentId}">경고 주기</button>
+                <button type="submit" class="btn btn-secondary  btn-sm  btn-block" name="reset" onclick="alert(('${targetStudent.userName}학생의 경고가 초기화되었습니다.'))" value="${targetStudent.studentId}">경고 초기화</button>
             </td>
             </form>
         </tr>

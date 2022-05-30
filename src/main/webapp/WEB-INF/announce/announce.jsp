@@ -9,7 +9,7 @@
 <jsp:include page="../fragment/adminHeader.jsp"/>
 
 <body>
-<div class="announce-box">
+<div class="announce-box announce-pt-12">
     <div class="announce-title">공지사항을 등록하세요</div>
     <form action="/postAnnounce" method="post">
         <c:choose>
@@ -22,7 +22,7 @@
         </c:choose>
         <br/>
         <div class="form-group mb-3">
-            <input type="submit" class="btn btn-secondary btn-block announce-button" value="등록">
+            <input type="submit" class="btn btn-primary btn-block announce-button" value="등록">
         </div>
     </form>
 </div>

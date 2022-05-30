@@ -10,7 +10,7 @@
 <jsp:include page="../../fragment/adminHeader.jsp"/>
 <body>
 
-<div class="schedule-box">
+<div class="schedule-box schedule-pt-12">
     <div class="schedule-title">시간표 입력</div>
     <form action="/admin/schedule" method="post">
 
@@ -70,7 +70,7 @@
 
             </label>
 
-            <button type="submit" class="btn btn-secondary btn-block mt-4" name="scheduleCreateBtn"> 입력
+            <button type="submit" class="btn btn-primary btn-block mt-4" name="scheduleCreateBtn"> 입력
             </button>
         </div>
         <hr/>

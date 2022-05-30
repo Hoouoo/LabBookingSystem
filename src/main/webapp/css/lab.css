@@ -20,6 +20,10 @@
     /*border-color: rgb(245, 245, 245);*/
 }
 
+.lab-pt-12 {
+    padding-top: 120px;
+}
+
 .lab-box-2 {
     display: flex;
 
