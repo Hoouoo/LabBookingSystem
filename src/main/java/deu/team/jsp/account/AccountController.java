@@ -49,7 +49,9 @@ public class AccountController {
     }
 
     @GetMapping("/adminPage")
-    public String adminPage(){
+    public String adminPage(Model model){
+        model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
+        model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
         return "WEB-INF/manager/adminMain.jsp";
     }
 

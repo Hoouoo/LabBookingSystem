@@ -31,13 +31,12 @@ public class ScheduleController {
     public String schedulePage(Model model) {
         //http://localhost:8080/admin/schedule
         System.out.println(scheduleService.getScheduleCnt());
-
+        model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
+        model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
         if (scheduleService.getScheduleCnt() > 0 ) {
             model.addAttribute("scheduleCnt", scheduleService.getScheduleCnt());
             model.addAttribute("scheduleList", scheduleService.getScheduleList());
             model.addAttribute("scheduleTimeList", scheduleService.getSubjectTime());
-            model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
-            model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
 
         }
         return "/WEB-INF/manager/schedule/scheduleCreate.jsp";
