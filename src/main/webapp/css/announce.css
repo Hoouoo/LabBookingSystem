@@ -21,6 +21,34 @@
     /*border-style: solid;*/
     /*border-color: rgb(245, 245, 245);*/
 }
+.announce-box-2 {
+    display: flex;
+    /*announce == lab*/
+    /*padding-top: 50px;*/
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    /*-webkit-box-align: center;*/
+    /*align-items: center;*/
+    /*-webkit-box-pack: center;*/
+    /*justify-content: center;*/
+    margin-left: 200px;
+    margin-right: 200px;
+    /*margin-top: 50px;*/
+    margin-bottom: 50px;
+
+    min-height: 100vh;
+    /*border-width: 1px;*/
+    /*border-style: solid;*/
+    /*border-color: rgb(245, 245, 245);*/
+}
+.announce-pt-12 {
+    padding-top: 120px;
+}
+
+.announce-pt-10 {
+    padding-top: 100px;
+}
 
 .announce-title {
     /*announce == lab*/
@@ -35,14 +63,63 @@
     border-bottom-color: rgb(245, 245, 245);
 }
 
+.announce-title-left {
+    /*announce == lab*/
+    padding-top: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    /*text-align: left;*/
+    line-height: 48px;
+    letter-spacing: -0.5px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(245, 245, 245);
+}
+
+.announce-title-left-2 {
+    /*announce == lab*/
+    /*padding-top: 50px;*/
+    font-size: 25px;
+    font-weight: lighter;
+    /*text-align: left;*/
+    /*line-height: 48px;*/
+    /*letter-spacing: -0.5px;*/
+    /*border-bottom-width: 1px;*/
+    /*border-bottom-style: solid;*/
+    /*border-bottom-color: rgb(245, 245, 245);*/
+}
+
 .announce-sub-title {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     /*margin-bottom: -30px;*/
     /*display: flex;*/
     /*width: 100%;*/
     margin-top: 10px;
     font-weight: 700;
     font-size: 14px;
+    line-height: 24px;
+}
+
+.announce-sub-title-2 {
+    margin-top: 8px;
+    margin-bottom: 4px;
+    /*margin-bottom: -30px;*/
+    /*display: flex;*/
+    /*width: 100%;*/
+    /*margin-top: 10px;*/
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.announce-sub-title-3 {
+    margin-bottom: 8px;
+    /*margin-bottom: -30px;*/
+    /*display: flex;*/
+    /*width: 100%;*/
+    /*margin-top: 10px;*/
+    font-weight: 400;
+    font-size: 20px;
     line-height: 24px;
 }
 
@@ -83,6 +160,18 @@
 .announce-textarea-2 {
     /*margin-top: 30px;*/
     width: 800px;
+    height: 400px;
+    /*border: none;*/
+    resize: none;
+    border-color: rgba(199, 206, 212);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+}
+
+.announce-textarea-3 {
+    /*margin-top: 30px;*/
+    width: 100%;
     height: 400px;
     /*border: none;*/
     resize: none;

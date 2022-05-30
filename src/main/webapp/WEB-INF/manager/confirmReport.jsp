@@ -23,7 +23,7 @@
 
 <jsp:include page="../fragment/adminHeader.jsp"/>
 <body>
-<div class="announce-box">
+<div class="announce-box announce-pt-10">
     <div class="announce-title">신고 및 문의</div>
     <div class="announce-top-m"></div>
     <table id="confirm" class="display">

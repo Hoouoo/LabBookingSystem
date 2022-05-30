@@ -15,8 +15,8 @@
 <jsp:include page="../fragment/adminHeader.jsp"/>
 <body>
 
-<div class="lab-box">
-    <div class="lab-box-2" id="manage_table">
+<div class="lab-box lab-pt-12" id="manage_table">
+    <div class="lab-box-2">
         <div class="lab-title">예약 관리</div>
         <span class="lab-title-group-m">
         <a href="#approve_table" class="lab-nav-title-border">
@@ -56,11 +56,11 @@
                         <td>
                             <form action="/admin/managelab" method="post">
 
-                                <button type="submit" class="btn btn-secondary  btn-sm  btn-block lab-button-m"
+                                <button type="submit" class="btn btn-primary  btn-sm  btn-block lab-button-m"
                                         name="approve" value="${targetBookList.id}"
                                         onclick=alert("승인되었습니다.")>승인
                                 </button>
-                                <button type="submit" class="btn btn-dark   btn-sm  btn-block lab-button-m"
+                                <button type="submit" class="btn btn-secondary   btn-sm  btn-block lab-button-m"
                                         name="cancel" value="${targetBookList.id}"
                                         onclick=alert("거절되었습니다.")>거절
                                 </button>
@@ -79,7 +79,7 @@
         </script>
     </div>
 
-    <div class="lab-box-2" id="approve_table">
+    <div class="lab-box-2 lab-pt-12" id="approve_table">
         <div class="lab-title">승인 목록</div>
         <span class="lab-title-group-m">
         <a href="#manage_table" class="lab-nav-title-border">
@@ -117,7 +117,7 @@
                         <td>${targetApproveBookList.endTime}</td>
                         <td>
                             <form action="/admin/managelab" method="post">
-                                <button type="submit" class="btn btn-dark btn-sm btn-block lab-button-m" name="cancel"
+                                <button type="submit" class="btn btn-primary btn-sm btn-block lab-button-m" name="cancel"
                                         value="${targetApproveBookList.id}"
                                         onclick=alert("거절되었습니다.")>거절
                                 </button>
@@ -136,7 +136,7 @@
     </div>
 
 
-    <div class="lab-box-2" id="reject_table">
+    <div class="lab-box-2 lab-pt-12" id="reject_table">
         <div class="lab-title">거절 목록</div>
         <span class="lab-title-group-m">
         <a href="#manage_table" class="lab-nav-title-border">
@@ -175,7 +175,7 @@
                         <td>${targetRejectList.endTime}</td>
                         <td>
                             <form action="/admin/managelab" method="post">
-                                <button type="submit" class="btn btn-secondary btn-sm  btn-block lab-button-m"
+                                <button type="submit" class="btn btn-primary btn-sm  btn-block lab-button-m"
                                         name="approve" value="${targetRejectList.id}"
                                         onclick=alert("승인되었습니다.")>승인
                                 </button>

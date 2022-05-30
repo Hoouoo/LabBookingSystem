@@ -115,7 +115,9 @@
     border-left-style: solid;
     border-color: rgb(237, 237, 237);
 }
-
+.account-mt-8 {
+    padding-top: 80px;
+}
 .account-mb-2{
     margin-bottom: 20px;
 }

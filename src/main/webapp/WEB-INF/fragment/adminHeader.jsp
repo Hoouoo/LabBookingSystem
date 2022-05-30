@@ -11,6 +11,7 @@
 <%
     String[] url = request.getRequestURI().split("/");
     String headerIndex = url[url.length - 1];       // list.jsp 반환
+
 %>
 <html>
 
@@ -32,7 +33,7 @@
 
 </head>
 <body>
-<header class="p-5 d-flex flex-wrap justify-content-center py-2 border-bottom">
+<header class="p-5 d-flex flex-wrap justify-content-center py-2 border-bottom position-fixed header_">
 
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <%--        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>--%>
@@ -45,10 +46,12 @@
                    href="/admin/schedule">일정 추가</a>
                 <a class="nav-item header-nav-link <%if (headerIndex.equals("manageLab.jsp")||headerIndex.equals("announce.jsp")) {%> header-nav-active <%}%>"
                    href="/admin/managelab">실습실 관리</a>
+                <a class="nav-item header-nav-link <%if (headerIndex.equals("adminWarning.jsp")) {%> header-nav-active <%}%>"
+                   href="/admin/warning">회원 관리</a>
                 <a class="nav-item header-nav-link <%if (headerIndex.equals("confirmReport.jsp")) {%> header-nav-active <%}%>"
                    href="/confirmReportPage">신고 및 문의</a>
 
-<!--                 <a class="nav-item nav-link <%if (headerIndex.equals("adminModifyAccount.jsp")) {%> active <%}%>" href="/adminAccountModifyPage">회원정보 수정</a>
+                <!--                 <a class="nav-item nav-link <%if (headerIndex.equals("adminModifyAccount.jsp")) {%> active <%}%>" href="/adminAccountModifyPage">회원정보 수정</a>
                 <a class="nav-item nav-link <%if (headerIndex.equals("adminModifyAccount.jsp")) {%> active <%}%>" href="/admin/warning">회원 관리</a>
                 <a class="nav-item nav-link <%if (headerIndex.equals("scheduleCreate.jsp")) {%> active <%}%>" href="/admin/schedule">시간표 추가</a>
                 <a class="nav-item nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> active <%}%>" href="/admin/managelab">실습실 관리</a>
@@ -58,7 +61,7 @@
             </div>
         </div>
     </nav>
-    <div class="header-dropdown">
+    <div class="header-dropdown header-z-idx">
         <li><a class="header-user-icons"></a>
             <ul>
                 <li><a href="/adminAccountModifyPage">회원정보 수정</a></li>
@@ -66,24 +69,25 @@
             </ul>
         </li>
     </div>
+
 </header>
 <%if (headerIndex.equals("manageLab.jsp") || headerIndex.equals("announce.jsp")) {%>
-<nav class="py-2 bg-light border-bottom d-flex shadow-sm">
+<nav class="py-2 bg-light border-bottom d-flex shadow-sm  position-fixed header_sub">
     <div class="container">
         <ul class="nav justify-content-center header-nav-height-4 ">
             <li class="nav-item header-nav-height-2"><a href="#" class="nav-link link-dark active"
                                                         aria-current="page">사용 현황</a></li>
             <li class="nav-item border-end align-self-center header-nav-height-2"/>
-            <li class="nav-item header-nav-height-2"><a href="/admin/managelab"
+            <li class="nav-item header-nav-height-2"><a href="/admin/managelab#manage_table"
                                                         class="nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>">예약
                 관리</a></li>
             <li class="nav-item border-end align-self-center header-nav-height-2"/>
-            <li class="nav-item header-nav-height-2"><a href="/admin/managelab"
+            <li class="nav-item header-nav-height-2"><a href="/admin/managelab#approve_table"
                                                         class="nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>">승인
                 목록</a>
             </li>
             <li class="nav-item border-end align-self-center header-nav-height-2"/>
-            <li class="nav-item header-nav-height-2"><a href="/admin/managelab"
+            <li class="nav-item header-nav-height-2"><a href="/admin/managelab#reject_table"
                                                         class="nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>">거절
                 목록</a></li>
             <li class="nav-item border-end align-self-center header-nav-height-2"/>
@@ -94,7 +98,6 @@
     </div>
 </nav>
 <%}%>
-
 
 <div class="header_button_container">
     <input type="checkbox" class="" id="collapsible">
@@ -121,7 +124,6 @@
         </li>
     </ul>
 </div>
-
 <%--<form action="/onetimekey" method="post">--%>
 <%--    <nav class="py-2 bg-light border-bottom d-flex shadow-sm">--%>
 <%--        <div class="container">--%>

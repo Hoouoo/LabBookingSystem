@@ -10,7 +10,7 @@
 <jsp:include page="../fragment/adminHeader.jsp"/>
 
 <body>
-<div class="account-second-box">
+<div class="account-second-box account-mt-8">
     <div class="account-long-title">
         회원정보 수정</div>
     <br/>
