@@ -269,6 +269,12 @@
     width: 50px;
 }
 
+.insert-full-seat{
+    content:url("../img/full-seat-gray.png");
+    height: 48px;
+    width: 48px;
+}
+
 [type=radio]{
     position: absolute;
     opacity: 0;
