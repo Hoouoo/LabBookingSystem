@@ -22,7 +22,7 @@
 <body>
 <div class="schedule-box">
     <div class="schedule-title mb-3">실습실 연장</div>
-    <button type="button" class="btn btn-dark btn-sm"  onClick="location.href='/checkExtend'">자리 확인하기</button>
+    <button type="button" class="btn btn-primary btn-sm"  onClick="location.href='/checkExtend'">자리 확인하기</button>
     <br/>
     <%
         System.out.println("---------------");

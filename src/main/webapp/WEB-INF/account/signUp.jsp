@@ -42,7 +42,7 @@
             <input class="account-input-box" type="text" name="passKey" placeholder="  인증키" required/>
         </div>
 
-        <input type="submit" class="btn btn-secondary btn-block account-button" value="회원가입"/>
+        <input type="submit" class="btn btn-primary btn-block account-button" value="회원가입"/>
     </form>
 
 </div>

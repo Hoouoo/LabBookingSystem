@@ -2,9 +2,10 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
-    <title>실습실 관리 페이지</title>
+    <title>실습실 예약 관리 페이지</title>
     <link href="../../css/lab.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
@@ -29,7 +30,7 @@
             <thead class="text-center">
             <tr>
 
-            <th>번호</th>
+                <th>번호</th>
                 <th>학번</th>
                 <th>실습실</th>
                 <th>좌석(행)</th>
@@ -55,10 +56,12 @@
                         <td>
                             <form action="/admin/managelab" method="post">
 
-                                <button type="submit" class="btn btn-secondary  btn-sm  btn-block lab-button-m" name="approve" value="${targetBookList.id}"
+                                <button type="submit" class="btn btn-secondary  btn-sm  btn-block lab-button-m"
+                                        name="approve" value="${targetBookList.id}"
                                         onclick=alert("승인되었습니다.")>승인
                                 </button>
-                                <button type="submit" class="btn btn-dark   btn-sm  btn-block lab-button-m" name="cancel" value="${targetBookList.id}"
+                                <button type="submit" class="btn btn-dark   btn-sm  btn-block lab-button-m"
+                                        name="cancel" value="${targetBookList.id}"
                                         onclick=alert("거절되었습니다.")>거절
                                 </button>
                             </form>
@@ -75,7 +78,6 @@
             });
         </script>
     </div>
-
 
     <div class="lab-box-2" id="approve_table">
         <div class="lab-title">승인 목록</div>
@@ -115,7 +117,8 @@
                         <td>${targetApproveBookList.endTime}</td>
                         <td>
                             <form action="/admin/managelab" method="post">
-                                <button type="submit" class="btn btn-dark btn-sm btn-block lab-button-m" name="cancel" value="${targetApproveBookList.id}"
+                                <button type="submit" class="btn btn-dark btn-sm btn-block lab-button-m" name="cancel"
+                                        value="${targetApproveBookList.id}"
                                         onclick=alert("거절되었습니다.")>거절
                                 </button>
                             </form>
@@ -131,6 +134,7 @@
             });
         </script>
     </div>
+
 
     <div class="lab-box-2" id="reject_table">
         <div class="lab-title">거절 목록</div>
@@ -171,7 +175,8 @@
                         <td>${targetRejectList.endTime}</td>
                         <td>
                             <form action="/admin/managelab" method="post">
-                                <button type="submit" class="btn btn-secondary btn-sm  btn-block lab-button-m" name="approve" value="${targetRejectList.id}"
+                                <button type="submit" class="btn btn-secondary btn-sm  btn-block lab-button-m"
+                                        name="approve" value="${targetRejectList.id}"
                                         onclick=alert("승인되었습니다.")>승인
                                 </button>
                             </form>

@@ -1,0 +1,170 @@
+@CHARSET "UTF-8";
+
+.main-box {
+    display: flex;
+
+    padding-top: 50px;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    /*justify-content: center;*/
+    margin-left: 200px;
+    margin-right: 200px;
+    /*margin-top: 50px;*/
+    margin-bottom: 50px;
+
+    min-height: 150vh;
+}
+
+.main-in-box-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    /*flex-direction: column;*/
+    /*-webkit-box-flex: 1;*/
+    /*flex-grow: 1;*/
+    /*-webkit-box-align: center;*/
+    /*align-items: center;*/
+    /*-webkit-box-pack: center;*/
+    /*justify-content: center;*/
+}
+
+.main-in-box-sub-grid {
+    /*min-width: 100%;*/
+    /*min-height: 100%;*/
+    /*margin-left: 100px;*/
+    /*margin-right: 100px;*/
+
+
+    /*flex-direction: column;*/
+    /*-webkit-box-flex: 1;*/
+    /*flex-grow: 1;*/
+
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    /*margin-right: 20px;*/
+    /*margin-left: 20px;*/
+    /*margin-right: 20px;*/
+    /*margin-left: 20px;*/
+    /*border-radius: 10px;*/
+    /*border: 3px solid rgb(199, 206, 212);*/
+}
+
+.main-in-box {
+
+    display: inline-flex;
+
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    /*padding-top: 50px;*/
+    /*padding-bottom: 50px;*/
+
+    /*width: 300px;*/
+    min-width: 280px;
+    /*height: 100%;*/
+    margin: 20px;
+
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-top: 10%;
+
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    /*text-align: center;*/
+
+
+    border-color: rgba(199, 206, 212, 50%);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px rgb(199, 206, 212);
+
+    outline-color: initial;
+    outline-style: none;
+    outline-width: initial;
+    touch-action: manipulation;
+}
+
+.main-in-box:hover {
+    background-color: rgba(199, 206, 212, 50%);
+}
+
+.main-ml-1 {
+    margin-left: 10%;
+}
+
+.main-mr-1 {
+    margin-right: 10%;
+}
+
+.main-insert-seat{
+    content:url("../img/seat.png");
+    margin-left: 36%;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10px;
+}
+
+.main-insert-full-seat{
+    content:url("../img/full-seat.png");
+    margin-left: 36%;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10px;
+}
+
+.main-booking{
+    content:url("../img/booking.png");
+    margin-left: 36%;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10px;
+}
+
+.main-full-booking{
+    content:url("../img/full-booking.png");
+    margin-left: 36%;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10px;
+}
+
+.main-account{
+    content:url("../img/account.png");
+    margin-left: 36%;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10px;
+}
+.main-question{
+    content:url("../img/question.png");
+    margin-left: 36%;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10px;
+}
+
+/*.main-left-sub-box {*/
+/*    float: left;*/
+/*}*/
+
+/*.main-right-sub-box {*/
+/*    float: right;*/
+/*}*/
+

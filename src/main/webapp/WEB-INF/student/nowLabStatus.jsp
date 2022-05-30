@@ -1,11 +1,7 @@
-<%@ page import="java.util.Objects" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-    String date = request.getParameter("date");
-    String startTime = request.getParameter("startTime");
-    String endTime = request.getParameter("endTime");
     String labNo = request.getParameter("labNo");
 %>
 
@@ -35,58 +31,50 @@
 
 %>
 
+
 <html>
 <head>
-    <title>Title</title>
+    <title>현재 실습실 사용 현황</title>
     <link href="../../css/schedule.css" rel="stylesheet" type="text/css">
 </head>
-<jsp:include page="../fragment/studentHeader.jsp"/>
-
-<%--<jsp:include page="../fragment/studentHeader.jsp"/>--%>
 <%--<link href="../../../css/schedule.css" rel="stylesheet" type="text/css">--%>
+<jsp:include page="../fragment/studentHeader.jsp"/>
 <body>
-
 <div class="schedule-box">
+    <form method="get" action="nowLabStatusPage">
+        <button type="submit" name="labNo" value="915">실습실 915</button>
+        <button type="submit" name="labNo" value="916">실습실 916</button>
+        <button type="submit" name="labNo" value="918">실습실 918</button>
+        <button type="submit" name="labNo" value="911">실습실 911</button>
+    </form>
     <form action="/book" method="post">
-
 
         <div class="schedule-title"><%=labNo%>
         </div>
-        <div class="schedule-sub-title-3">SCREEN</div>
-        <br/>
+        <div class="schedule-sub-title-3">SCREEN</div><br/>
+        &nbsp;&nbsp;&nbsp;
         <% for (int x = 1; x <= labSizeY; x++) {%>
         <small>
-            <%--            <%=x%>--%>
-        </small>
+<%--            <%=x%>--%>
+        </small> &nbsp;
         <%}%>
         <br/>
 
         <% for (int y = 1; y <= labSizeX; y++) {%>
-        <%--        <%=y%>--%>
+<%--        <%=y%>--%>
         <%
             for (int x = 1; x <= labSizeY; x++) {
                 if (seatList[y - 1][x - 1] == 1) {
         %>
-        <%--        <input type="radio" name="seat" value="<%=x %>-<%=y %>" disabled>--%>
-
         <input type="radio" name="seat" value="<%=x %>-<%=y %>" disabled><label
             class="insert-full-seat"></label></input>
-
         <%} else {%>
-
         <input type="radio" name="seat" value="<%=x %>-<%=y %>"><label class="insert-seat"></label></input>
-        <%--        <input type="radio" name="seat" value="<%=x %>-<%=y %>">--%>
         <%}%>
         <%}%>
         <br/>
         <%}%>
         <br/>
-
-        <input type="hidden" name="startTime" value="<%=startTime%>">
-        <input type="hidden" name="endTime" value="<%=endTime%>">
-        <input type="hidden" name="labNo" value="<%=labNo%>">
-
-        <input type="submit" class="btn btn-secondary btn-block schedule-btn-fw" value="예약"/>
     </form>
 </div>
 </body>

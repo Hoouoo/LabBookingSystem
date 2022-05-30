@@ -34,7 +34,7 @@
 <html>
 <head>
     <title>실습실 예약</title>
-    <link href="../../../css/schedule.css" rel="stylesheet" type="text/css">
+    <link href="../../css/schedule.css" rel="stylesheet" type="text/css">
 </head>
 <jsp:include page="../fragment/studentHeader.jsp"/>
 <body>
@@ -81,7 +81,7 @@
         <br/>
         <input type="hidden" name="todayDayOfWeek" value="<%=todayDayOfWeek%>">
 
-        <input type="submit" class="btn btn-secondary btn-block schedule-btn-fw" value="자리 확인하기"/>
+        <input type="submit" class="btn btn-primary btn-block schedule-btn-fw" value="자리 확인하기"/>
     </form>
 </div>
 </body>
