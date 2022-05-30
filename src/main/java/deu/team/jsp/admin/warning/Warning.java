@@ -22,8 +22,6 @@ public class Warning {
     // 학생 아이디
     String studentId;
 
-    // 경고 개수
-    @ColumnDefault("1")
     int warningCnt;
 
     public void changeWarningCnt(int warningCnt) {

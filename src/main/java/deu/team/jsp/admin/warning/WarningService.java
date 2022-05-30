@@ -46,7 +46,7 @@ public class WarningService {
         }else{
             accountRepository.getAccountByStudentId(studentId).ifPresent(
                     targetAccount ->{
-                        Warning targetWarning = Warning.builder().studentId(studentId).build();
+                        Warning targetWarning = Warning.builder().studentId(studentId).warningCnt(1).build();
                         warningRepository.save(targetWarning);
                         targetAccount.setWarning(targetWarning);
                         accountRepository.save(targetAccount);
