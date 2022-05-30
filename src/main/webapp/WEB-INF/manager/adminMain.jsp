@@ -6,10 +6,37 @@
 </head>
 
 <jsp:include page="../fragment/adminHeader.jsp"/>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <body>
-    <div class="main-box main-mt-10">
+<div class="main-box main-mt-10">
+
+    <form action="/onetimekey" method="post">
         <div class="main-in-box-grid">
+            <%--        <div class="main-in-box-sub-grid main-in-box">--%>
+            <button class="main-in-box-sub-grid main-in-box main-bg-white" type="submit" name="keyRole" value="STUDENT">
+
+                <div class="main-account"></div>
+                일반 사용자 암호 생성
+                <c:if test="${null ne keyStudent}">
+                    <c:out value="${keyStudent}"/>
+                    <br/>
+                </c:if>
+            </button>
+            <%--        </div>--%>
+
+            <%--        <div class="main-in-box-sub-grid main-in-box">--%>
+
+            <button class="main-in-box-sub-grid main-in-box main-bg-white" type="submit" name="keyRole" value="PROFESSOR">
+
+                <div class="main-account"></div>
+                교수 사용자 암호 생성
+                <c:if test="${null ne keyProfessor}">
+                    <c:out value="${keyProfessor}"/>
+                </c:if>
+            </button>
+
+            <%--        </div>--%>
+            <%--        </form>--%>
             <div class="main-in-box-sub-grid">
                 <div class="main-in-box" onClick="location.href='/admin/schedule'">
                     <a>
@@ -61,7 +88,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>
 </body>
 
 <jsp:include page="../fragment/footer.jsp"/>

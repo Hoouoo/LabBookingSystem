@@ -22,7 +22,9 @@
 .main-mt-10 {
     padding-top: 100px;
 }
-
+.main-bg-white {
+    background-color: white;
+}
 .main-in-box-grid {
     display: grid;
     grid-template-columns: 50% 50%;
