@@ -111,6 +111,8 @@
 <nav class="py-2 bg-light border-bottom d-flex shadow-sm">
     <div class="container">
         <ul class="nav justify-content-center header-nav-height-4 ">
+            <li class="nav-item header-nav-height-2"><a href="/searchSchedule" class="nav-link <%if (headerIndex.equals("nowLabStatus.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>"
+                                                        aria-current="page">실습실 시간표 조회</a></li>
             <li class="nav-item header-nav-height-2"><a href="/nowLabStatusPage" class="nav-link <%if (headerIndex.equals("nowLabStatus.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>"
                                                         aria-current="page">실습실 사용 현황</a></li>
             <li class="nav-item border-end align-self-center header-nav-height-2"/>

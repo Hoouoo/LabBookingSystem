@@ -3,6 +3,7 @@ package deu.team.jsp.admin;
 import deu.team.jsp.OneTimeKey.OneTimeKeyService;
 import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.interceptor.CheckSession;
+import deu.team.jsp.nowBookStatus.nowBookStatusService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.http.HttpRequest;
@@ -28,13 +30,14 @@ import java.util.Objects;
 public class AdminMainController {
 
     private final OneTimeKeyService oneTimeKeyService;
+    private final nowBookStatusService nowBookStatusService;
 
     @CheckSession
-//    @GetMapping("/manager")
-////    @RequestMapping(value = "/manager",method = {RequestMethod.POST,RequestMethod.GET})
-//    public String mainPage() {
-//        return "/WEB-INF/manager/adminMain.jsp";
-//    }
+    @GetMapping("/admin/searchSeat")
+    public String searchSeatPage(HttpServletRequest request, Model model){
+        model.addAttribute("seats", nowBookStatusService.nowBookStatus(request,model));
+        return "/WEB-INF/student/nowLabStatus.jsp";
+    }
 
     @PostMapping("/onetimekey")
     public String generateKey(RedirectAttributes model, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

@@ -30,7 +30,6 @@ public class ScheduleController {
     @GetMapping("/admin/schedule")
     public String schedulePage(Model model) {
         //http://localhost:8080/admin/schedule
-        System.out.println(scheduleService.getScheduleCnt());
         model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
         model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
         if (scheduleService.getScheduleCnt() > 0 ) {
