@@ -2,7 +2,6 @@
 
 .lab-box {
     display: flex;
-
     /*padding-top: 50px;*/
     flex-direction: column;
     -webkit-box-flex: 1;
@@ -19,6 +18,10 @@
     /*border-width: 1px;*/
     /*border-style: solid;*/
     /*border-color: rgb(245, 245, 245);*/
+}
+
+.lab-pt-12 {
+    padding-top: 120px;
 }
 
 .lab-box-2 {

@@ -6,11 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
@@ -26,8 +28,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
                   @Param("endTime") LocalDateTime endTime);
 
     //자리 예약 시 해당 강의실, 시작 시간, 끝나는 시간 조회하는 쿼리
+    @Transactional
     @Query("select b from Book as b where b.labNo=:labNo and ((:start between b.startTime and b.endTime) or (:end between b.startTime and b.endTime)" +
-            "or (:start <= b.startTime) and (:end >=b.endTime) )")
+            "or (:start <= b.startTime) and (:end >=b.endTime)) and b.approveStatus <> 'REJECT'")
     List<Book> bookList(@Param("labNo") String labNo,
                         @Param("start") LocalDateTime start,
                         @Param("end") LocalDateTime end);
@@ -52,4 +55,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     void extendEndTime(@Param("endTime")LocalDateTime endTime,
                        @Param("studentId")String studentId);
 
+
+    @Query("select b from Book as b where b.labNo = :labNo order by b.endTime desc")
+    List<Book> getLastBookListByLabNo(@Param("labNo") String labNo);
 }

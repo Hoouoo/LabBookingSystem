@@ -2,6 +2,8 @@ package deu.team.jsp.account;
 
 import deu.team.jsp.OneTimeKey.OneTimeKeyService;
 import deu.team.jsp.account.domain.Role;
+import deu.team.jsp.admin.managelab.ManageLabService;
+import deu.team.jsp.alert.AlertLastUser;
 import deu.team.jsp.interceptor.CheckSession;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,12 +101,19 @@ public class AccountController {
     @PostMapping("/adminAccountModify")
     public String AdminModify(HttpServletRequest request){
         accountService.modify(request);
-        return "redirect:/";
+        return "redirect:/admin/managelab";
+    }
+
+    @AlertLastUser
+    @CheckSession
+    @GetMapping(value = "/studentAccountModifyPage")
+    public String StudentAccountModifyGetPage(HttpSession session, Model model){
+        return "WEB-INF/student/studentModifyAccount.jsp";
     }
 
     @CheckSession
-    @RequestMapping(value = "/studentAccountModifyPage",method = {RequestMethod.POST,RequestMethod.GET})
-    public String StudentAccountModifyPage(){
+    @PostMapping(value = "/studentAccountModifyPage")
+    public String StudentAccountModifyPostPage(){
         return "WEB-INF/student/studentModifyAccount.jsp";
     }
 

@@ -5,6 +5,8 @@
     <link href="../../css/account.css" rel="stylesheet" type="text/css">
 </head>
 
+<jsp:include page="../fragment/header.jsp"/>
+
 <body class="text-center">
 
 <%--<jsp:include page="../fragment/adminHeader.jsp"/>--%>
@@ -24,9 +26,9 @@
         </div>
 
         <div class="form-group mb-3">
-            <input type="submit" class="btn btn-secondary btn-block account-button" value="로그인">
+            <input type="submit" class="btn btn-primary btn-block account-button" value="로그인">
         </div>
-        <button type="button" class="btn btn-dark btn-block account-button" onClick="location.href='signUpPage'"> 회원가입
+        <button type="button" class="btn btn-secondary btn-block account-button" onClick="location.href='signUpPage'"> 회원가입
         </button>
     </form>
 </div>

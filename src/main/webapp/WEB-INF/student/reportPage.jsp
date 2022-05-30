@@ -27,7 +27,7 @@
         <%--        </table>--%>
 
         <div class="form-group mb-3">
-            <input type="submit" class="btn btn-secondary btn-block announce-button" value="작성하기">
+            <input type="submit" class="btn btn-primary btn-block announce-button" value="작성하기">
         </div>
     </form>
 </div>

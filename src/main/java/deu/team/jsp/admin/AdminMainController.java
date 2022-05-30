@@ -39,7 +39,6 @@ public class AdminMainController {
     @PostMapping("/onetimekey")
     public String generateKey(RedirectAttributes model, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Role targetRole;
-        System.out.println("~~~> : " + request.getParameter("keyRole"));
         if (request.getParameter("keyRole").equals("STUDENT")) {
             targetRole = Role.STUDENT;
         } else {
@@ -53,16 +52,6 @@ public class AdminMainController {
             response.setContentType("text/html; charset=UTF-8");
         }
         request.setCharacterEncoding("utf-8");
-//        if (request.getParameter("keyRole").equals("STUDENT")) {
-//            model.addFlashAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
-//        } else {
-//            model.addFlashAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
-//        }
-
-//        request.getSession().setAttribute("keyMsg", "일회용 토큰 값이 성공적으로 생성되었습니다.");
-
-
-//        response.sendRedirect(request.getRequestURL().toString());
         return "redirect:" + request.getHeader("Referer");
     }
 }

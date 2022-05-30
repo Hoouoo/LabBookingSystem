@@ -5,11 +5,6 @@
 
 <c:set var="reportList" value="${reportList}"/>
 
-<%
-    int cnt = 0;
-    List<Report> reportList = (List<Report>) pageContext.getAttribute("reportList");
-%>
-
 <html>
 <head>
     <title>Title</title>
@@ -24,34 +19,33 @@
 <jsp:include page="../fragment/adminHeader.jsp"/>
 <body>
 <div class="announce-box announce-pt-10">
-    <div class="announce-title">신고 및 문의</div>
+    <div class="announce-title">사용자 관리</div>
     <div class="announce-top-m"></div>
     <table id="confirm" class="display">
         <thead class="text-center">
         <tr>
-            <th class="announce-table-th">글번호</th>
-            <th class="announce-table-th">제목</th>
-            <th class="announce-table-th">작성자</th>
-            <th class="announce-table-th">작성 시간</th>
+            <th class="announce-table-th">학번</th>
+            <th class="announce-table-th">이름</th>
+            <th class="announce-table-th">연락처</th>
+            <th class="announce-table-th">누적 경고횟수</th>
+            <th class="announce-table-th"> </th>
         </tr>
         </thead>
         <tbody class="text-center">
-
-        <%
-            for (Report reports : reportList) {
-                cnt++;
-        %>
+        <c:forEach var="targetStudent" items="${studentList}">
         <tr>
-            <td><%=cnt%>
+            <td><c:out value="${targetStudent.studentId}"/> </td>
+            <td><c:out value="${targetStudent.userName}"/> </td>
+            <td><c:out value="${targetStudent.phoneNo}"/> </td>
+            <td><c:out value="${targetStudent.warning.warningCnt}"/> </td>
+            <form action="/admin/warning" method="post">
+            <td>
+                <button type="submit" class="btn btn-primary  btn-sm  btn-block" name="warning" onclick="alert('${targetStudent.userName}학생에게 경고가 부여되었습니다.')" value="${targetStudent.studentId}">경고 주기</button>
+                <button type="submit" class="btn btn-secondary  btn-sm  btn-block" name="reset" onclick="alert(('${targetStudent.userName}학생의 경고가 초기화되었습니다.'))" value="${targetStudent.studentId}">경고 초기화</button>
             </td>
-            <td><a href="/getReport/<%=reports.getId()%>"><%=reports.getReportTitle()%>
-            </a></td>
-            <td><%=reports.getAccount().getUserName()%>
-            </td>
-            <td><%=reports.getReportTime().toString().substring(0, 19)%>
-            </td>
+            </form>
         </tr>
-        <%}%>
+        </c:forEach>
         </tbody>
     </table>
     <script>

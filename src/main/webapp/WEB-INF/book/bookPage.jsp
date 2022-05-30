@@ -34,14 +34,15 @@
 <html>
 <head>
     <title>실습실 예약</title>
-    <link href="../../../css/schedule.css" rel="stylesheet" type="text/css">
+    <link href="../../css/schedule.css" rel="stylesheet" type="text/css">
 </head>
 <jsp:include page="../fragment/studentHeader.jsp"/>
 <body>
 <div class="schedule-box">
+
     <div class="schedule-title">실습실 예약</div>
     <br/>
-    <div class="schedule-sub-title">자정 넘어 실습실 사용하실 분은 종료 시간을 11시59분으로 예약 하고 그 이후 연장해주세요</div>
+<%--    <div class="schedule-sub-title">자정 넘어 실습실 사용하실 분은 종료 시간을 11시59분으로 예약 하고 그 이후 연장해주세요</div>--%>
     <form action="/seat" method="post">
         <%if (now.before(cutLine)) {%>
         <div class="schedule-in-box">
@@ -80,7 +81,7 @@
         <br/>
         <input type="hidden" name="todayDayOfWeek" value="<%=todayDayOfWeek%>">
 
-        <input type="submit" class="btn btn-secondary btn-block schedule-btn-fw" value="자리 확인하기"/>
+        <input type="submit" class="btn btn-primary btn-block schedule-btn-fw" value="자리 확인하기"/>
     </form>
 </div>
 </body>

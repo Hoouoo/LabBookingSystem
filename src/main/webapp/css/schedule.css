@@ -16,11 +16,16 @@
     /*margin-top: 50px;*/
     margin-bottom: 50px;
 
+    min-height: 100vh;
+
     /*border-width: 1px;*/
     /*border-style: solid;*/
     /*border-color: rgb(245, 245, 245);*/
 }
 
+.schedule-pt-12 {
+    padding-top: 120px;
+}
 .schedule-box-2 {
     display: flex;
 
@@ -262,6 +267,12 @@
     content:url("../img/full-seat.png");
     height: 50px;
     width: 50px;
+}
+
+.insert-full-seat{
+    content:url("../img/full-seat-gray.png");
+    height: 48px;
+    width: 48px;
 }
 
 [type=radio]{

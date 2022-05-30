@@ -10,7 +10,7 @@
 <jsp:include page="../fragment/adminHeader.jsp"/>
 
 <body>
-<div class="account-second-box">
+<div class="account-second-box account-mt-8">
     <div class="account-long-title">
         회원정보 수정</div>
     <br/>
@@ -99,7 +99,7 @@
         </div>
 
         <div class="form-group mb-3">
-            <input type="submit" class="btn btn-dark btn-block account-button" name="remove" value="삭제">
+            <input type="submit" class="btn btn-primary btn-block account-button" name="remove" value="삭제">
         </div>
 
     </form>

@@ -63,10 +63,10 @@
                 <td>
 
                     <form action="/control" method="post">
-                        <button type="submit" name="remove" class="btn btn-secondary  btn-sm  btn-block lab-button-m"
+                        <button type="submit" name="remove" class="btn btn-primary  btn-sm  btn-block lab-button-m"
                                 value="<%=mybooks.getId()%>">삭제
                         </button>
-                        <button type="submit" name="cancel" class="btn btn-dark   btn-sm  btn-block lab-button-m"
+                        <button type="submit" name="cancel" class="btn btn-secondary   btn-sm  btn-block lab-button-m"
                                 value="<%=mybooks.getId()%>">취소
                         </button>
                     </form>
