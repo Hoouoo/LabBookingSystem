@@ -64,9 +64,9 @@ public class ManageLabService {
         for (String targetLabNo : labNoList) {
             List<Book> bookList = bookRepository.getLastBookListByLabNo(targetLabNo);
             if (!bookList.isEmpty()) {
-                Stream<Book> todayBookList = bookList.stream().filter(target -> target.getStartTime().toLocalDate().equals(LocalDate.now()));
+                Stream<Book> todayBookList = bookList.stream().filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now()));
                 if (todayBookList.findFirst().isPresent()) {
-                    String targetStudentId = todayBookList.max(Comparator.comparing(Book::getEndTime)).get().getStudentId();
+                    String targetStudentId = bookList.stream().filter(target->target.getEndTime().toLocalDate().equals(LocalDate.now())).max(Comparator.comparing(Book::getEndTime)).get().getStudentId();
                     targetLastStudentList.add(AlertLastUserDto.builder().labNo(targetLabNo).studentId(targetStudentId).build());
                 }
             }
