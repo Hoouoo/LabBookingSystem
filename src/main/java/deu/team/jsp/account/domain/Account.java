@@ -4,6 +4,9 @@ import deu.team.jsp.admin.warning.Warning;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -28,6 +31,7 @@ public class Account {
 
     @JoinColumn(name = "WARNING_ID")
     @OneToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     Warning warning;
 
 

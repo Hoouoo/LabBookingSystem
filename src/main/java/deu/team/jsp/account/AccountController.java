@@ -101,7 +101,7 @@ public class AccountController {
     @PostMapping("/adminAccountModify")
     public String AdminModify(HttpServletRequest request){
         accountService.modify(request);
-        return "redirect:/";
+        return "redirect:/admin/managelab";
     }
 
     @AlertLastUser
