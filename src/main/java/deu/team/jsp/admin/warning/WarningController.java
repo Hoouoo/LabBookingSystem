@@ -1,6 +1,8 @@
 package deu.team.jsp.admin.warning;
 
+import deu.team.jsp.OneTimeKey.OneTimeKeyService;
 import deu.team.jsp.account.domain.Account;
+import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.interceptor.CheckSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +21,14 @@ import java.util.Objects;
 public class WarningController {
 
     private final WarningService warningService;
+    private final OneTimeKeyService oneTimeKeyService;
 
     @CheckSession
     @GetMapping("/admin/warning")
     public String adminWarningGetPage(Model model){
         List<Account> allStudentList = warningService.getAllStudentList();
+        model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
+        model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
         if(!allStudentList.isEmpty()){
             model.addAttribute("studentList", allStudentList);
         }

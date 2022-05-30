@@ -39,6 +39,7 @@ public class ManageLabController {
             manageLabService.approveBook(Long.parseLong(request.getParameter("approve")));
             msg = "승인되었습니다.";
         } else if (Objects.nonNull(request.getParameter("cancel"))) {
+            // TODO 사용자 거절 메시지 저장 서비스 로직 구현
             manageLabService.cancelBook(Long.parseLong(request.getParameter("cancel")));
         }
 
