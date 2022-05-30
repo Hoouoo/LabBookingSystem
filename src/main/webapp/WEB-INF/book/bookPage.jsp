@@ -81,7 +81,7 @@
         <br/>
         <input type="hidden" name="todayDayOfWeek" value="<%=todayDayOfWeek%>">
 
-        <input type="submit" class="btn btn-secondary btn-block schedule-btn-fw" value="자리 확인하기"/>
+        <input type="submit" class="btn btn-primary btn-block schedule-btn-fw" value="자리 확인하기"/>
     </form>
 </div>
 </body>

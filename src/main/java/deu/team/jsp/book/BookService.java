@@ -162,11 +162,11 @@ public class BookService {
             dayOfWeekKorean = "일";
         }
 
-        Integer dayOfWeekNumber = Integer.valueOf(request.getParameter("todayDayOfWeek"));
-        if ((dayOfWeekNumber == 6 && targetDayOfWeek == 6) || (dayOfWeekNumber == 6 && targetDayOfWeek == 7)
-                || (dayOfWeekNumber == 7 && targetDayOfWeek == 7)) {
-            alertService.alertMessage("주말에는 주말 좌석 예약 불가능 합니다.","/studentPage",response);
-        }
+//        Integer dayOfWeekNumber = Integer.valueOf(request.getParameter("todayDayOfWeek"));
+//        if ((dayOfWeekNumber == 6 && targetDayOfWeek == 6) || (dayOfWeekNumber == 6 && targetDayOfWeek == 7)
+//                || (dayOfWeekNumber == 7 && targetDayOfWeek == 7)) {
+//            alertService.alertMessage("주말에는 주말 좌석 예약 불가능 합니다.","/studentPage",response);
+//        }
 
         //새로운 시간 정의 포멧 맞추기
         LocalDateTime start= LocalDateTime.of(year, month, startDay,startHour,startMinute);

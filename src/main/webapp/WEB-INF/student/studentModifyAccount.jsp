@@ -68,7 +68,7 @@
         </c:choose>
         <input type="hidden" name="studentId" value="${account.studentId}">
         <div class="form-group mb-3">
-            <input type="submit" class="btn btn-dark btn-block account-button" name="modify" value="수정">
+            <input type="submit" class="btn btn-primary btn-block account-button" name="modify" value="수정">
         </div>
     </form>
 </div>

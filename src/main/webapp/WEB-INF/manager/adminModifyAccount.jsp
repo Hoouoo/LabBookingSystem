@@ -99,7 +99,7 @@
         </div>
 
         <div class="form-group mb-3">
-            <input type="submit" class="btn btn-dark btn-block account-button" name="remove" value="삭제">
+            <input type="submit" class="btn btn-primary btn-block account-button" name="remove" value="삭제">
         </div>
 
     </form>
