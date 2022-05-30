@@ -19,6 +19,12 @@
     min-height: 150vh;
 }
 
+.main-mt-10 {
+    padding-top: 100px;
+}
+.main-bg-white {
+    background-color: white;
+}
 .main-in-box-grid {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -115,7 +121,7 @@
 
 .main-insert-seat{
     content:url("../img/seat.png");
-    margin-left: 36%;
+    margin-left: 30%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;
@@ -123,7 +129,7 @@
 
 .main-insert-full-seat{
     content:url("../img/full-seat.png");
-    margin-left: 36%;
+    margin-left: 30%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;
@@ -131,7 +137,7 @@
 
 .main-booking{
     content:url("../img/booking.png");
-    margin-left: 36%;
+    margin-left: 30%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;
@@ -139,7 +145,7 @@
 
 .main-full-booking{
     content:url("../img/full-booking.png");
-    margin-left: 36%;
+    margin-left: 30%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;
@@ -147,14 +153,14 @@
 
 .main-account{
     content:url("../img/account.png");
-    margin-left: 36%;
+    margin-left: 30%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;
 }
 .main-question{
     content:url("../img/question.png");
-    margin-left: 36%;
+    margin-left: 30%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;

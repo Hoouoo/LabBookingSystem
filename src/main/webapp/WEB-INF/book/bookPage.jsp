@@ -39,50 +39,57 @@
 <jsp:include page="../fragment/studentHeader.jsp"/>
 <body>
 <div class="schedule-box">
+    <div class="schedule-in-box-grid">
 
-    <div class="schedule-title">실습실 예약</div>
-    <br/>
-<%--    <div class="schedule-sub-title">자정 넘어 실습실 사용하실 분은 종료 시간을 11시59분으로 예약 하고 그 이후 연장해주세요</div>--%>
-    <form action="/seat" method="post">
-        <%if (now.before(cutLine)) {%>
-        <div class="schedule-in-box">
-            <div class="schedule-sub-title"> 강의실</div>
-            <select class="form-select form-select-sm" name="labNo">
-                <option value="915">915</option>
-                <option value="916">916</option>
-                <option value="918">918</option>
-                <option value="911">911</option>
-            </select>
+        <div class="schedule-in-box-sub-grid">fefe</div>
+        <div class="schedule-in-box-sub-grid">
+            <div class="schedule-title">실습실 예약</div>
+            <br/>
+            <%--    <div class="schedule-sub-title">자정 넘어 실습실 사용하실 분은 종료 시간을 11시59분으로 예약 하고 그 이후 연장해주세요</div>--%>
+            <form action="/seat" method="post">
+                <%if (now.before(cutLine)) {%>
+                <div class="schedule-in-box">
+                    <div class="schedule-sub-title"> 강의실</div>
+                    <select class="form-select form-select-sm" name="labNo">
+                        <option value="915">915</option>
+                        <option value="916">916</option>
+                        <option value="918">918</option>
+                        <option value="911">911</option>
+                    </select>
+                </div>
+
+                <br/>
+                <div class="schedule-in-box-2">
+                    <div class="schedule-sub-title"> 시작 시간</div>
+                    <input class="schedule-input-box" type="datetime-local" name="startTime" min="<%=today%>"
+                           max="<%=after7%>" required>
+                </div>
+                <%} else {%>
+
+                <div class="schedule-in-box-2">
+                    <div class="schedule-sub-title"> 시작 시간</div>
+                    <input class="schedule-input-box" type="datetime-local" name="startTime" min="<%=tomorrow%>"
+                           max="<%=after7%>" required>
+                </div>
+                <%}%>
+                <br/>
+                <div class="schedule-in-box-2">
+                    <div class="schedule-sub-title"> 종료 시간</div>
+                    <input class="schedule-input-box" type="datetime-local" name="endTime" max="24:00" required>
+                </div>
+                <br/>
+                <%--        <div class="schedule-in-box-2 mb-4">--%>
+
+                <%--            <div class="schedule-sub-title"> 종료 시간</div>--%>
+                <%--            <input class="schedule-input-box" type="datetime-local" name="endTime" max="24:00" required>--%>
+                <%--        </div>--%>
+                <br/>
+                <input type="hidden" name="todayDayOfWeek" value="<%=todayDayOfWeek%>">
+
+                <input type="submit" class="btn btn-primary btn-block schedule-btn-fw" value="자리 확인하기"/>
+            </form>
         </div>
-
-        <br/>
-        <div class="schedule-in-box-2">
-            <div class="schedule-sub-title"> 시작 시간</div>
-            <input class="schedule-input-box" type="datetime-local" name="startTime" min="<%=today%>" max="<%=after7%>" required>
-        </div>
-        <%} else {%>
-
-        <div class="schedule-in-box-2">
-            <div class="schedule-sub-title"> 시작 시간</div>
-            <input class="schedule-input-box" type="datetime-local" name="startTime" min="<%=tomorrow%>" max="<%=after7%>" required>
-        </div>
-        <%}%>
-        <br/>
-        <div class="schedule-in-box-2">
-            <div class="schedule-sub-title"> 종료 시간</div>
-            <input class="schedule-input-box" type="datetime-local" name="endTime" max="24:00" required>
-        </div>
-        <br/>
-        <%--        <div class="schedule-in-box-2 mb-4">--%>
-
-        <%--            <div class="schedule-sub-title"> 종료 시간</div>--%>
-        <%--            <input class="schedule-input-box" type="datetime-local" name="endTime" max="24:00" required>--%>
-        <%--        </div>--%>
-        <br/>
-        <input type="hidden" name="todayDayOfWeek" value="<%=todayDayOfWeek%>">
-
-        <input type="submit" class="btn btn-primary btn-block schedule-btn-fw" value="자리 확인하기"/>
-    </form>
+    </div>
 </div>
 </body>
 <jsp:include page="../fragment/footer.jsp"/>
