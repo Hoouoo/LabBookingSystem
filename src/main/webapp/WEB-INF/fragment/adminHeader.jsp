@@ -48,12 +48,13 @@
                 <a class="nav-item header-nav-link <%if (headerIndex.equals("confirmReport.jsp")) {%> header-nav-active <%}%>"
                    href="/confirmReportPage">신고 및 문의</a>
 
-                <%--                <a class="nav-item nav-link <%if (headerIndex.equals("adminModifyAccount.jsp")) {%> active <%}%>" href="/adminAccountModifyPage">회원정보 수정</a>--%>
-                <%--                <a class="nav-item nav-link <%if (headerIndex.equals("scheduleCreate.jsp")) {%> active <%}%>" href="/admin/schedule">시간표 추가</a>--%>
-                <%--                <a class="nav-item nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> active <%}%>" href="/admin/managelab">실습실 관리</a>--%>
-                <%--                <a class="nav-item nav-link <%if (headerIndex.equals("announce.jsp")) {%> active <%}%>" href="/announcePage">공지사항 등록</a>--%>
-                <%--                <a class="nav-item nav-link <%if (headerIndex.equals("confirmReport.jsp")) {%> active <%}%>" href="/confirmReportPage">신고 및 문의</a>--%>
-                <%--                <a class="nav-item nav-link" href="/logout">로그아웃</a>--%>
+<!--                 <a class="nav-item nav-link <%if (headerIndex.equals("adminModifyAccount.jsp")) {%> active <%}%>" href="/adminAccountModifyPage">회원정보 수정</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("adminModifyAccount.jsp")) {%> active <%}%>" href="/admin/warning">회원 관리</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("scheduleCreate.jsp")) {%> active <%}%>" href="/admin/schedule">시간표 추가</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> active <%}%>" href="/admin/managelab">실습실 관리</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("announce.jsp")) {%> active <%}%>" href="/announcePage">공지사항 등록</a>
+                <a class="nav-item nav-link <%if (headerIndex.equals("confirmReport.jsp")) {%> active <%}%>" href="/confirmReportPage">신고 및 문의</a>
+                <a class="nav-item nav-link" href="/logout">로그아웃</a> -->
             </div>
         </div>
     </nav>
