@@ -37,10 +37,10 @@
             <td><c:out value="${targetStudent.studentId}"/> </td>
             <td><c:out value="${targetStudent.userName}"/> </td>
             <td><c:out value="${targetStudent.phoneNo}"/> </td>
-            <td><c:out value="${targetStudent.waring.waringCnt}"/> </td>
-            <form action="/admin/waring" method="post">
+            <td><c:out value="${targetStudent.warning.warningCnt}"/> </td>
+            <form action="/admin/warning" method="post">
             <td>
-                <button type="submit" name="waring" onclick="alert('${targetStudent.userName}학생에게 경고가 부여되었습니다.')" value="${targetStudent.studentId}">경고 주기</button>
+                <button type="submit" name="warning" onclick="alert('${targetStudent.userName}학생에게 경고가 부여되었습니다.')" value="${targetStudent.studentId}">경고 주기</button>
                 <button type="submit" name="reset" onclick="alert(('${targetStudent.userName}학생의 경고가 초기화되었습니다.'))" value="${targetStudent.studentId}">경고 초기화</button>
             </td>
             </form>

@@ -1,6 +1,6 @@
 package deu.team.jsp.account.domain;
 
-import deu.team.jsp.admin.waring.Waring;
+import deu.team.jsp.admin.warning.Warning;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,11 +22,13 @@ public class Account {
     private String userPassword;
     private String email;
     private String phoneNo;
+
+    // 0 : 예약 가능, 1 : 예약 중인 상태, 2 : 블랙리스트 추가된 상태
     private int bookStatus;
 
-    @JoinColumn(name = "WARING_ID")
+    @JoinColumn(name = "WARNING_ID")
     @OneToOne(fetch = FetchType.EAGER)
-    Waring waring;
+    Warning warning;
 
 
     @Enumerated(EnumType.STRING)

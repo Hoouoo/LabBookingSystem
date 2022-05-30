@@ -1,4 +1,4 @@
-package deu.team.jsp.admin.waring;
+package deu.team.jsp.admin.warning;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -13,26 +13,26 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Waring {
+public class Warning {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="WARING_ID")
+    @Column(name ="WARNING_ID")
     Long id;
     // 학생 아이디
     String studentId;
 
     // 경고 개수
     @ColumnDefault("1")
-    int waringCnt;
+    int warningCnt;
 
-    public void changeWaringCnt(int waringCnt) {
-        this.waringCnt = waringCnt;
+    public void changeWarningCnt(int warningCnt) {
+        this.warningCnt = warningCnt;
     }
 
     @Builder
-    public Waring(String studentId, int waringCnt) {
+    public Warning(String studentId, int warningCnt) {
         this.studentId = studentId;
-        this.waringCnt = waringCnt;
+        this.warningCnt = warningCnt;
     }
 }
