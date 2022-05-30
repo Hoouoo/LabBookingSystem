@@ -37,6 +37,7 @@
     <a href="/studentPage" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <%--        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>--%>
         <span class="fs-4 header-title">Lab Booking System</span>
+<%--            <%=headerIndex%>--%>
     </a>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -124,12 +125,14 @@
     </nav>
 </c:if>
 
-<%if (headerIndex.equals("bookPage.jsp") || headerIndex.equals("seat.jsp") || headerIndex.equals("bookExtendPage.jsp") || headerIndex.equals("nowLabStatus.jsp")) {%>
+<%if (headerIndex.equals("bookPage.jsp") || headerIndex.equals("seat.jsp") || headerIndex.equals("bookExtendPage.jsp") || headerIndex.equals("nowLabStatus.jsp") || headerIndex.equals("searchSchedule.jsp")) {%>
 <nav class="py-2 bg-light border-bottom d-flex shadow-sm">
     <div class="container">
         <ul class="nav justify-content-center header-nav-height-4 ">
-            <li class="nav-item header-nav-height-2"><a href="/nowLabStatusPage"
-                                                        class="nav-link <%if (headerIndex.equals("nowLabStatus.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>"
+            <li class="nav-item header-nav-height-2"><a href="/searchSchedule" class="nav-link <%if (headerIndex.equals("searchSchedule.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>"
+                                                        aria-current="page">실습실 시간표 조회</a></li>
+            <li class="nav-item border-end align-self-center header-nav-height-2"/>
+            <li class="nav-item header-nav-height-2"><a href="/nowLabStatusPage" class="nav-link <%if (headerIndex.equals("nowLabStatus.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>"
                                                         aria-current="page">실습실 사용 현황</a></li>
             <li class="nav-item border-end align-self-center header-nav-height-2"/>
             <li class="nav-item header-nav-height-2"><a href="/bookPage"
