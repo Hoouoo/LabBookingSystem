@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class nowBookStatusService {
+public class NowBookStatusService {
 
     @Autowired
     BookRepository bookRepository;

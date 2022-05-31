@@ -100,7 +100,7 @@
 <nav class="py-2 bg-light border-bottom d-flex shadow-sm  position-fixed header_sub">
     <div class="container">
         <ul class="nav justify-content-center header-nav-height-4 ">
-            <li class="nav-item header-nav-height-2"><a href="/admin/searchSeat" class="nav-link link-dark active"
+            <li class="nav-item header-nav-height-2"><a href="/admin/nowLabStatusPage" class="nav-link link-dark active"
                                                         aria-current="page">사용 현황</a></li>
             <li class="nav-item border-end align-self-center header-nav-height-2"/>
             <li class="nav-item header-nav-height-2"><a href="/admin/managelab#manage_table"
