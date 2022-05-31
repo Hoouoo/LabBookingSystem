@@ -121,7 +121,7 @@
 
 .main-insert-seat{
     content:url("../img/seat.png");
-    margin-left: 30%;
+    margin-left: 26%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;
@@ -129,7 +129,7 @@
 
 .main-insert-full-seat{
     content:url("../img/full-seat.png");
-    margin-left: 30%;
+    margin-left: 26%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;
@@ -137,7 +137,7 @@
 
 .main-booking{
     content:url("../img/booking.png");
-    margin-left: 30%;
+    margin-left: 26%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;
@@ -145,7 +145,7 @@
 
 .main-full-booking{
     content:url("../img/full-booking.png");
-    margin-left: 30%;
+    margin-left: 26%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;
@@ -153,17 +153,37 @@
 
 .main-account{
     content:url("../img/account.png");
-    margin-left: 30%;
+    margin-left: 26%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;
 }
 .main-question{
     content:url("../img/question.png");
-    margin-left: 30%;
+    margin-left: 26%;
     height: 40px;
     width: 40px;
     margin-bottom: 10px;
+}
+
+.main-user-security{
+    content:url("../img/user-security.png");
+    /*margin-left: 30%;*/
+    height: 30px;
+    width: 30px;
+    margin-bottom: 10px;
+}
+
+.main-admin-security{
+    content:url("../img/admin-security.png");
+    /*margin-left: 30%;*/
+    height: 30px;
+    width: 30px;
+    margin-bottom: 10px;
+}
+
+.main-text-blue {
+    color: #0d6efd;
 }
 
 /*.main-left-sub-box {*/

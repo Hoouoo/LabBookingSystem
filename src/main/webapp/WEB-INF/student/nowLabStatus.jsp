@@ -57,7 +57,8 @@
     }
 %>
 
-<%--<jsp:include page="../fragment/${urlHeader}Header.jsp"/>--%>
+<jsp:include page="../fragment/${urlHeader}Header.jsp"/>
+<body>
 <body>
 <div class="schedule-box">
     <form method="get" action="${url}nowLabStatusPage">
