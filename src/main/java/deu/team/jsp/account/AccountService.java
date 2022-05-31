@@ -108,7 +108,6 @@ public class AccountService {
             accountRepository.delete(findByStudentId);
             Account account=new Account(studentId,userName,userPassword,email,phoneNo,bookStatus,role);
             accountRepository.save(account);
-
         }
         else{
             Account findByStudentId = accountRepository.findByStudentId(studentId);

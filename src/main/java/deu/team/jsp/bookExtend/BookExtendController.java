@@ -2,6 +2,7 @@ package deu.team.jsp.bookExtend;
 
 import deu.team.jsp.admin.managelab.ManageLabService;
 import deu.team.jsp.alert.AlertLastUser;
+import deu.team.jsp.interceptor.CheckSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,19 +20,21 @@ public class BookExtendController {
     @Autowired
     BookExtendService bookExtendService;
 
+    @CheckSession
     @AlertLastUser
     @GetMapping("/bookExtendPage")
     public String BookExtendPage(HttpSession session, Model model ){
         return "/WEB-INF/bookExtend/bookExtendPage.jsp";
     }
 
-
+    @CheckSession
     @GetMapping("/checkExtend")
     public String CheckExtend(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         model.addAttribute("finishTime", bookExtendService.CheckExtend(request,response,model));
         return "/bookExtendPage";
     }
 
+    @CheckSession
     @PostMapping("/extendSeat")
     public String extendSeat(HttpServletRequest request,HttpServletResponse response,Model model) throws IOException {
 

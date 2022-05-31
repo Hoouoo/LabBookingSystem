@@ -41,6 +41,7 @@ public class AccountController {
         return "/WEB-INF/account/signUp.jsp";
     }
 
+    @CheckSession
     @GetMapping("/studentPage")
     public String studentPage(){
         return "WEB-INF/student/studentMain.jsp";
@@ -133,7 +134,11 @@ public class AccountController {
     @PostMapping("/studentAccountModify")
     public String StudentModify(HttpServletRequest request){
         accountService.modify(request);
-        return "redirect:/";
+        HttpSession session = request.getSession();
+        session.invalidate();
+        request.setAttribute("msg","회원정보 수정이 완료 되었습니다.다시 로그인 해주세요");
+        request.setAttribute("url","/");
+        return "WEB-INF/alert/alert.jsp";
     }
 
 

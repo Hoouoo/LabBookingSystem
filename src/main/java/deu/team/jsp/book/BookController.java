@@ -41,6 +41,7 @@ public class BookController {
         return "/WEB-INF/book/bookPage.jsp";
 
     }
+    @CheckSession
     @AlertLastUser
     @GetMapping("/myBookStatusPage")
     public String myBookStatusPage(HttpSession session,Model model, HttpServletRequest request){
