@@ -3,6 +3,7 @@ package deu.team.jsp.admin.schedule;
 import deu.team.jsp.OneTimeKey.OneTimeKeyService;
 import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.admin.schedule.dto.ScheduleCreateRequestDto;
+import deu.team.jsp.interceptor.CheckSession;
 import deu.team.jsp.schedule.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
     private final OneTimeKeyService oneTimeKeyService;
 
+    @CheckSession
     @GetMapping("/admin/schedule")
     public String schedulePage(Model model) {
         //http://localhost:8080/admin/schedule
@@ -40,7 +42,7 @@ public class ScheduleController {
         }
         return "/WEB-INF/manager/schedule/scheduleCreate.jsp";
     }
-
+    @CheckSession
     @PostMapping("/admin/schedule")
     public void scheduleCreate(HttpServletRequest request, HttpServletResponse response, RedirectAttributes model) throws IOException {
         if (Objects.nonNull(request.getParameter("delete"))) {
