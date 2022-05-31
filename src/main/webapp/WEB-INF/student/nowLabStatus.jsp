@@ -1,3 +1,5 @@
+<%@ page import="deu.team.jsp.account.domain.Account" %>
+<%@ page import="deu.team.jsp.account.domain.Role" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -38,10 +40,27 @@
     <link href="../../css/schedule.css" rel="stylesheet" type="text/css">
 </head>
 <%--<link href="../../../css/schedule.css" rel="stylesheet" type="text/css">--%>
-<jsp:include page="../fragment/studentHeader.jsp"/>
+<%
+    Account account = (Account) session.getAttribute("account");
+    if (account.getRole().equals(Role.ADMIN)){ %>
+    <c:set var="url" value="/admin/"/>
+    <c:set var="urlHeader" value="admin"/>
+<%
+    }else if(account.getRole().equals(Role.STUDENT)){%>
+    <c:set var="url" value="/"/>
+    <c:set var="urlHeader" value="student"/>
+<%
+    } else if(account.getRole().equals(Role.PROFESSOR)){%>
+    <c:set var="url" value="/prof/"/>
+    <c:set var="urlHeader" value="prof"/>
+<%
+    }
+%>
+
+<%--<jsp:include page="../fragment/${urlHeader}Header.jsp"/>--%>
 <body>
 <div class="schedule-box">
-    <form method="get" action="nowLabStatusPage">
+    <form method="get" action="${url}nowLabStatusPage">
         <button type="submit" name="labNo" value="915">실습실 915</button>
         <button type="submit" name="labNo" value="916">실습실 916</button>
         <button type="submit" name="labNo" value="918">실습실 918</button>

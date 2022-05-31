@@ -1,5 +1,20 @@
+<%@ page import="deu.team.jsp.account.domain.Account" %>
+<%@ page import="deu.team.jsp.account.domain.Role" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+    Account account = (Account) session.getAttribute("account");
+    if (account.getRole().equals(Role.ADMIN)){ %>
+<c:set var="url" value="/admin/"/>
+<c:set var="urlHeader" value="admin"/>
+<%
+} else if(account.getRole().equals(Role.PROFESSOR)){%>
+<c:set var="url" value="/prof/"/>
+<c:set var="urlHeader" value="prof"/>
+<%
+    }
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -7,12 +22,12 @@
     <link href="../../../css/schedule.css" rel="stylesheet" type="text/css">
 </head>
 
-<jsp:include page="../../fragment/adminHeader.jsp"/>
+<jsp:include page="../../fragment/${urlHeader}Header.jsp"/>
 <body>
 
 <div class="schedule-box schedule-pt-12">
     <div class="schedule-title">시간표 입력</div>
-    <form action="/admin/schedule" method="post">
+    <form action="${url}schedule" method="post">
 
         <div class="schedule-in-box">
             <div class="schedule-sub-title"> 강의실</div>
@@ -158,7 +173,7 @@
                             <p><b>수업 종료 시간 :</b> <c:out value="${schedule.endTime}"/></p>
                         </div>
                         <br/>
-                        <form action="/admin/schedule" method="post">
+                        <form action="${url}/schedule" method="post">
                             <button type="submit" class="btn btn-secondary btn-block schedule-btn-w" name="delete" value="${schedule.id}"> 삭제
                             </button>
                       </form>

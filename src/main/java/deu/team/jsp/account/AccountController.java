@@ -43,11 +43,6 @@ public class AccountController {
         return "WEB-INF/student/studentMain.jsp";
     }
 
-    @GetMapping("/professor")
-    public String professorPage(){
-        return "WEB-INF/manager/professor.jsp";
-    }
-
     @GetMapping("/adminPage")
     public String adminPage(Model model){
         model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
@@ -66,7 +61,7 @@ public class AccountController {
             return "redirect:/adminPage";
         }
         else{
-            return "redirect:/professor";
+            return "redirect:/professorPage";
         }
     }
 
