@@ -1,17 +1,14 @@
-package deu.team.jsp.admin.schedule;
+package deu.team.jsp.professor;
 
-import deu.team.jsp.OneTimeKey.OneTimeKeyService;
-import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.admin.schedule.dto.ScheduleCreateRequestDto;
+import deu.team.jsp.interceptor.CheckSession;
+import deu.team.jsp.nowBookStatus.NowBookStatusService;
 import deu.team.jsp.schedule.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,27 +19,27 @@ import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
-public class ScheduleController {
+public class ProfessorController {
 
+    private final NowBookStatusService nowBookStatusService;
     private final ScheduleService scheduleService;
-    private final OneTimeKeyService oneTimeKeyService;
 
-    @GetMapping("/admin/schedule")
-    public String schedulePage(Model model) {
-        //http://localhost:8080/admin/schedule
-        model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
-        model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
-        if (scheduleService.getScheduleCnt() > 0 ) {
+
+    @CheckSession
+    @GetMapping("/professorPage")
+    public String professorPage(Model model) {
+
+        if (scheduleService.getScheduleCnt() > 0) {
             model.addAttribute("scheduleCnt", scheduleService.getScheduleCnt());
             model.addAttribute("scheduleList", scheduleService.getScheduleList());
             model.addAttribute("scheduleTimeList", scheduleService.getSubjectTime());
 
         }
-        return "/WEB-INF/manager/schedule/scheduleCreate.jsp";
+        return "/WEB-INF/professor/professorMain.jsp";
     }
 
-    @PostMapping("/admin/schedule")
-    public void scheduleCreate(HttpServletRequest request, HttpServletResponse response, RedirectAttributes model) throws IOException {
+    @PostMapping("/prof/schedule")
+    public void profSchedulePagePost(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         if (Objects.nonNull(request.getParameter("delete"))) {
             scheduleService.deleteSchedule(Long.parseLong(request.getParameter("delete")));
         } else {
@@ -63,8 +60,22 @@ public class ScheduleController {
             // dto 저장
             scheduleService.generateSchedule(requestDto);
         }
-
-
         response.sendRedirect("/admin/schedule");
+    }
+
+
+    @CheckSession
+    @GetMapping("/prof/schedule")
+    public String profSchedulePage() {
+        //TODO 학생 헤더가 아닌 교수 헤더로 변경되야 함.
+        return "/WEB-INF/manager/schedule/scheduleCreate.jsp";
+    }
+
+
+    @CheckSession
+    @GetMapping("/prof/nowLabStatusPage")
+    public String profSearchSeat(Model model, HttpServletRequest request) {
+        model.addAttribute("seats", nowBookStatusService.nowBookStatus(request, model));
+        return "/WEB-INF/student/nowLabStatus.jsp";
     }
 }

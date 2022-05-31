@@ -1,5 +1,6 @@
 package deu.team.jsp.nowBookStatus;
 
+import deu.team.jsp.interceptor.CheckSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 public class NowBookStatusController {
 
     @Autowired
-    nowBookStatusService nowBookStatusService;
+    NowBookStatusService nowBookStatusService;
 
+    @CheckSession
     @GetMapping("/nowLabStatusPage")
     public String nowBookStatus(HttpServletRequest request, Model model){
         model.addAttribute("seats", nowBookStatusService.nowBookStatus(request,model));

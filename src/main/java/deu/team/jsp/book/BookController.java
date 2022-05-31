@@ -3,6 +3,10 @@ package deu.team.jsp.book;
 import deu.team.jsp.admin.managelab.ManageLabService;
 import deu.team.jsp.alert.AlertLastUser;
 import deu.team.jsp.interceptor.CheckSession;
+import deu.team.jsp.nowBookStatus.NowBookStatusController;
+import deu.team.jsp.nowBookStatus.NowBookStatusService;
+import deu.team.jsp.schedule.ScheduleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +19,24 @@ import java.io.IOException;
 import java.util.Objects;
 
 @Controller
+@RequiredArgsConstructor
 public class BookController {
 
     @Autowired
     BookService bookService;
 
+    private final ScheduleService scheduleService;
+
+    private final NowBookStatusService nowBookStatusService;
+
+
     @CheckSession
     @AlertLastUser
     @GetMapping("/bookPage")
-    public String bookPage(HttpSession session, Model model){
+    public String bookPage(HttpSession session, Model model, HttpServletRequest request){
+        model.addAttribute("seats", nowBookStatusService.nowBookStatus(request,model));
+        model.addAttribute("seats", nowBookStatusService.nowBookStatus(request,model));
+
 //        manageLabService.alertUser(session, model);
         return "/WEB-INF/book/bookPage.jsp";
 
@@ -63,6 +76,15 @@ public class BookController {
         }
 
         return "/WEB-INF/student/studentMain.jsp";
+    }
+
+    @GetMapping("/searchSchedule")
+    public String searchSchedulePage(Model model){
+        if (scheduleService.getScheduleCnt() > 0 ) {
+            model.addAttribute("scheduleTimeList", scheduleService.getSubjectTime());
+        }
+        return "/WEB-INF/student/searchSchedule.jsp";
+
     }
 
 
