@@ -3,16 +3,16 @@ package deu.team.jsp.account;
 import deu.team.jsp.OneTimeKey.OneTimeKeyService;
 import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.admin.managelab.ManageLabService;
+import deu.team.jsp.alert.Alert;
 import deu.team.jsp.alert.AlertLastUser;
+import deu.team.jsp.alert.AlertService;
 import deu.team.jsp.interceptor.CheckSession;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +28,9 @@ public class AccountController {
     @Autowired
     OneTimeKeyService oneTimeKeyService;
 
+    @Autowired
+    AlertService alertService;
+
     @GetMapping("/")
     public String LoginPage(){
         return "/WEB-INF/account/login.jsp";
@@ -38,6 +41,7 @@ public class AccountController {
         return "/WEB-INF/account/signUp.jsp";
     }
 
+    @CheckSession
     @GetMapping("/studentPage")
     public String studentPage(){
         return "WEB-INF/student/studentMain.jsp";
@@ -73,9 +77,16 @@ public class AccountController {
     }
 
     @PostMapping("/signUp")
-    public String SignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        accountService.SignUp(request,response);
-        return "redirect:/";
+        public String SignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String msg="";
+        if(accountService.SignUp(request,response)){
+            msg="회원가입 완료. ";
+        }else{
+            msg="이미 존재하는 학번 이거나 인증키가 일치하지 않습니다. ";
+        }
+        request.setAttribute("msg",msg);
+        request.setAttribute("url","/");
+        return "WEB-INF/alert/alert.jsp";
     }
 
     @CheckSession
@@ -123,7 +134,11 @@ public class AccountController {
     @PostMapping("/studentAccountModify")
     public String StudentModify(HttpServletRequest request){
         accountService.modify(request);
-        return "redirect:/";
+        HttpSession session = request.getSession();
+        session.invalidate();
+        request.setAttribute("msg","회원정보 수정이 완료 되었습니다.다시 로그인 해주세요");
+        request.setAttribute("url","/");
+        return "WEB-INF/alert/alert.jsp";
     }
 
 

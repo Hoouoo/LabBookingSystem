@@ -42,45 +42,41 @@
 <%--<link href="../../../css/schedule.css" rel="stylesheet" type="text/css">--%>
 <%
     Account account = (Account) session.getAttribute("account");
-    if (account.getRole().equals(Role.ADMIN)){ %>
-    <c:set var="url" value="/admin/"/>
-    <c:set var="urlHeader" value="admin"/>
+    if (account.getRole().equals(Role.ADMIN)) { %>
+<c:set var="url" value="/admin/"/>
+<c:set var="urlHeader" value="admin"/>
 <%
-    }else if(account.getRole().equals(Role.STUDENT)){%>
-    <c:set var="url" value="/"/>
-    <c:set var="urlHeader" value="student"/>
+} else if (account.getRole().equals(Role.STUDENT)) {%>
+<c:set var="url" value="/"/>
+<c:set var="urlHeader" value="student"/>
 <%
-    } else if(account.getRole().equals(Role.PROFESSOR)){%>
-    <c:set var="url" value="/prof/"/>
-    <c:set var="urlHeader" value="prof"/>
+} else if (account.getRole().equals(Role.PROFESSOR)) {%>
+<c:set var="url" value="/prof/"/>
+<c:set var="urlHeader" value="prof"/>
 <%
     }
 %>
 
-<%--<jsp:include page="../fragment/${urlHeader}Header.jsp"/>--%>
+<jsp:include page="../fragment/${urlHeader}Header.jsp"/>
 <body>
-<div class="schedule-box">
-    <form method="get" action="${url}nowLabStatusPage">
-        <button type="submit" name="labNo" value="915">실습실 915</button>
-        <button type="submit" name="labNo" value="916">실습실 916</button>
-        <button type="submit" name="labNo" value="918">실습실 918</button>
-        <button type="submit" name="labNo" value="911">실습실 911</button>
-    </form>
+<body>
+<div class="schedule-box <c:if test="${urlHeader eq 'admin'}">schedule-pt-14</c:if>">
     <form action="/book" method="post">
 
         <div class="schedule-title"><%=labNo%>
         </div>
-        <div class="schedule-sub-title-3">SCREEN</div><br/>
+        <div class="schedule-sub-title-3">SCREEN</div>
+        <br/>
         &nbsp;&nbsp;&nbsp;
         <% for (int x = 1; x <= labSizeY; x++) {%>
         <small>
-<%--            <%=x%>--%>
+            <%--            <%=x%>--%>
         </small> &nbsp;
         <%}%>
         <br/>
 
         <% for (int y = 1; y <= labSizeX; y++) {%>
-<%--        <%=y%>--%>
+        <%--        <%=y%>--%>
         <%
             for (int x = 1; x <= labSizeY; x++) {
                 if (seatList[y - 1][x - 1] == 1) {
@@ -94,6 +90,47 @@
         <br/>
         <%}%>
         <br/>
+    </form>
+
+    <form method="get" action="${url}nowLabStatusPage">
+        <button class="btn btn-block
+        <c:choose>
+            <c:when test="${labNo eq '915'}">
+                btn-primary
+            </c:when>
+            <c:otherwise>
+                btn-secondary
+            </c:otherwise>
+        </c:choose>" type="submit" name="labNo" value="915">실습실 915
+        </button>
+        <button class="btn btn-block
+        <c:choose>
+            <c:when test="${labNo eq '916'}">
+                btn-primary
+            </c:when>
+            <c:otherwise>
+                btn-secondary
+            </c:otherwise>
+        </c:choose>" type="submit" name="labNo" value="916">실습실 916</button>
+        <button class="btn btn-block
+        <c:choose>
+            <c:when test="${labNo eq '918'}">
+                btn-primary
+            </c:when>
+            <c:otherwise>
+                btn-secondary
+            </c:otherwise>
+        </c:choose>" type="submit" name="labNo" value="918">실습실 918</button>
+        <button class="btn
+        <c:choose>
+            <c:when test="${labNo eq '911'}">
+                btn-primary
+            </c:when>
+            <c:otherwise>
+                btn-secondary
+            </c:otherwise>
+        </c:choose>
+        btn-block" type="submit" name="labNo" value="911">실습실 911</button>
     </form>
 </div>
 </body>

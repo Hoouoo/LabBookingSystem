@@ -15,24 +15,26 @@
             <%--        <div class="main-in-box-sub-grid main-in-box">--%>
             <button class="main-in-box-sub-grid main-in-box main-bg-white" type="submit" name="keyRole" value="STUDENT">
 
-                <div class="main-account"></div>
-                일반 사용자 암호 생성
-                <c:if test="${null ne keyStudent}">
-                    <c:out value="${keyStudent}"/>
-                    <br/>
-                </c:if>
+                <div class="main-user-security"></div>
+                일반 사용자 암호 생성<br/>
+                <div class="main-text-blue">
+                    <c:if test="${null ne keyStudent}">
+                        <c:out value="${keyStudent}"/>
+                    </c:if></div>
             </button>
             <%--        </div>--%>
 
             <%--        <div class="main-in-box-sub-grid main-in-box">--%>
 
-            <button class="main-in-box-sub-grid main-in-box main-bg-white" type="submit" name="keyRole" value="PROFESSOR">
+            <button class="main-in-box-sub-grid main-in-box main-bg-white" type="submit" name="keyRole"
+                    value="PROFESSOR">
 
-                <div class="main-account"></div>
-                교수 사용자 암호 생성
-                <c:if test="${null ne keyProfessor}">
-                    <c:out value="${keyProfessor}"/>
-                </c:if>
+                <div class="main-admin-security"></div>
+                교수 사용자 암호 생성<br/>
+                <div class="main-text-blue">
+                    <c:if test="${null ne keyProfessor}">
+                        <c:out value="${keyProfessor}"/>
+                    </c:if></div>
             </button>
 
             <%--        </div>--%>

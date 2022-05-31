@@ -44,8 +44,33 @@
             <div class="navbar-nav">
                 <a class="nav-item header-nav-link <%if (headerIndex.equals("scheduleCreate.jsp")) {%> header-nav-active <%}%>"
                    href="/admin/schedule">일정 추가</a>
-                <a class="nav-item header-nav-link <%if (headerIndex.equals("manageLab.jsp")||headerIndex.equals("announce.jsp")) {%> header-nav-active <%}%>"
-                   href="/admin/managelab">실습실 관리</a>
+
+                <div class="header-dropdown header-dropdown-margin">
+                    <li>
+                        <a class="nav-item header-nav-link <%if (headerIndex.equals("manageLab.jsp")||headerIndex.equals("announce.jsp")) {%> header-nav-active <%}%>"
+                           href="/admin/managelab">실습실 관리</a>
+                        <ul>
+                            <li><a href="/admin/nowLabStatusPage" class="nav-link"
+                                   aria-current="page">사용 현황</a></li>
+                            <li><a href="/admin/managelab#manage_table"
+                                   class="nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>">예약
+                                관리</a></li>
+                            <li><a href="/admin/managelab#approve_table"
+                                   class="nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>">승인
+                                목록</a>
+                            </li>
+                            <li><a href="/admin/managelab#reject_table"
+                                   class="nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>">거절
+                                목록</a></li>
+                            <li><a href="/announcePage"
+                                   class="nav-link <%if (headerIndex.equals("announce.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>">공지사항
+                                등록</a></li>
+                        </ul>
+                    </li>
+                </div>
+
+                <%--                <a class="nav-item header-nav-link <%if (headerIndex.equals("manageLab.jsp")||headerIndex.equals("announce.jsp")) {%> header-nav-active <%}%>"--%>
+                <%--                   href="/admin/managelab">실습실 관리</a>--%>
                 <a class="nav-item header-nav-link <%if (headerIndex.equals("adminWarning.jsp")) {%> header-nav-active <%}%>"
                    href="/admin/warning">회원 관리</a>
                 <a class="nav-item header-nav-link <%if (headerIndex.equals("confirmReport.jsp")) {%> header-nav-active <%}%>"
@@ -71,11 +96,12 @@
     </div>
 
 </header>
-<%if (headerIndex.equals("manageLab.jsp") || headerIndex.equals("announce.jsp")) {%>
+<%if (headerIndex.equals("manageLab.jsp") || headerIndex.equals("announce.jsp") || headerIndex.equals("nowLabStatus.jsp")) {%>
 <nav class="py-2 bg-light border-bottom d-flex shadow-sm  position-fixed header_sub">
     <div class="container">
         <ul class="nav justify-content-center header-nav-height-4 ">
-            <li class="nav-item header-nav-height-2"><a href="/admin/nowLabStatusPage" class="nav-link link-dark active"
+            <li class="nav-item header-nav-height-2"><a href="/admin/nowLabStatusPage"
+                                                        class="nav-link <%if (headerIndex.equals("nowLabStatus.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>"
                                                         aria-current="page">사용 현황</a></li>
             <li class="nav-item border-end align-self-center header-nav-height-2"/>
             <li class="nav-item header-nav-height-2"><a href="/admin/managelab#manage_table"
