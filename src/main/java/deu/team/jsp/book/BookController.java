@@ -3,7 +3,8 @@ package deu.team.jsp.book;
 import deu.team.jsp.admin.managelab.ManageLabService;
 import deu.team.jsp.alert.AlertLastUser;
 import deu.team.jsp.interceptor.CheckSession;
-import deu.team.jsp.nowBookStatus.nowBookStatusService;
+import deu.team.jsp.nowBookStatus.NowBookStatusController;
+import deu.team.jsp.nowBookStatus.NowBookStatusService;
 import deu.team.jsp.schedule.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class BookController {
 
     private final ScheduleService scheduleService;
 
-    private final nowBookStatusService nowBookStatusService;
+    private final NowBookStatusService nowBookStatusService;
 
 
     @CheckSession
@@ -34,6 +35,8 @@ public class BookController {
     @GetMapping("/bookPage")
     public String bookPage(HttpSession session, Model model, HttpServletRequest request){
         model.addAttribute("seats", nowBookStatusService.nowBookStatus(request,model));
+        model.addAttribute("seats", nowBookStatusService.nowBookStatus(request,model));
+
 //        manageLabService.alertUser(session, model);
         return "/WEB-INF/book/bookPage.jsp";
 
