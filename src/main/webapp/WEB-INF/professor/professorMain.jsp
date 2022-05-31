@@ -2,11 +2,29 @@
 <html>
 <head>
     <title>교수</title>
+    <link href="../../css/main.css" rel="stylesheet" type="text/css">
 </head>
+
+<jsp:include page="../fragment/profHeader.jsp"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <body>
-<li class="nav-item header-nav-height-2"><a href="/prof/schedule" class="nav-link link-dark active"
-                                            aria-current="page">시간표 등록</a></li>
-<li class="nav-item header-nav-height-2"><a href="/prof/nowLabStatusPage" class="nav-link link-dark active"
-                                            aria-current="page">좌석 조회</a></li>
+<div class="main-box main-mt-10">
+    <div class="main-in-box-grid">
+        <div class="main-in-box-sub-grid">
+            <div class="main-in-box" onClick="location.href='/prof/schedule'">
+                <a>
+                    <div class="main-account"></div>
+                    시간표 등록</a>
+            </div>
+        </div>
+        <div class="main-in-box-sub-grid">
+            <div class="main-in-box" onClick="location.href='/prof/nowLabStatusPage'">
+                <a>
+                    <div class="main-insert-seat"></div>
+                    좌석 조회</a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
