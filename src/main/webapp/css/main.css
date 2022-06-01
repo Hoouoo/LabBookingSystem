@@ -1,5 +1,21 @@
 @CHARSET "UTF-8";
 
+.main-m-box {
+    min-height: 150vh;
+}
+
+.main-background {
+    /*padding: 30px 40px;*/
+    height: 415px;
+    background: #00265a;
+}
+
+.main-background-2 {
+    /*padding: 30px 40px;*/
+    height: 315px;
+    background: #00265a;
+}
+
 .main-box {
     display: flex;
 
@@ -67,6 +83,7 @@
 .main-in-box {
 
     display: inline-flex;
+    background-color: white;
 
     cursor: pointer;
 
@@ -108,7 +125,7 @@
 }
 
 .main-in-box:hover {
-    background-color: rgba(199, 206, 212, 50%);
+    background-color: rgba(199, 206, 212);
 }
 
 .main-ml-1 {
@@ -185,6 +202,7 @@
 .main-text-blue {
     color: #0d6efd;
 }
+
 
 /*.main-left-sub-box {*/
 /*    float: left;*/

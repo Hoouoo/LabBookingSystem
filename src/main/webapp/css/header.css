@@ -80,6 +80,16 @@
     border-bottom: rgb(213, 213, 213);
 }
 
+.header-logo{
+    margin-top: 10px;
+    margin-right: 5px;
+    content:url("../img/logo.png");
+    /*margin-left: 30%;*/
+    height: 40px;
+    width: auto;
+    margin-bottom: 10px;
+}
+
 /*.header-dropdown {*/
 /*    position: relative;*/
 /*}*/
