@@ -113,7 +113,7 @@ public class AccountController {
     @PostMapping("/adminAccountModify")
     public String AdminModify(HttpServletRequest request){
         accountService.modify(request);
-        return "redirect:/admin/managelab";
+        return "WEB-INF/alert/alert.jsp";
     }
 
     @AlertLastUser

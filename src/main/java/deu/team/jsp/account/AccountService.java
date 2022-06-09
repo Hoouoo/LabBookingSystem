@@ -111,12 +111,15 @@ public class AccountService {
       Role role = findByStudentId.getRole();
       int bookStatus = findByStudentId.getBookStatus();
       accountRepository.delete(findByStudentId);
-      Account account = new Account(studentId, userName, userPassword, email, phoneNo, bookStatus,
-          role);
+      Account account = new Account(studentId, userName, userPassword, email, phoneNo, bookStatus, role);
       accountRepository.save(account);
+      request.setAttribute("msg","회원정보가 수정 되었습니다.");
+      request.setAttribute("url","/adminPage");
     } else {
       Account findByStudentId = accountRepository.findByStudentId(studentId);
       accountRepository.delete(findByStudentId);
+      request.setAttribute("msg","회원정보가 삭제 되었습니다.");
+      request.setAttribute("url","/adminPage");
     }
 
   }
