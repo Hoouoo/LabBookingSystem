@@ -88,8 +88,14 @@ public class BookService {
         LocalDateTime start = LocalDateTime.of(year, month, startDay, startHour, startMinute);
         LocalDateTime end = LocalDateTime.of(year, month, endDay, endHour, endMinute);
 
-        Book book = new Book(account.getStudentId(), start, end, labNo, seatX, seatY, ApproveStatus.READY);
-
+        // 4시 30분 이전인 경우
+        LocalTime flagTime = LocalTime.of(16, 30);
+        Book book;
+        if(end.toLocalTime().isBefore(flagTime)) {
+            book = new Book(account.getStudentId(), start, end, labNo, seatX, seatY, ApproveStatus.APPROVE);
+        }else{
+            book = new Book(account.getStudentId(), start, end, labNo, seatX, seatY, ApproveStatus.READY);
+        }
         Book findSeat = bookRepository.findSeat(seatX, seatY, labNo, start, end);
 
         List<Announcement> all = announceRepository.findAll();
