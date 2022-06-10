@@ -1,6 +1,7 @@
 package deu.team.jsp.interceptor;
 
 import deu.team.jsp.account.domain.Account;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;

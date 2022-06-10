@@ -100,9 +100,13 @@ public class BookService {
             announceContent = "예약이 완료 되었습니다.";
         }
         LocalDateTime now = LocalDateTime.now();
+        LocalDateTime limitBookTime=LocalDateTime.of(year, month, startDay, 16, 30);
+        if(now.isAfter(limitBookTime)){
+            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
+        }
+
         //해당 아이디에 예약한거 정렬해서 가져와서 끝나는 시간이 현재보다 작으면 예약상태 0으로 변경
         List<Book> lastBookList = bookRepository.getLastBookList(account.getStudentId());
-        System.out.println(findSeat);
 
         if (lastBookList.size() > 0) {
             Book lastBook = lastBookList.get(lastBookList.size() - 1);
