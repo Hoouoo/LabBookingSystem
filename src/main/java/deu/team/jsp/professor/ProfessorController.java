@@ -38,6 +38,7 @@ public class ProfessorController {
         return "/WEB-INF/professor/professorMain.jsp";
     }
 
+    @CheckSession
     @PostMapping("/prof/schedule")
     public void profSchedulePagePost(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         if (Objects.nonNull(request.getParameter("delete"))) {

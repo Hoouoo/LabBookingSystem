@@ -19,7 +19,9 @@
 </head>
 <body>
 <header class="p-5 d-flex flex-wrap justify-content-center py-2 border-bottom">
-    <span class="fs-4 justify-content-center header-title">Lab Booking System</span>
+
+    <span class="header-logo"></span>
+    <span class="fs-4 justify-content-center header-title d-flex align-items-center mb-3 mb-md-0 me-md-auto">Lab Booking System</span>
 </header>
 
 
