@@ -5,6 +5,7 @@ import deu.team.jsp.OneTimeKey.OneTimeKeyRepository;
 import deu.team.jsp.account.domain.Account;
 import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.alert.AlertService;
+import deu.team.jsp.notification.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ public class AccountService {
 
     @Autowired
     AlertService alertService;
+
+    @Autowired
+    NotificationService notificationService;
 
     public boolean SignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -72,6 +76,7 @@ public class AccountService {
         }else{
             HttpSession session=request.getSession();
             session.setAttribute("account", findByStudentId);
+            session.setAttribute("notificationService", notificationService);
             System.out.println(session);
         }
         return findByStudentId.getRole();
