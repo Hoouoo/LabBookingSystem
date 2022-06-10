@@ -2,6 +2,7 @@ package deu.team.jsp.admin.managelab;
 
 import deu.team.jsp.OneTimeKey.OneTimeKeyService;
 import deu.team.jsp.account.domain.Role;
+import deu.team.jsp.interceptor.CheckSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class ManageLabController {
     private final ManageLabService manageLabService;
     private final OneTimeKeyService oneTimeKeyService;
 
+    @CheckSession
     @GetMapping("/admin/managelab")
     public String manageLabMainPage(Model model) {
         model.addAttribute("bookList", manageLabService.getAllBookList());
@@ -32,6 +34,7 @@ public class ManageLabController {
         return "/WEB-INF/manager/manageLab.jsp";
     }
 
+    @CheckSession
     @PostMapping("/admin/managelab")
     public String manageLab(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         String msg = null;

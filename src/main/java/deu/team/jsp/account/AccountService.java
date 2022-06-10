@@ -29,7 +29,7 @@ public class AccountService {
     @Autowired
     AlertService alertService;
 
-    public void SignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public boolean SignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String studentId = request.getParameter("studentId");
         String userName = request.getParameter("userName");
@@ -51,12 +51,12 @@ public class AccountService {
         Account findByUserId = accountRepository.findByStudentId(studentId);
 
         if(Objects.isNull(findByUserId) && passKey.equals(key.get().getPassKey())){
-
-                Account account=new Account(studentId,userName,userPassword,email,phoneNo,0,role);
-                accountRepository.save(account);
+            Account account=new Account(studentId,userName,userPassword,email,phoneNo,0,role);
+            accountRepository.save(account);
+            return true;
         }
         else{
-            alertService.alertMessage("이미 존재하는 학번 이거나 인증키가 일치하지 않습니다. \n 메인 페이지로 이동합니다.","/",response);
+            return false;
         }
     }
 
@@ -108,7 +108,6 @@ public class AccountService {
             accountRepository.delete(findByStudentId);
             Account account=new Account(studentId,userName,userPassword,email,phoneNo,bookStatus,role);
             accountRepository.save(account);
-
         }
         else{
             Account findByStudentId = accountRepository.findByStudentId(studentId);
