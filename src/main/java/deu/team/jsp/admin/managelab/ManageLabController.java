@@ -25,83 +25,72 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ManageLabController {
 
-    private final ManageLabService manageLabService;
-    private final OneTimeKeyService oneTimeKeyService;
-    @Autowired
-    private final NotificationService notificationService;
+  private final ManageLabService manageLabService;
+  private final OneTimeKeyService oneTimeKeyService;
 
-    @CheckSession
-    @GetMapping("/admin/managelab")
-    public String manageLabMainPage(Model model) {
-        /**
-         * 각각의 리스트 조회
-         */
-        model.addAttribute("bookList", manageLabService.getAllBookList());
-        model.addAttribute("bookApproveList", manageLabService.getAllApproveList());
-        model.addAttribute("bookRejectList", manageLabService.getAllRejectList());
-        model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
-        model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
+  @CheckSession
+  @GetMapping("/admin/managelab")
+  public String manageLabMainPage(Model model) {
+    /**
+     * 각각의 리스트 조회
+     */
+    model.addAttribute("bookList", manageLabService.getAllBookList());
+    model.addAttribute("bookApproveList", manageLabService.getAllApproveList());
+    model.addAttribute("bookRejectList", manageLabService.getAllRejectList());
+    model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
+    model.addAttribute("keyProfessor", oneTimeKeyService.getOneTimeKey(Role.PROFESSOR));
 
-        return "/WEB-INF/manager/manageLab.jsp";
+    return "/WEB-INF/manager/manageLab.jsp";
+  }
+
+  @CheckSession
+  @PostMapping("/admin/managelab")
+  public String manageLab(HttpServletRequest request, HttpServletResponse response, Model model)
+      throws IOException {
+    String msg = null;
+
+    if (Objects.nonNull(request.getParameter("approveAll"))) {
+      String[] target = request.getParameterValues("itemReject");
+      if (Objects.isNull(target)) {
+        target = request.getParameterValues("item");
+      }
+
+      if (Objects.nonNull(target)) {
+        // index[0]은 approveAll의 Value 값이 포함됨
+        Long[] targetList = new Long[target.length - 1];
+        for (int idx = 1; idx < target.length; idx++) {
+          targetList[idx - 1] = Long.parseLong(target[idx]);
+        }
+        manageLabService.listAllApprove(targetList, ApproveStatus.APPROVE);
+      }
+    } else {
+      if (Objects.nonNull(request.getParameter("rejectAll"))) {
+        String[] target = request.getParameterValues("itemApprove");
+        if (Objects.isNull(target)) {
+          target = request.getParameterValues("item");
+        }
+        if (Objects.nonNull(target)) {
+          // index[0]은 approveAll의 Value 값이 포함됨
+          Long[] targetList = new Long[target.length - 1];
+          for (int idx = 1; idx < target.length; idx++) {
+            targetList[idx - 1] = Long.parseLong(target[idx]);
+          }
+          manageLabService.listAllApprove(targetList, ApproveStatus.REJECT);
+        }
+      }
     }
 
-    @CheckSession
-    @PostMapping("/admin/managelab")
-    public String manageLab(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-        String msg = null;
-        
-        if(Objects.nonNull(request.getParameter( "approveAll"))){
-            String[] target = request.getParameterValues("itemReject");
-            if(Objects.isNull(target)){
-                target = request.getParameterValues("item");
-            }
+    if (Objects.nonNull(request.getParameter("approve"))) {
+      manageLabService.approveBook(Long.parseLong(request.getParameter("approve")));
+      msg = "승인되었습니다.";
+    } else if (Objects.nonNull(request.getParameter("cancel"))) {
+      manageLabService.cancelBook(Long.parseLong(request.getParameter("cancel")));
+    } else if (Objects.nonNull(request.getParameter("delete"))) {
+      manageLabService.deleteModifyUser(Long.parseLong(request.getParameter("delete")));
 
-            if(Objects.nonNull(target)) {
-                // index[0]은 approveAll의 Value 값이 포함됨
-                Long[] targetList = new Long[target.length-1];
-                for(int idx =1; idx <target.length; idx++){
-                    targetList[idx-1] = Long.parseLong(target[idx]);
-                }
-                manageLabService.listAllApprove(targetList, ApproveStatus.APPROVE);
-            }
-        }else{
-            if (Objects.nonNull(request.getParameter("rejectAll"))) {
-                String[] target = request.getParameterValues("itemApprove");
-                if(Objects.isNull(target)){
-                    target = request.getParameterValues("item");
-                }
-                if(Objects.nonNull(target)) {
-                    // index[0]은 approveAll의 Value 값이 포함됨
-                    Long[] targetList = new Long[target.length-1];
-                    for(int idx =1; idx <target.length; idx++){
-                        targetList[idx-1] = Long.parseLong(target[idx]);
-                    }
-                    manageLabService.listAllApprove(targetList, ApproveStatus.REJECT);
-                }
-            }
-        }
-        
-        if (Objects.nonNull(request.getParameter("approve"))) {
-            manageLabService.approveBook(Long.parseLong(request.getParameter("approve")));
-            msg = "승인되었습니다.";
-        } else if (Objects.nonNull(request.getParameter("cancel"))) {
-            try {
-                HttpSession session = request.getSession();
-                Account account = (Account) session.getAttribute("account");
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(account.getStudentId()).append("님의 예약 요청이 운영자로부터 거절 되었습니다.");
-                String content = stringBuilder.toString();
-                notificationService.addNotification(account.getStudentId(), content);
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-            manageLabService.cancelBook(Long.parseLong(request.getParameter("cancel")));
-        } else if(Objects.nonNull(request.getParameter("delete"))){
-            manageLabService.deleteModifyUser(Long.parseLong(request.getParameter("delete")));
-
-        }
-
-        model.addAttribute("manageMsg", msg);
-        return "redirect:/admin/managelab";
     }
+
+    model.addAttribute("manageMsg", msg);
+    return "redirect:/admin/managelab";
+  }
 }
