@@ -47,6 +47,7 @@ public class AccountController {
         return "WEB-INF/student/studentMain.jsp";
     }
 
+    @CheckSession
     @GetMapping("/adminPage")
     public String adminPage(Model model){
         model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
