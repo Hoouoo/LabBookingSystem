@@ -11,6 +11,7 @@ import deu.team.jsp.book.domain.ApproveStatus;
 import deu.team.jsp.book.domain.Book;
 import deu.team.jsp.schedule.Schedule;
 import deu.team.jsp.schedule.ScheduleRepository;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,15 +100,10 @@ public class BookService {
         } else {
             announceContent = "예약이 완료 되었습니다.";
         }
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime limitBookTime=LocalDateTime.of(year, month, startDay, 16, 30);
-        if(now.isAfter(limitBookTime)){
-            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
-        }
 
         //해당 아이디에 예약한거 정렬해서 가져와서 끝나는 시간이 현재보다 작으면 예약상태 0으로 변경
         List<Book> lastBookList = bookRepository.getLastBookList(account.getStudentId());
-
+        LocalDateTime now = LocalDateTime.now();
         if (lastBookList.size() > 0) {
             Book lastBook = lastBookList.get(lastBookList.size() - 1);
             if (lastBook.getEndTime().isBefore(now)) {
@@ -115,22 +111,27 @@ public class BookService {
             }
         }
 
-        //예약 상태 검색 쿼리
-        int bookStatus = accountRepository.findByStudentId(account.getStudentId()).getBookStatus();
-
-        if (Objects.isNull(findSeat) && bookStatus == 0) { //공지사항 등록 했을 때
-            Optional<Warning> byStudentId = warningRepository.findByStudentId(account.getStudentId());
-                bookRepository.save(book);
-                accountRepository.updateBookStatus(account.getStudentId(), 1);
-
-                alertService.alertMessage(announceContent, "", response);
-
-        } else if(Objects.nonNull(findSeat) && bookStatus==1){
-            alertService.alertMessage("이미 예약된 좌석 이거나 중복 예약이 불가능 합니다.","/studentPage",response);
+        LocalDateTime limitBookTime=LocalDateTime.of(year, month, startDay, 16, 30);
+        if(now.isAfter(limitBookTime)){ //금일 오후 4시 반 이후 예약 불가
+            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
         }else{
-            alertService.alertMessage("경고 3회 받아 실습실 예약이 불가능 합니다.","/studentPage",response);
+            //예약 상태 검색 쿼리
+            int bookStatus = accountRepository.findByStudentId(account.getStudentId()).getBookStatus();
+            if(Objects.nonNull(findSeat) || bookStatus==1) {
+                alertService.alertMessage("이미 예약된 좌석 이거나 중복 예약이 불가능 합니다.", "/studentPage", response);
+            }else{
+                Account byStudentId = accountRepository.findByStudentId(account.getStudentId());
+                if(byStudentId.getBookStatus()==2){
+                    alertService.alertMessage("경고 3회 받아 실습실 예약이 불가능 합니다.", "/studentPage", response);
+                }else{
+                    if (Objects.isNull(findSeat) && bookStatus == 0) { //공지사항 등록 했을 때
+                        bookRepository.save(book);
+                        accountRepository.updateBookStatus(account.getStudentId(), 1);
+                        alertService.alertMessage(announceContent, "", response);
+                    }
+                }
+            }
         }
-
     }
 
     public int[][] checkSeat(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
@@ -138,8 +139,6 @@ public class BookService {
         String startTime = request.getParameter("startTime");
         String endTime = request.getParameter("endTime");
         String labNo = request.getParameter("labNo");
-        System.out.println("startTime = " + startTime);
-
 
         int year = Integer.valueOf(startTime.substring(0, 4));
         int month = Integer.valueOf(startTime.substring(5, 7));
@@ -179,6 +178,17 @@ public class BookService {
         if ((dayOfWeekNumber == 6 && targetDayOfWeek == 6) || (dayOfWeekNumber == 6 && targetDayOfWeek == 7)
                 || (dayOfWeekNumber == 7 && targetDayOfWeek == 7)) {
             alertService.alertMessage("주말에는 주말 좌석 예약 불가능 합니다.","/studentPage",response);
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime limitBookTime=LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 16, 30);
+
+        DayOfWeek dayOfWeek1 = now.getDayOfWeek();
+        int value = dayOfWeek1.getValue();
+        System.out.println(value);
+        System.out.println(targetDayOfWeek);
+        if((value==5) && (targetDayOfWeek ==6 || targetDayOfWeek==7) && (now.isAfter(limitBookTime))){
+            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
         }
 
         //새로운 시간 정의 포멧 맞추기

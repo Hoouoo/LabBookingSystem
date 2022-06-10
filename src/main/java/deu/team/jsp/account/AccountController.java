@@ -28,8 +28,6 @@ public class AccountController {
     @Autowired
     OneTimeKeyService oneTimeKeyService;
 
-    @Autowired
-    AlertService alertService;
 
     @GetMapping("/")
     public String LoginPage(){
