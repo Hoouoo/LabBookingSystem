@@ -35,6 +35,7 @@
 <body>
 <header class="p-5 d-flex flex-wrap justify-content-center py-2 border-bottom position-fixed header_">
 
+    <span class="header-logo"></span>
     <a href="/adminPage" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <%--        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>--%>
         <span class="fs-4 header-title">Lab Booking System</span>
@@ -50,7 +51,7 @@
                         <a class="nav-item header-nav-link <%if (headerIndex.equals("manageLab.jsp")||headerIndex.equals("announce.jsp")) {%> header-nav-active <%}%>"
                            href="/admin/managelab">실습실 관리</a>
                         <ul>
-                            <li><a href="/admin/searchSeat" class="nav-link"
+                            <li><a href="/admin/nowLabStatusPage" class="nav-link"
                                    aria-current="page">사용 현황</a></li>
                             <li><a href="/admin/managelab#manage_table"
                                    class="nav-link <%if (headerIndex.equals("manageLab.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>">예약
@@ -96,11 +97,12 @@
     </div>
 
 </header>
-<%if (headerIndex.equals("manageLab.jsp") || headerIndex.equals("announce.jsp")) {%>
+<%if (headerIndex.equals("manageLab.jsp") || headerIndex.equals("announce.jsp") || headerIndex.equals("nowLabStatus.jsp")) {%>
 <nav class="py-2 bg-light border-bottom d-flex shadow-sm  position-fixed header_sub">
     <div class="container">
         <ul class="nav justify-content-center header-nav-height-4 ">
-            <li class="nav-item header-nav-height-2"><a href="/admin/nowLabStatusPage" class="nav-link link-dark active"
+            <li class="nav-item header-nav-height-2"><a href="/admin/nowLabStatusPage"
+                                                        class="nav-link <%if (headerIndex.equals("nowLabStatus.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>"
                                                         aria-current="page">사용 현황</a></li>
             <li class="nav-item border-end align-self-center header-nav-height-2"/>
             <li class="nav-item header-nav-height-2"><a href="/admin/managelab#manage_table"

@@ -3,10 +3,15 @@ package deu.team.jsp.admin.managelab;
 import deu.team.jsp.OneTimeKey.OneTimeKeyService;
 import deu.team.jsp.account.domain.Account;
 import deu.team.jsp.account.domain.Role;
+
 import deu.team.jsp.notification.NotificationService;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import javax.servlet.http.HttpSession;
+
+import deu.team.jsp.book.domain.ApproveStatus;
+import deu.team.jsp.interceptor.CheckSession;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +32,10 @@ public class ManageLabController {
   private final ManageLabService manageLabService;
   private final OneTimeKeyService oneTimeKeyService;
 
+
   @Autowired
   private final NotificationService notificationService;
+
 
   @GetMapping("/admin/managelab")
   public String manageLabMainPage(Model model) {
@@ -50,6 +57,7 @@ public class ManageLabController {
       msg = "승인되었습니다.";
     } else if (Objects.nonNull(request.getParameter("cancel"))) {
       // TODO 사용자 거절 메시지 저장 서비스 로직 구현
+
 
       try {
         HttpSession session = request.getSession();

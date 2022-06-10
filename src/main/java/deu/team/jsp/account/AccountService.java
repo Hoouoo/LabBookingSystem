@@ -30,8 +30,10 @@ public class AccountService {
   @Autowired
   AlertService alertService;
 
+
   @Autowired
   NotificationService notificationService;
+
 
   public void SignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -55,6 +57,7 @@ public class AccountService {
     Account findByUserId = accountRepository.findByStudentId(studentId);
 
     if (Objects.isNull(findByUserId) && passKey.equals(key.get().getPassKey())) {
+
 
       Account account = new Account(studentId, userName, userPassword, email, phoneNo, 0, role);
       accountRepository.save(account);
@@ -82,10 +85,12 @@ public class AccountService {
 
   }
 
+
   public Account AccountSearch(HttpServletRequest request, HttpServletResponse response,
       Model model) throws IOException {
     String studentId = request.getParameter("studentId");
     Account findByStudentId = accountRepository.findByStudentId(studentId);
+
 
     if (Objects.isNull(findByStudentId)) {
       alertService.alertMessage("해당 학번이 존재하지 않습니다.", "/adminAccountModifyPage", response);

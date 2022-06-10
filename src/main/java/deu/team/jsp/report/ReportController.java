@@ -24,6 +24,7 @@ public class ReportController {
     @Autowired
     OneTimeKeyService oneTimeKeyService;
 
+    @CheckSession
     @AlertLastUser
     @GetMapping("/reportPage")
     public String reportPage(HttpSession session, Model model){

@@ -3,17 +3,17 @@ package deu.team.jsp.account;
 import deu.team.jsp.OneTimeKey.OneTimeKeyService;
 import deu.team.jsp.account.domain.Role;
 import deu.team.jsp.admin.managelab.ManageLabService;
+import deu.team.jsp.alert.Alert;
 import deu.team.jsp.alert.AlertLastUser;
+import deu.team.jsp.alert.AlertService;
 import deu.team.jsp.interceptor.CheckSession;
 import deu.team.jsp.notification.NotificationService;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,6 +66,7 @@ public class AccountController {
       return "redirect:/adminPage";
     } else {
       return "redirect:/professorPage";
+
     }
   }
 

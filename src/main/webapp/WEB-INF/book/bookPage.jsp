@@ -101,11 +101,44 @@
                 <%}%>
                 <br/>
             </form>
-            <form method="get" action="bookPage">
-                <button type="submit" name="labNo" value="915">실습실 915</button>
-                <button type="submit" name="labNo" value="916">실습실 916</button>
-                <button type="submit" name="labNo" value="918">실습실 918</button>
-                <button type="submit" name="labNo" value="911">실습실 911</button>
+            <form method="get" action="bookPage">        <button class="btn btn-block
+        <c:choose>
+            <c:when test="${labNo eq '915'}">
+                btn-primary
+            </c:when>
+            <c:otherwise>
+                btn-secondary
+            </c:otherwise>
+        </c:choose>" type="submit" name="labNo" value="915">실습실 915
+            </button>
+                <button class="btn btn-block
+        <c:choose>
+            <c:when test="${labNo eq '916'}">
+                btn-primary
+            </c:when>
+            <c:otherwise>
+                btn-secondary
+            </c:otherwise>
+        </c:choose>" type="submit" name="labNo" value="916">실습실 916</button>
+                <button class="btn btn-block
+        <c:choose>
+            <c:when test="${labNo eq '918'}">
+                btn-primary
+            </c:when>
+            <c:otherwise>
+                btn-secondary
+            </c:otherwise>
+        </c:choose>" type="submit" name="labNo" value="918">실습실 918</button>
+                <button class="btn
+        <c:choose>
+            <c:when test="${labNo eq '911'}">
+                btn-primary
+            </c:when>
+            <c:otherwise>
+                btn-secondary
+            </c:otherwise>
+        </c:choose>
+        btn-block" type="submit" name="labNo" value="911">실습실 911</button>
             </form>
         </div>
 
