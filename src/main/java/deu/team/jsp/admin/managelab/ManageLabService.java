@@ -66,7 +66,7 @@ public class ManageLabService {
             if (!bookList.isEmpty()) {
                 Stream<Book> todayBookList = bookList.stream().filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now()));
                 if (todayBookList.findFirst().isPresent()) {
-                    String targetStudentId = bookList.stream().filter(target->target.getEndTime().toLocalDate().equals(LocalDate.now())).max(Comparator.comparing(Book::getEndTime)).get().getStudentId();
+                    String targetStudentId = bookList.stream().filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now())).max(Comparator.comparing(Book::getEndTime)).get().getStudentId();
                     targetLastStudentList.add(AlertLastUserDto.builder().labNo(targetLabNo).studentId(targetStudentId).build());
                 }
             }
@@ -105,4 +105,30 @@ public class ManageLabService {
             }
         }
     }
+
+    /**
+     * 리스트 목록에서 사라지게 삭제
+     */
+    public void deleteModifyUser(Long id) {
+        bookRepository.findById(id).ifPresent(
+                target -> {
+                    target.setApproveStatus(ApproveStatus.DELETE);
+                    bookRepository.save(target);
+                }
+        );
+    }
+
+    // 일괄 처리를 위한 로직
+    public void listAllApprove(Long[] id, ApproveStatus status) {
+        List<Book> listTarget = new ArrayList<>();
+        for (Long target : id) {
+            bookRepository.findById(target).ifPresent(targetBook -> {
+                targetBook.setApproveStatus(status);
+                listTarget.add(targetBook);
+
+            });
+        }
+        bookRepository.saveAll(listTarget);
+    }
 }
+
