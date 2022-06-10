@@ -19,7 +19,7 @@
     if (account != null) {
         String accountId = account.getStudentId();
 
-        NotificationService notificationService = (NotificationService) request.getAttribute(
+        NotificationService notificationService = (NotificationService) session.getAttribute(
                 "notificationService");
         if (notificationService != null) {
             unConfirmMessageCount = notificationService.getUnConfirmMessageCount(accountId);
