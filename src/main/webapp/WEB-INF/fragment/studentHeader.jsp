@@ -1,4 +1,5 @@
-<%--
+<%@ page import="deu.team.jsp.notification.NotificationService" %>
+<%@ page import="deu.team.jsp.account.domain.Account" %><%--
   Created by IntelliJ IDEA.
   User: Hoouoo
   Date: 2022-05-06
@@ -11,6 +12,21 @@
 <%
     String[] url = request.getRequestURI().split("/");
     String headerIndex = url[url.length - 1];       // list.jsp 반환
+
+    Account account = (Account) session.getAttribute("account");
+
+    int unConfirmMessageCount = -1;
+    if (account != null) {
+        String accountId = account.getStudentId();
+
+        NotificationService notificationService = (NotificationService) session.getAttribute(
+                "notificationService");
+        if (notificationService != null) {
+            unConfirmMessageCount = notificationService.getUnConfirmMessageCount(accountId);
+        }
+    }
+
+
 %>
 
 <html>
@@ -18,8 +34,10 @@
 <head>
     <link href="../../css/header.css" rel="stylesheet" type="text/css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
@@ -34,11 +52,13 @@
 <body>
 <header class="p-5 d-flex flex-wrap justify-content-center py-2 border-bottom shadow-sm">
 
-    <span class="header-logo d-flex"></span>
-    <a href="/studentPage" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+
+    <a href="/studentPage"
+       class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+
         <%--        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>--%>
         <span class="fs-4 header-title">Lab Booking System</span>
-<%--            <%=headerIndex%>--%>
+        <%--            <%=headerIndex%>--%>
     </a>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -79,7 +99,12 @@
     </nav>
     <div class="header-dropdown">
         <li><a class="header-user-icons"></a>
+            <label class="header-circle"><%=unConfirmMessageCount%>
+            </label>
             <ul>
+                <li><a href="/notification">알림 메시지</a>
+                    <label class="header-circle-2"><%=unConfirmMessageCount%>
+                    </label></li>
                 <li><a href="/studentAccountModifyPage">회원정보 수정</a></li>
                 <li><a href="logout">로그아웃</a></li>
             </ul>
@@ -126,14 +151,20 @@
     </nav>
 </c:if>
 
-<%if (headerIndex.equals("bookPage.jsp") || headerIndex.equals("seat.jsp") || headerIndex.equals("bookExtendPage.jsp") || headerIndex.equals("nowLabStatus.jsp") || headerIndex.equals("searchSchedule.jsp")) {%>
+<%
+    if (headerIndex.equals("bookPage.jsp") || headerIndex.equals("seat.jsp") || headerIndex.equals(
+            "bookExtendPage.jsp") || headerIndex.equals("nowLabStatus.jsp") || headerIndex.equals(
+            "searchSchedule.jsp")) {
+%>
 <nav class="py-2 bg-light border-bottom d-flex shadow-sm">
     <div class="container">
         <ul class="nav justify-content-center header-nav-height-4 ">
-            <li class="nav-item header-nav-height-2"><a href="/searchSchedule" class="nav-link <%if (headerIndex.equals("searchSchedule.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>"
+            <li class="nav-item header-nav-height-2"><a href="/searchSchedule"
+                                                        class="nav-link <%if (headerIndex.equals("searchSchedule.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>"
                                                         aria-current="page">실습실 시간표 조회</a></li>
             <li class="nav-item border-end align-self-center header-nav-height-2"/>
-            <li class="nav-item header-nav-height-2"><a href="/nowLabStatusPage" class="nav-link <%if (headerIndex.equals("nowLabStatus.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>"
+            <li class="nav-item header-nav-height-2"><a href="/nowLabStatusPage"
+                                                        class="nav-link <%if (headerIndex.equals("nowLabStatus.jsp")) {%> header-nav-active <%} else {%>link-dark <%}%>"
                                                         aria-current="page">실습실 사용 현황</a></li>
             <li class="nav-item border-end align-self-center header-nav-height-2"/>
             <li class="nav-item header-nav-height-2"><a href="/bookPage"
