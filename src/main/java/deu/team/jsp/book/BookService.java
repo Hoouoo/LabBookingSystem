@@ -188,6 +188,29 @@ public class BookService {
       alertService.alertMessage("주말에는 주말 좌석 예약 불가능 합니다.", "/studentPage", response);
     }
 
+
+        LocalDateTime limitBookTime=LocalDateTime.of(year, month, startDay, 16, 30);
+//        if(now.isAfter(limitBookTime)){ //금일 오후 4시 반 이후 예약 불가
+//            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
+//        }else{
+
+            int bookStatus = accountRepository.findByStudentId(account.getStudentId()).getBookStatus();
+            if(Objects.nonNull(findSeat) || bookStatus==1) {
+                alertService.alertMessage("이미 예약된 좌석 이거나 중복 예약이 불가능 합니다.", "/studentPage", response);
+            }else{
+                Account byStudentId = accountRepository.findByStudentId(account.getStudentId());
+                if(byStudentId.getBookStatus()==2){
+                    alertService.alertMessage("경고 3회 받아 실습실 예약이 불가능 합니다.", "/studentPage", response);
+                }else{
+                    if (Objects.isNull(findSeat) && bookStatus == 0) { //공지사항 등록 했을 때
+                        bookRepository.save(book);
+                        accountRepository.updateBookStatus(account.getStudentId(), 1);
+                        alertService.alertMessage(announceContent, "", response);
+                    }
+                }
+            }
+
+
     LocalDateTime now = LocalDateTime.now();
     LocalDateTime limitBookTime = LocalDateTime.of(now.getYear(), now.getMonth(),
         now.getDayOfMonth(), 16, 30);
@@ -199,6 +222,7 @@ public class BookService {
     if ((value == 5) && (targetDayOfWeek == 6 || targetDayOfWeek == 7) && (now.isAfter(
         limitBookTime))) {
       alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.", "/studentPage", response);
+
     }
 
     //새로운 시간 정의 포멧 맞추기
@@ -207,6 +231,18 @@ public class BookService {
 
     LocalTime bookStartTime = LocalTime.of(startHour, startMinute);
     LocalTime bookEndTime = LocalTime.of(endHour, endMinute);
+
+
+//        LocalDateTime now = LocalDateTime.now();
+//        LocalDateTime limitBookTime=LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 16, 30);
+//
+//        DayOfWeek dayOfWeek1 = now.getDayOfWeek();
+//        int value = dayOfWeek1.getValue();
+//        System.out.println(value);
+//        System.out.println(targetDayOfWeek);
+//        if((value==5) && (targetDayOfWeek ==6 || targetDayOfWeek==7) && (now.isAfter(limitBookTime))){
+//            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
+//        }
 
     if (start.isAfter(end)) {
       alertService.alertMessage("종료 시간이 시작 시간보다 빠를수 없습니다.", "/bookPage", response);
@@ -231,6 +267,7 @@ public class BookService {
     //수업시간 강의실 빈곳 찾기
     int labSizeX = 5;
     int labSizeY = 8;
+
 
     int[][] seats = new int[labSizeX][labSizeY];
 
