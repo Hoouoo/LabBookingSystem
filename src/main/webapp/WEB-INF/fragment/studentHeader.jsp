@@ -1,4 +1,5 @@
-<%--
+<%@ page import="deu.team.jsp.notification.NotificationService" %>
+<%@ page import="deu.team.jsp.account.domain.Account" %><%--
   Created by IntelliJ IDEA.
   User: Hoouoo
   Date: 2022-05-06
@@ -11,6 +12,22 @@
 <%
     String[] url = request.getRequestURI().split("/");
     String headerIndex = url[url.length - 1];       // list.jsp 반환
+%>
+
+<%
+
+    Account account = (Account) session.getAttribute("account");
+
+    int unConfirmMessageCount = -1;
+    if (account != null) {
+        String accountId = account.getStudentId();
+
+        NotificationService notificationService = (NotificationService) session.getAttribute(
+                "notificationService");
+        if (notificationService != null) {
+            unConfirmMessageCount = notificationService.getUnConfirmMessageCount(accountId);
+        }
+    }
 %>
 
 <html>
@@ -79,7 +96,12 @@
     </nav>
     <div class="header-dropdown">
         <li><a class="header-user-icons"></a>
+            <label class="header-circle"><%=unConfirmMessageCount%>
+            </label>
             <ul>
+                <li><a href="/notification">알림 메시지</a>
+                    <label class="header-circle-2"><%=unConfirmMessageCount%>
+                    </label></li>
                 <li><a href="/studentAccountModifyPage">회원정보 수정</a></li>
                 <li><a href="logout">로그아웃</a></li>
             </ul>

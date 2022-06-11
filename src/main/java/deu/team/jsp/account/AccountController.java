@@ -28,8 +28,6 @@ public class AccountController {
     @Autowired
     OneTimeKeyService oneTimeKeyService;
 
-    @Autowired
-    AlertService alertService;
 
     @GetMapping("/")
     public String LoginPage(){
@@ -47,6 +45,7 @@ public class AccountController {
         return "WEB-INF/student/studentMain.jsp";
     }
 
+    @CheckSession
     @GetMapping("/adminPage")
     public String adminPage(Model model){
         model.addAttribute("keyStudent", oneTimeKeyService.getOneTimeKey(Role.STUDENT));
@@ -114,7 +113,7 @@ public class AccountController {
     @PostMapping("/adminAccountModify")
     public String AdminModify(HttpServletRequest request){
         accountService.modify(request);
-        return "redirect:/admin/managelab";
+        return "WEB-INF/alert/alert.jsp";
     }
 
     @AlertLastUser

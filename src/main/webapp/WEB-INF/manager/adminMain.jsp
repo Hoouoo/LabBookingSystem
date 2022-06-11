@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="main-in-box-sub-grid">
-                        <div class="main-in-box" onClick="location.href='#'">
+                        <div class="main-in-box" onClick="location.href='/admin/nowLabStatusPage'">
                             <a>
                                 <div class="main-insert-seat"></div>
                                 사용 현황</a>
