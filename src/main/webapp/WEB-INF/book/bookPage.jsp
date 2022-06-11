@@ -9,21 +9,33 @@
 <%@ page import="java.text.DateFormat" %>
 
 <%
+    LocalDateTime time=LocalDateTime.now();
     Date now = new Date();
+    System.out.println("now = " + now);
     Date cutLine = new Date();
     cutLine.setHours(16);
     cutLine.setMinutes(30);
     Calendar cal = Calendar.getInstance();
-    Calendar tom = Calendar.getInstance();
     cal.setTime(now);
-    tom.setTime(now);
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-    String today=sdf2.format(now);
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+    String today=sdf.format(now);
     cal.add(Calendar.DATE, 3);
-    tom.add(Calendar.DATE, 1);
-    String after3 = sdf2.format(cal.getTime());
-    String tomorrow = sdf2.format(tom.getTime());
+
+    Date tom=new Date();
+    tom.setDate(time.getDayOfMonth()+1);
+    tom.setHours(0);
+    tom.setMinutes(0);
+
+    Date t3=new Date();
+    t3.setDate(tom.getDate()+3);
+
+    String after3 = sdf.format(t3.getTime());
+    String tomorrow = sdf.format(tom.getTime());
+
+    System.out.println("tomorrow = " + tomorrow);
+    System.out.println("after3 = " + after3);
+    
     //요일 구하기
     Integer todayYear = Integer.valueOf(today.substring(0, 4));
     Integer todayMonth = Integer.valueOf(today.substring(5, 7));
