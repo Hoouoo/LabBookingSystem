@@ -5,6 +5,8 @@
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.DayOfWeek" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.text.DateFormat" %>
 
 <%
     Date now = new Date();
@@ -16,11 +18,12 @@
     cal.setTime(now);
     tom.setTime(now);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    String today = sdf.format(now);
-    cal.add(Calendar.DATE, 7);
+    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+    String today=sdf2.format(now);
+    cal.add(Calendar.DATE, 3);
     tom.add(Calendar.DATE, 1);
-    String after7 = sdf.format(cal.getTime());
-    String tomorrow = sdf.format(tom.getTime());
+    String after3 = sdf2.format(cal.getTime());
+    String tomorrow = sdf2.format(tom.getTime());
     //요일 구하기
     Integer todayYear = Integer.valueOf(today.substring(0, 4));
     Integer todayMonth = Integer.valueOf(today.substring(5, 7));
@@ -164,20 +167,20 @@
                 <div class="schedule-in-box-2">
                     <div class="schedule-sub-title"> 시작 시간</div>
                     <input class="schedule-input-book-box" type="datetime-local" name="startTime" min="<%=today%>"
-                           max="<%=after7%>" required>
+                           max="<%=after3%>" required>
                 </div>
                 <%} else {%>
 
                 <div class="schedule-in-box-2">
                     <div class="schedule-sub-title"> 시작 시간</div>
                     <input class="schedule-input-book-box" type="datetime-local" name="startTime" min="<%=tomorrow%>"
-                           max="<%=after7%>" required>
+                           max="<%=after3%>" required>
                 </div>
                 <%}%>
                 <br/>
                 <div class="schedule-in-box-2">
                     <div class="schedule-sub-title"> 종료 시간</div>
-                    <input class="schedule-input-book-box" type="datetime-local" name="endTime" max="24:00" required>
+                    <input class="schedule-input-book-box" type="datetime-local" name="endTime" min="<%=today%>"max="<%=after3%>" required>
                 </div>
                 <br/>
                 <%--        <div class="schedule-in-box-2 mb-4">--%>
