@@ -1,5 +1,6 @@
 <%@ page import="deu.team.jsp.book.domain.Book" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.time.LocalDateTime" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -36,7 +37,7 @@
                 <th>실습실</th>
                 <th>시작 시간</th>
                 <th>종료 시간</th>
-                <th>삭제/취소</th>
+                <th>예약 취소 / 목록 삭제</th>
             </tr>
             </thead>
             <tbody class="text-center">
@@ -63,12 +64,15 @@
                 <td>
 
                     <form action="/control" method="post">
-                        <button type="submit" name="remove" class="btn btn-primary  btn-sm  btn-block lab-button-m"
-                                value="<%=mybooks.getId()%>">삭제
+                        <% if(mybooks.getEndTime().isBefore(LocalDateTime.now())){%>
+                        <button type="submit" name="remove" class="btn btn-warning  btn-sm  btn-block lab-button-m"
+                                value="<%=mybooks.getId()%>">목록 삭제
                         </button>
-                        <button type="submit" name="cancel" class="btn btn-secondary   btn-sm  btn-block lab-button-m"
-                                value="<%=mybooks.getId()%>">취소
+                        <%}else{ %>
+                        <button type="submit" name="cancel" class="btn btn-danger   btn-sm  btn-block lab-button-m"
+                                value="<%=mybooks.getId()%>">예약 취소
                         </button>
+                        <%}%>
                     </form>
                 </td>
             </tr>

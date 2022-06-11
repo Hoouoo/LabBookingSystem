@@ -60,7 +60,7 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <div class="header-dropdown header-dropdown-margin">
+                <div class="header-dropdown header-dropdown-margin header-z-idx">
                     <li>
                         <a class="nav-item header-nav-link<%if (headerIndex.equals("bookPage.jsp")||headerIndex.equals("seat.jsp")||headerIndex.equals("bookExtendPage.jsp")) {%> header-nav-active <%}%>"
                            href="/bookPage">실습실 이용</a>

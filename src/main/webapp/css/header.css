@@ -107,11 +107,11 @@
 
 .header-dropdown > li > ul {
     /*z-index: 2;*/
-    margin-left: -50px;
-    width: 130px;
+    margin-left: -60px;
+    width: 140px;
     display: none;
     position: absolute;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     /*color: #0079BF;*/
     background: white;
