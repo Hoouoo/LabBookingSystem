@@ -91,7 +91,7 @@ public class ManageLabService {
       List<Book> bookList = bookRepository.getLastBookListByLabNo(targetLabNo);
       if (!bookList.isEmpty()) {
         Stream<Book> todayBookList = bookList.stream()
-            .filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now()));
+            .filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now())).filter(target->target.getApproveStatus().equals(ApproveStatus.APPROVE));
         if (todayBookList.findFirst().isPresent()) {
           String targetStudentId = bookList.stream()
               .filter(target -> target.getEndTime().toLocalDate().equals(LocalDate.now()))
