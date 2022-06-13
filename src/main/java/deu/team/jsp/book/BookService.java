@@ -9,6 +9,7 @@ import deu.team.jsp.announce.AnnounceRepository;
 import deu.team.jsp.announce.domain.Announcement;
 import deu.team.jsp.book.domain.ApproveStatus;
 import deu.team.jsp.book.domain.Book;
+import deu.team.jsp.notification.NotificationService;
 import deu.team.jsp.schedule.Schedule;
 import deu.team.jsp.schedule.ScheduleRepository;
 import jdk.swing.interop.SwingInterOpUtils;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -52,6 +54,10 @@ public class BookService {
 
   @Autowired
   WarningRepository warningRepository;
+
+  @Autowired
+  NotificationService notificationService;
+
 
   public void book(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -93,6 +99,17 @@ public class BookService {
     Book book;
     if(end.toLocalTime().isBefore(flagTime)) {
       book = new Book(account.getStudentId(), start, end, labNo, seatX, seatY, ApproveStatus.APPROVE);
+
+      //승인 메시지 사용자에게 전송
+      try {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(account.getStudentId()).append("님의 예약 요청이 운영자로부터 자동승인 되었습니다.");
+        String content = stringBuilder.toString();
+        notificationService.addNotification(account.getStudentId(), content);
+      } catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException(e);
+      }
+
     }else{
       book = new Book(account.getStudentId(), start, end, labNo, seatX, seatY, ApproveStatus.READY);
     }
