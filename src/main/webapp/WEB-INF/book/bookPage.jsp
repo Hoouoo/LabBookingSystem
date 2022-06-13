@@ -185,7 +185,7 @@
 
                 <div class="schedule-in-box-2">
                     <div class="schedule-sub-title"> 시작 시간</div>
-                    <input class="schedule-input-book-box" type="datetime-local" name="startTime" min="<%=tomorrow%>"
+                    <input class="schedule-input-book-box" type="datetime-local" name="startTime" min="<%=today%>"
                            max="<%=after3%>" required>
                 </div>
                 <%}%>

@@ -118,9 +118,9 @@ public class BookService {
         }
 
         LocalDateTime limitBookTime=LocalDateTime.of(year, month, startDay, 16, 30);
-        if(now.isAfter(limitBookTime)){ //금일 오후 4시 반 이후 예약 불가
-            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
-        }else{
+//        if(now.isAfter(limitBookTime)){ //금일 오후 4시 반 이후 예약 불가
+//            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
+//        }else{
             //예약 상태 검색 쿼리
             int bookStatus = accountRepository.findByStudentId(account.getStudentId()).getBookStatus();
             if(Objects.nonNull(findSeat) || bookStatus==1) {
@@ -137,7 +137,7 @@ public class BookService {
                     }
                 }
             }
-        }
+
     }
 
     public int[][] checkSeat(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
@@ -186,16 +186,16 @@ public class BookService {
             alertService.alertMessage("주말에는 주말 좌석 예약 불가능 합니다.","/studentPage",response);
         }
 
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime limitBookTime=LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 16, 30);
-
-        DayOfWeek dayOfWeek1 = now.getDayOfWeek();
-        int value = dayOfWeek1.getValue();
-        System.out.println(value);
-        System.out.println(targetDayOfWeek);
-        if((value==5) && (targetDayOfWeek ==6 || targetDayOfWeek==7) && (now.isAfter(limitBookTime))){
-            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
-        }
+//        LocalDateTime now = LocalDateTime.now();
+//        LocalDateTime limitBookTime=LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 16, 30);
+//
+//        DayOfWeek dayOfWeek1 = now.getDayOfWeek();
+//        int value = dayOfWeek1.getValue();
+//        System.out.println(value);
+//        System.out.println(targetDayOfWeek);
+//        if((value==5) && (targetDayOfWeek ==6 || targetDayOfWeek==7) && (now.isAfter(limitBookTime))){
+//            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
+//        }
 
         //새로운 시간 정의 포멧 맞추기
         LocalDateTime start= LocalDateTime.of(year, month, startDay,startHour,startMinute);
