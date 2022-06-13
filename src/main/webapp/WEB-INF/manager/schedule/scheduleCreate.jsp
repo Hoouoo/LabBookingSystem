@@ -173,7 +173,7 @@
                             <p><b>수업 종료 시간 :</b> <c:out value="${schedule.endTime}"/></p>
                         </div>
                         <br/>
-                        <form action="${url}/schedule" method="post">
+                        <form action="${url}schedule" method="post">
                             <button type="submit" class="btn btn-secondary btn-block schedule-btn-w" name="delete" value="${schedule.id}"> 삭제
                             </button>
                       </form>

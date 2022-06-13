@@ -27,14 +27,8 @@ public class ProfessorController {
 
     @CheckSession
     @GetMapping("/professorPage")
-    public String professorPage(Model model) {
+    public String professorPage() {
 
-        if (scheduleService.getScheduleCnt() > 0) {
-            model.addAttribute("scheduleCnt", scheduleService.getScheduleCnt());
-            model.addAttribute("scheduleList", scheduleService.getScheduleList());
-            model.addAttribute("scheduleTimeList", scheduleService.getSubjectTime());
-
-        }
         return "/WEB-INF/professor/professorMain.jsp";
     }
 
@@ -67,7 +61,14 @@ public class ProfessorController {
 
     @CheckSession
     @GetMapping("/prof/schedule")
-    public String profSchedulePage() {
+    public String profSchedulePage(Model model) {
+
+        if (scheduleService.getScheduleCnt() > 0) {
+            model.addAttribute("scheduleCnt", scheduleService.getScheduleCnt());
+            model.addAttribute("scheduleList", scheduleService.getScheduleList());
+            model.addAttribute("scheduleTimeList", scheduleService.getSubjectTime());
+
+        }
         //TODO 학생 헤더가 아닌 교수 헤더로 변경되야 함.
         return "/WEB-INF/manager/schedule/scheduleCreate.jsp";
     }
