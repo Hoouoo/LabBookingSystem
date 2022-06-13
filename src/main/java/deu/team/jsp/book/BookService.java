@@ -63,10 +63,11 @@ public class BookService {
     String seat = request.getParameter("seat");
     String labNo = request.getParameter("labNo");
 
+
     int year = Integer.valueOf(startTime.substring(0, 4));
     int month = Integer.valueOf(startTime.substring(5, 7));
 
-    int startDay = Integer.valueOf(startTime.substring(8, 10));
+    int startDay=Integer.valueOf(startTime.substring(8, 10));
     int endDay = Integer.valueOf(endTime.substring(8, 10));
 
     int startHour = Integer.valueOf(startTime.substring(11, 13));
@@ -77,8 +78,7 @@ public class BookService {
     if (Objects.isNull(seat)) {
       response.setContentType("text/html; charset=UTF-8");
       PrintWriter out = response.getWriter();
-      out.println(
-          "<script>alert('수업이 있어 실습실 사용이 제한 되거나 좌석을 선택 해야 합니다.'); location.href='/studentPage';</script>");
+      out.println("<script>alert('수업이 있어 실습실 사용이 제한 되거나 좌석을 선택 해야 합니다.'); location.href='/studentPage';</script>");
       out.flush();
     }
 
@@ -89,12 +89,11 @@ public class BookService {
     LocalDateTime end = LocalDateTime.of(year, month, endDay, endHour, endMinute);
 
     // 4시 30분 이전인 경우
-    LocalTime flagTime = LocalTime.of(17, 00);
+    LocalTime flagTime = LocalTime.of(16, 30);
     Book book;
-    if (end.toLocalTime().isBefore(flagTime)) {
-      book = new Book(account.getStudentId(), start, end, labNo, seatX, seatY,
-          ApproveStatus.APPROVE);
-    } else {
+    if(end.toLocalTime().isBefore(flagTime)) {
+      book = new Book(account.getStudentId(), start, end, labNo, seatX, seatY, ApproveStatus.APPROVE);
+    }else{
       book = new Book(account.getStudentId(), start, end, labNo, seatX, seatY, ApproveStatus.READY);
     }
     Book findSeat = bookRepository.findSeat(seatX, seatY, labNo, start, end);
@@ -118,31 +117,30 @@ public class BookService {
       }
     }
 
-    LocalDateTime limitBookTime = LocalDateTime.of(year, month, startDay, 16, 30);
-    if (now.isAfter(limitBookTime)) { //금일 오후 4시 반 이후 예약 불가
-      alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.", "/studentPage", response);
-    } else {
-      //예약 상태 검색 쿼리
-      int bookStatus = accountRepository.findByStudentId(account.getStudentId()).getBookStatus();
-      if (Objects.nonNull(findSeat) || bookStatus == 1) {
-        alertService.alertMessage("이미 예약된 좌석 이거나 중복 예약이 불가능 합니다.", "/studentPage", response);
-      } else {
-        Account byStudentId = accountRepository.findByStudentId(account.getStudentId());
-        if (byStudentId.getBookStatus() == 2) {
-          alertService.alertMessage("경고 3회 받아 실습실 예약이 불가능 합니다.", "/studentPage", response);
-        } else {
-          if (Objects.isNull(findSeat) && bookStatus == 0) { //공지사항 등록 했을 때
-            bookRepository.save(book);
-            accountRepository.updateBookStatus(account.getStudentId(), 1);
-            alertService.alertMessage(announceContent, "", response);
-          }
+    LocalDateTime limitBookTime=LocalDateTime.of(year, month, startDay, 16, 30);
+//        if(now.isAfter(limitBookTime)){ //금일 오후 4시 반 이후 예약 불가
+//            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
+//        }else{
+    //예약 상태 검색 쿼리
+    int bookStatus = accountRepository.findByStudentId(account.getStudentId()).getBookStatus();
+    if(Objects.nonNull(findSeat) || bookStatus==1) {
+      alertService.alertMessage("이미 예약된 좌석 이거나 중복 예약이 불가능 합니다.", "/studentPage", response);
+    }else{
+      Account byStudentId = accountRepository.findByStudentId(account.getStudentId());
+      if(byStudentId.getBookStatus()==2){
+        alertService.alertMessage("경고 3회 받아 실습실 예약이 불가능 합니다.", "/studentPage", response);
+      }else{
+        if (Objects.isNull(findSeat) && bookStatus == 0) { //공지사항 등록 했을 때
+          bookRepository.save(book);
+          accountRepository.updateBookStatus(account.getStudentId(), 1);
+          alertService.alertMessage(announceContent, "", response);
         }
       }
     }
+
   }
 
-  public int[][] checkSeat(HttpServletRequest request, HttpServletResponse response, Model model)
-      throws IOException {
+  public int[][] checkSeat(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 
     String startTime = request.getParameter("startTime");
     String endTime = request.getParameter("endTime");
@@ -151,11 +149,12 @@ public class BookService {
     int year = Integer.valueOf(startTime.substring(0, 4));
     int month = Integer.valueOf(startTime.substring(5, 7));
 
-    int startDay = Integer.valueOf(startTime.substring(8, 10));
-    int endDay = Integer.valueOf(endTime.substring(8, 10));
+    int startDay=Integer.valueOf(startTime.substring(8, 10));
+    int endDay=Integer.valueOf(endTime.substring(8, 10));
 
     int startHour = Integer.valueOf(startTime.substring(11, 13));
     int startMinute = Integer.valueOf(startTime.substring(14, 16));
+
 
     int endHour = Integer.valueOf(endTime.substring(11, 13));
     int endMinute = Integer.valueOf(endTime.substring(14, 16));
@@ -182,56 +181,10 @@ public class BookService {
     }
 
     Integer dayOfWeekNumber = Integer.valueOf(request.getParameter("todayDayOfWeek"));
-    if ((dayOfWeekNumber == 6 && targetDayOfWeek == 6) || (dayOfWeekNumber == 6
-        && targetDayOfWeek == 7)
-        || (dayOfWeekNumber == 7 && targetDayOfWeek == 7)) {
-      alertService.alertMessage("주말에는 주말 좌석 예약 불가능 합니다.", "/studentPage", response);
+    if ((dayOfWeekNumber == 6 && targetDayOfWeek == 6) || (dayOfWeekNumber == 6 && targetDayOfWeek == 7)
+            || (dayOfWeekNumber == 7 && targetDayOfWeek == 7)) {
+      alertService.alertMessage("주말에는 주말 좌석 예약 불가능 합니다.","/studentPage",response);
     }
-
-
-        LocalDateTime limitBookTime=LocalDateTime.of(year, month, startDay, 16, 30);
-//        if(now.isAfter(limitBookTime)){ //금일 오후 4시 반 이후 예약 불가
-//            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
-//        }else{
-
-            int bookStatus = accountRepository.findByStudentId(account.getStudentId()).getBookStatus();
-            if(Objects.nonNull(findSeat) || bookStatus==1) {
-                alertService.alertMessage("이미 예약된 좌석 이거나 중복 예약이 불가능 합니다.", "/studentPage", response);
-            }else{
-                Account byStudentId = accountRepository.findByStudentId(account.getStudentId());
-                if(byStudentId.getBookStatus()==2){
-                    alertService.alertMessage("경고 3회 받아 실습실 예약이 불가능 합니다.", "/studentPage", response);
-                }else{
-                    if (Objects.isNull(findSeat) && bookStatus == 0) { //공지사항 등록 했을 때
-                        bookRepository.save(book);
-                        accountRepository.updateBookStatus(account.getStudentId(), 1);
-                        alertService.alertMessage(announceContent, "", response);
-                    }
-                }
-            }
-
-
-    LocalDateTime now = LocalDateTime.now();
-    LocalDateTime limitBookTime = LocalDateTime.of(now.getYear(), now.getMonth(),
-        now.getDayOfMonth(), 16, 30);
-
-    DayOfWeek dayOfWeek1 = now.getDayOfWeek();
-    int value = dayOfWeek1.getValue();
-    System.out.println(value);
-    System.out.println(targetDayOfWeek);
-    if ((value == 5) && (targetDayOfWeek == 6 || targetDayOfWeek == 7) && (now.isAfter(
-        limitBookTime))) {
-      alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.", "/studentPage", response);
-
-    }
-
-    //새로운 시간 정의 포멧 맞추기
-    LocalDateTime start = LocalDateTime.of(year, month, startDay, startHour, startMinute);
-    LocalDateTime end = LocalDateTime.of(year, month, endDay, endHour, endMinute);
-
-    LocalTime bookStartTime = LocalTime.of(startHour, startMinute);
-    LocalTime bookEndTime = LocalTime.of(endHour, endMinute);
-
 
 //        LocalDateTime now = LocalDateTime.now();
 //        LocalDateTime limitBookTime=LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 16, 30);
@@ -244,8 +197,15 @@ public class BookService {
 //            alertService.alertMessage("오후 4시 반 이후 에약이 불가 합니다.","/studentPage",response);
 //        }
 
-    if (start.isAfter(end)) {
-      alertService.alertMessage("종료 시간이 시작 시간보다 빠를수 없습니다.", "/bookPage", response);
+    //새로운 시간 정의 포멧 맞추기
+    LocalDateTime start= LocalDateTime.of(year, month, startDay,startHour,startMinute);
+    LocalDateTime end= LocalDateTime.of(year, month, endDay,endHour,endMinute);
+
+    LocalTime bookStartTime=LocalTime.of(startHour, startMinute);
+    LocalTime bookEndTime=LocalTime.of(endHour, endMinute);
+
+    if(start.isAfter(end)){
+      alertService.alertMessage("종료 시간이 시작 시간보다 빠를수 없습니다.","/bookPage",response);
     }
 
     if (Objects.isNull(labNo)) {
@@ -268,7 +228,6 @@ public class BookService {
     int labSizeX = 5;
     int labSizeY = 8;
 
-
     int[][] seats = new int[labSizeX][labSizeY];
 
     for (int i = 0; i < labSizeX; i++) { //빈자리로 초기화
@@ -277,8 +236,7 @@ public class BookService {
       }
     }
 
-    List<Schedule> schedules = scheduleRepository.scheduleList(dayOfWeekKorean, labNo,
-        bookStartTime, bookEndTime);
+    List<Schedule> schedules = scheduleRepository.scheduleList(dayOfWeekKorean, labNo, bookStartTime, bookEndTime);
 
     if (schedules.size() == 0) { //강의실이 비어있다면
 
